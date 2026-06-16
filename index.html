@@ -594,10 +594,10 @@
 .shoe-size-group-label{font-size:16px;color:#666;margin:0 0 8px}
 .shoe-size-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .shoe-size-btn{min-height:58px;border:1.5px solid #aeb4bd;background:#f8f8fa;border-radius:4px;font-size:17px;color:#20242a;cursor:pointer;position:relative;overflow:hidden}
-.shoe-size-btn::before{content:'';position:absolute;left:-8px;bottom:0;width:130%;height:1px;background:#c7cbd1;transform:rotate(-25deg);transform-origin:left bottom}
 .shoe-size-btn.active{background:#fff;border:2px solid #111;box-shadow:0 0 0 1px #111}
 .shoe-size-btn span{position:relative;z-index:1}
 .shoe-size-selected{margin-top:10px;font-size:13px;font-weight:800;color:#111}
+.shoe-size-available{margin-top:10px;font-size:13px;line-height:1.6;color:#4b5563}
 @media(max-width:767px){.sweatpant-color-card{flex-basis:58px}.sweatpant-color-card img{width:52px;height:52px}}
 @media(max-width:767px){.inspiration-card{flex-basis:68vw}}
 @media(max-width:767px){.tiktok-card{flex-basis:62vw}}
@@ -1565,6 +1565,7 @@
                 <div class="shoe-size-group"><p class="shoe-size-group-label">Women</p><div class="shoe-size-grid">${bostonSizeButtons('Women',bostonWomenSizes)}</div></div>
                 <div class="shoe-size-group"><p class="shoe-size-group-label">Men</p><div class="shoe-size-grid">${bostonSizeButtons('Men',bostonMenSizes)}</div></div>
                 <div class="shoe-size-selected">Selected: <span id="bostonSizeLabel">${selected.size}</span></div>
+                <div class="shoe-size-available"><b>Available sizes:</b> Women ${bostonWomenSizes.join(', ')} · Men ${bostonMenSizes.join(', ')}</div>
               </div>
               <div class="urgency">LIMITED TO 1 PRODUCT PER ORDER<small>Due to high demand, we limit orders to 1 unit per customer.</small></div>
               <a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">ADD TO CART</a>
