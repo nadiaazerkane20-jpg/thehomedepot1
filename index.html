@@ -1778,9 +1778,12 @@
       {name:'Midnight',image:'https://images.ctfassets.net/hnk2vsx53n6l/1n56zVsvKpJUyVwWP81OVO/fe5eff8ffc3ca9479b2b6c408bf3cdb0/c546ff81d7d95bff8be41216dda839da9801f021.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'},
       {name:'Sand Ivory',image:'https://images.ctfassets.net/hnk2vsx53n6l/11lUwKxDKy3xF2vVIKp1E1/f1482fdc341ac480b8f092d844c33ea6/dba2f68172d7cceda1bb4ed2dfe8f6c403081bdc.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'}
     ];
+    const cloudtiltSizes=['5','5.5','6','6.5','7','7.5','8','8.5','9','9.5','10','10.5','11','12','13'];
     let selectedCloudtiltColorIndex=0;
+    let selectedCloudtiltSizeIndex=4;
     function getSelectedCloudtilt(){
-      return cloudtiltColors[selectedCloudtiltColorIndex] || cloudtiltColors[0];
+      const color=cloudtiltColors[selectedCloudtiltColorIndex] || cloudtiltColors[0];
+      return {...color,size:cloudtiltSizes[selectedCloudtiltSizeIndex] || cloudtiltSizes[0]};
     }
     function cloudtiltPageHTML(){
       const selected=getSelectedCloudtilt();
@@ -1805,6 +1808,12 @@
                 <div class="sweatpant-color-grid">${cloudtiltColors.map((color,index)=>`<button class="sweatpant-color-card ${index===0?'active':''}" data-cloudtilt-color="${index}" title="${color.name}" onclick="selectCloudtiltColor(${index},this)"><img src="${color.image}" alt="${color.name}"><span>${color.name}</span></button>`).join('')}</div>
                 <div class="model-count-pill">${cloudtiltColors.length} colors available</div>
               </div>
+              <div class="blanket-variant-panel">
+                <div class="define-size-head"><h3>Select Size</h3></div>
+                <div class="define-size-grid">${cloudtiltSizes.map((size,index)=>`<button class="define-size-btn ${index===selectedCloudtiltSizeIndex?'active':''}" data-cloudtilt-size="${index}" onclick="selectCloudtiltSize(${index},this)">${size}</button>`).join('')}</div>
+                <div class="shoe-size-selected">Selected: <span id="cloudtiltSizeLabel">${selected.size}</span></div>
+                <div class="shoe-size-available"><b>Available sizes:</b> ${cloudtiltSizes.join(', ')}</div>
+              </div>
               <div class="inline-badges"><span>All-day comfort</span><span>Lightweight feel</span><span>Clean cushioned profile</span></div>
               <div class="urgency">LIMITED TO 1 PRODUCT PER ORDER<small>Due to high demand, we limit orders to 1 unit per customer.</small></div>
               <a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">ADD TO CART</a>
@@ -1812,7 +1821,7 @@
           </div>
         </section>
         <section><div class="container long-desc"><h2>Description</h2><h3>Soft, clean, and easy for everyday wear.</h3><p>Cloudtilt is a lightweight everyday sneaker made for walking, travel, errands, and daily comfort. The smooth sculpted shape gives it a premium look while the cushioned feel keeps it easy to wear from morning to night.</p><p><b>Choose your favorite color above.</b> Each option updates the product image and checkout tracking so the selected variant is sent correctly.</p></div></section>
-        <section><div class="container"><div class="section-head"><h2>Technical Details</h2></div><table class="spec-table"><tr><td>Product Name</td><td>Cloudtilt</td></tr><tr><td>Selected Color</td><td id="cloudtiltSpecColor">${selected.name}</td></tr><tr><td>Colors Available</td><td>${cloudtiltColors.map(c=>c.name).join(', ')}</td></tr><tr><td>Use</td><td>Walking, travel, errands, daily wear</td></tr><tr><td>Style</td><td>Lightweight cushioned sneaker</td></tr><tr><td>Shipping</td><td>Fast free delivery</td></tr></table></div></section>
+        <section><div class="container"><div class="section-head"><h2>Technical Details</h2></div><table class="spec-table"><tr><td>Product Name</td><td>Cloudtilt</td></tr><tr><td>Selected Color</td><td id="cloudtiltSpecColor">${selected.name}</td></tr><tr><td>Selected Size</td><td id="cloudtiltSpecSize">${selected.size}</td></tr><tr><td>Colors Available</td><td>${cloudtiltColors.map(c=>c.name).join(', ')}</td></tr><tr><td>Sizes Available</td><td>${cloudtiltSizes.join(', ')}</td></tr><tr><td>Use</td><td>Walking, travel, errands, daily wear</td></tr><tr><td>Style</td><td>Lightweight cushioned sneaker</td></tr><tr><td>Shipping</td><td>Fast free delivery</td></tr></table></div></section>
         <section class="testimonials"><div class="container"><div class="section-head"><h2>Customer Reviews</h2><p class="section-sub">Comfort-focused feedback from customers wearing them daily.</p></div><div class="review-strip">
           <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=72" alt="Nina P."><div><b>Nina P.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><img class="review-photo" src="https://i.pravatar.cc/600?img=72" alt="Nina P. customer photo"><p>"Super light and clean. I wore them all day walking around and they still felt comfortable."</p><small>June 15, 2026</small></div>
           <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=73" alt="Maya T."><div><b>Maya T.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><img class="review-photo" src="https://i.pravatar.cc/600?img=73" alt="Maya T. customer photo"><p>"The Black Ivory color goes with everything. The shape looks premium without being too sporty."</p><small>June 11, 2026</small></div>
@@ -1834,6 +1843,17 @@
       document.querySelectorAll('#product-cloudtilt .sweatpant-color-card').forEach(b=>b.classList.remove('active'));
       document.querySelectorAll('#product-cloudtilt .walkingpad-gallery button').forEach(b=>b.classList.remove('active'));
       document.querySelectorAll(`#product-cloudtilt [data-cloudtilt-color="${index}"]`).forEach(b=>b.classList.add('active'));
+      setTimeout(ensureCheckoutLinks,0);
+    }
+    function selectCloudtiltSize(index,btn){
+      selectedCloudtiltSizeIndex=Number(index) || 0;
+      const selected=getSelectedCloudtilt();
+      const label=document.getElementById('cloudtiltSizeLabel');
+      const spec=document.getElementById('cloudtiltSpecSize');
+      if(label)label.textContent=selected.size;
+      if(spec)spec.textContent=selected.size;
+      document.querySelectorAll('#product-cloudtilt .define-size-btn').forEach(item=>item.classList.remove('active'));
+      if(btn)btn.classList.add('active');
       setTimeout(ensureCheckoutLinks,0);
     }
     const originalRenderProductPagesWithWalkingPad = renderProductPages;
@@ -1953,7 +1973,7 @@
       const cloudtiltPage=document.getElementById('product-cloudtilt');
       if(cloudtiltPage && typeof getSelectedCloudtilt==='function'){
         const selected=getSelectedCloudtilt();
-        setProductCheckoutLinks(cloudtiltPage,buildCheckoutUrl("$28.50",`Cloudtilt - ${selected.name}`,selected.image));
+        setProductCheckoutLinks(cloudtiltPage,buildCheckoutUrl("$28.50",`Cloudtilt - ${selected.name} - Size ${selected.size}`,selected.image));
       }
     }
     const originalNavigateToCheckout = navigateTo;
