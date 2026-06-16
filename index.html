@@ -590,9 +590,18 @@
 .tiktok-card{flex:0 0 190px;scroll-snap-align:start;background:#050505;border-radius:18px;overflow:hidden;box-shadow:0 10px 28px rgba(15,23,42,.12)}
 .tiktok-card video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000}
 .tiktok-caption{padding:10px 12px;color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.shoe-size-group{margin-top:16px}
+.shoe-size-group-label{font-size:16px;color:#666;margin:0 0 8px}
+.shoe-size-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.shoe-size-btn{min-height:58px;border:1.5px solid #aeb4bd;background:#f8f8fa;border-radius:4px;font-size:17px;color:#20242a;cursor:pointer;position:relative;overflow:hidden}
+.shoe-size-btn::before{content:'';position:absolute;left:-8px;bottom:0;width:130%;height:1px;background:#c7cbd1;transform:rotate(-25deg);transform-origin:left bottom}
+.shoe-size-btn.active{background:#fff;border:2px solid #111;box-shadow:0 0 0 1px #111}
+.shoe-size-btn span{position:relative;z-index:1}
+.shoe-size-selected{margin-top:10px;font-size:13px;font-weight:800;color:#111}
 @media(max-width:767px){.sweatpant-color-card{flex-basis:58px}.sweatpant-color-card img{width:52px;height:52px}}
 @media(max-width:767px){.inspiration-card{flex-basis:68vw}}
 @media(max-width:767px){.tiktok-card{flex-basis:62vw}}
+@media(min-width:768px){.shoe-size-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
 @media(max-width:767px){.desktop-links{gap:18px}.product-layout{width:100%!important;max-width:100%!important}}
 
 
@@ -752,8 +761,8 @@
     <button class="ann-arrow ann-next" onclick="moveAnn(1)">›</button></div>
   <header><nav class="nav">
 <a href="#home" class="logo clean-logo" onclick="navigateTo('home')"><span class="logo-the">The</span><span class="logo-home">Home</span><span class="logo-depot">Depot</span></a>
-<div class="desktop-links"><a href="#home" onclick="navigateTo('home')">Home</a><a href="#product-premium-lola-blanket" onclick="navigateTo('product-premium-lola-blanket')">Plaid Blanket</a><a href="#product-walkingpad-a1-pro" onclick="navigateTo('product-walkingpad-a1-pro')">WalkingPad</a><a href="#product-accolade-straight-leg-sweatpant" onclick="navigateTo('product-accolade-straight-leg-sweatpant')">Sweatpant</a><a href="#product-impact-shorts-45" onclick="navigateTo('product-impact-shorts-45')">Shorts</a><a href="#collection" onclick="navigateTo('collection')">Collection</a><a href="#faq" onclick="navigateTo('faq')">FAQ</a><a href="#contact" onclick="navigateTo('contact')">Contact</a></div><div class="nav-actions"><button class="cart-icon" aria-label="Cart"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-2 9H8L6 2H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg></button><button class="hamburger" onclick="toggleMenu(true)" aria-label="Menu"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></nav></header>
-  <div class="mobile-menu" id="mobileMenu"><button class="close" onclick="toggleMenu(false)">×</button><a href="#home" onclick="navigateTo('home');toggleMenu(false)">Home</a><a href="#product-premium-lola-blanket" onclick="navigateTo('product-premium-lola-blanket');toggleMenu(false)">Plaid Blanket</a><a href="#product-walkingpad-a1-pro" onclick="navigateTo('product-walkingpad-a1-pro');toggleMenu(false)">WalkingPad</a><a href="#product-accolade-straight-leg-sweatpant" onclick="navigateTo('product-accolade-straight-leg-sweatpant');toggleMenu(false)">Sweatpant</a><a href="#product-impact-shorts-45" onclick="navigateTo('product-impact-shorts-45');toggleMenu(false)">Shorts</a><a href="#collection" onclick="navigateTo('collection');toggleMenu(false)">Collection</a><a href="#faq" onclick="navigateTo('faq');toggleMenu(false)">FAQ</a><a href="#contact" onclick="navigateTo('contact');toggleMenu(false)">Contact</a></div>
+<div class="desktop-links"><a href="#home" onclick="navigateTo('home')">Home</a><a href="#product-premium-lola-blanket" onclick="navigateTo('product-premium-lola-blanket')">Plaid Blanket</a><a href="#product-walkingpad-a1-pro" onclick="navigateTo('product-walkingpad-a1-pro')">WalkingPad</a><a href="#product-accolade-straight-leg-sweatpant" onclick="navigateTo('product-accolade-straight-leg-sweatpant')">Sweatpant</a><a href="#product-impact-shorts-45" onclick="navigateTo('product-impact-shorts-45')">Shorts</a><a href="#product-boston-soft-footbed" onclick="navigateTo('product-boston-soft-footbed')">Boston</a><a href="#collection" onclick="navigateTo('collection')">Collection</a><a href="#faq" onclick="navigateTo('faq')">FAQ</a><a href="#contact" onclick="navigateTo('contact')">Contact</a></div><div class="nav-actions"><button class="cart-icon" aria-label="Cart"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-2 9H8L6 2H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg></button><button class="hamburger" onclick="toggleMenu(true)" aria-label="Menu"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></nav></header>
+  <div class="mobile-menu" id="mobileMenu"><button class="close" onclick="toggleMenu(false)">×</button><a href="#home" onclick="navigateTo('home');toggleMenu(false)">Home</a><a href="#product-premium-lola-blanket" onclick="navigateTo('product-premium-lola-blanket');toggleMenu(false)">Plaid Blanket</a><a href="#product-walkingpad-a1-pro" onclick="navigateTo('product-walkingpad-a1-pro');toggleMenu(false)">WalkingPad</a><a href="#product-accolade-straight-leg-sweatpant" onclick="navigateTo('product-accolade-straight-leg-sweatpant');toggleMenu(false)">Sweatpant</a><a href="#product-impact-shorts-45" onclick="navigateTo('product-impact-shorts-45');toggleMenu(false)">Shorts</a><a href="#product-boston-soft-footbed" onclick="navigateTo('product-boston-soft-footbed');toggleMenu(false)">Boston</a><a href="#collection" onclick="navigateTo('collection');toggleMenu(false)">Collection</a><a href="#faq" onclick="navigateTo('faq');toggleMenu(false)">FAQ</a><a href="#contact" onclick="navigateTo('contact');toggleMenu(false)">Contact</a></div>
   <main><div id="home" class="page"><section class="hero"><div class="container hero-grid"><div><span class="eyebrow">Premium Daily Deals</span><h1>Upgrade your daily essentials for less.</h1><p>Discover comfort, fitness, apparel, and home essentials selected for modern American shoppers.</p><div class="hero-actions"><a href="#collection" onclick="navigateTo('collection')" class="btn btn-primary">View the Collection</a><a href="https://trustpilot.customerthread.com/?country=US&shop=TheHomeDepot&logo=&url=thehomedepot.com" target="_blank" class="btn btn-secondary">★ 4.8/5 Trustpilot</a></div></div><div class="hero-visual"><div class="hero-card"><img src="https://placehold.co/700x700/1a1a2e/ffffff?text=Premium+Home" alt="Premium home collection"></div><div class="floating-proof">+3,000 Happy Customers</div></div></div></section><div class="trust-row"><div class="trust-pill">Fast Free Shipping</div><div class="trust-pill">Secure Payment</div><div class="trust-pill">30-Day Returns</div><div class="trust-pill">Verified Reviews</div><div class="trust-pill">Premium Quality</div></div><section class="fade"><div class="container"><div class="section-head"><h2>Premium Picks</h2><p class="section-sub">Customer-loved deals across comfort, fitness, apparel, and home essentials.</p></div><div class="products-grid" id="homeProducts"></div></div></section><section class="featured fade"><div class="container"><div class="section-head"><h2>Featured Collection</h2><p class="section-sub">A premium selection of customer-loved upgrades for the modern home.</p></div><div class="featured-layout"><div class="featured-big" id="featuredBig"></div><div class="products-grid" id="featuredSmall"></div></div></div></section><section class="fade"><div class="container"><div class="features-grid"><div class="feature-card"><div class="feature-icon">✓</div><h3>Fast Free Shipping</h3><p>Every order ships quickly with tracking across the United States.</p></div><div class="feature-card"><div class="feature-icon">★</div><h3>Premium Quality</h3><p>Materials and finishes selected for elevated daily use.</p></div><div class="feature-card"><div class="feature-icon">↩</div><h3>30-Day Returns</h3><p>Shop confidently with simple returns on eligible orders.</p></div><div class="feature-card"><div class="feature-icon">⌂</div><h3>Home-Ready Design</h3><p>Products designed to blend beautifully into modern spaces.</p></div><div class="feature-card"><div class="feature-icon">🔒</div><h3>Secure Payment</h3><p>Encrypted checkout keeps your details protected.</p></div><div class="feature-card"><div class="feature-icon">24</div><h3>Support 24/7</h3><p>Friendly assistance when you need help with your order.</p></div></div></div></section><section class="testimonials fade" id="testimonialsSection"></section><section class="fade" id="faqHome"></section><section class="fade"><div class="container"><a class="trust-widget" href="https://trustpilot.customerthread.com/?country=US&shop=TheHomeDepot&logo=&url=thehomedepot.com" target="_blank" style="display:block"><div class="stars">★★★★★</div><h2>Trustpilot Excellent · 4.8/5</h2><p>Read verified customer experiences from homeowners across the United States.</p></a></div></section><section class="marquee"><div class="marquee-track" id="marqueeTrack"></div></section></div><div id="collection" class="page"><section class="collection-hero"><div class="container"><span class="eyebrow">Featured Deals</span><h1>Premium Daily Essentials</h1><p class="section-sub">Shop customer-loved comfort, apparel, fitness, and home deals in one place.</p></div></section><section><div class="container"><div class="filters"><button class="filter">All Products</button><button class="filter">Blanket</button><button class="filter">Fitness</button><button class="filter">Apparel</button><button class="filter">Deals</button></div><div class="products-grid" id="collectionProducts"></div></div></section></div><div id="faq" class="page"><section class="collection-hero"><div class="container"><h1>FAQ</h1><p class="section-sub">Everything you need to know before ordering.</p></div></section><section id="faqPage"></section><section><div class="container"><div class="box-section"><h2>Still need help?</h2><p class="section-sub">Send us a message through the contact page and our support team will assist you.</p><br><a href="#contact" onclick="navigateTo('contact')" class="btn btn-primary">Contact Us</a></div></div></section></div><div id="contact" class="page"><section class="collection-hero"><div class="container"><h1>Contact Us</h1><p class="section-sub">Questions about your order, shipping, or product details? We are here to help.</p></div></section><section><div class="container contact-grid"><form class="form" onsubmit="event.preventDefault();alert('Thank you. This demo form has been submitted.');"><input type="text" placeholder="Full name" required><input type="email" placeholder="Email address" required><textarea placeholder="Your message" required></textarea><button class="btn btn-primary" style="width:100%;max-width:100%">Send Message</button></form><div class="box-section"><h2>Store Information</h2><p><b>TheHomeDepot</b></p><p>THE HOME DEPOT LLC | EIN: 12-3456789 | N/A</p><p>123 Main Street, New York, NY 10001, USA</p><p>Email: support@thehomedepot.com</p><p>Hours: Monday–Friday, 9:00 AM–6:00 PM EST</p></div></div></section></div><div id="productPages"></div></main>
   <footer><div class="container"><div class="footer-grid"><div class="footer-col"><h4>TheHomeDepot</h4><p>Premium home essentials selected for elegant, comfortable living across every room.</p></div><div class="footer-col"><h4>Shop</h4><a href="#collection" onclick="navigateTo('collection')">Collection</a><a href="#faq" onclick="navigateTo('faq')">FAQ</a><a href="#contact" onclick="navigateTo('contact')">Contact</a></div><div class="footer-col"><h4>Support</h4><a>Shipping</a><a>Returns</a><a>Secure Payment</a><a>Order Help</a></div><div class="footer-col"><h4>Trustpilot</h4><a href="https://trustpilot.customerthread.com/?country=US&shop=TheHomeDepot&logo=&url=thehomedepot.com" target="_blank" class="trustpilot-badge"><span style="color:#00B67A">★★★★★</span> Excellent · 4.8/5</a></div></div><div class="footer-bottom">THE HOME DEPOT LLC | EIN: 12-3456789 | N/A | 123 Main Street, New York, NY 10001, USA</div></div></footer>
   <script>
@@ -787,6 +796,15 @@
       tag:'12 Colors',
       img:'https://us.dfyne.com/cdn/shop/files/IMPACT_SHORTS_BUTTER_2189-Edit-2.jpg?v=1780154643&width=1800',
       desc:'High-waisted 4.5 inch training shorts with a sculpting fit, smooth performance feel, and bold color options.'
+    },{
+      slug:'boston-soft-footbed',
+      name:'Boston Soft Footbed',
+      old:'$169.00',
+      price:'$28.50',
+      off:'-83%',
+      tag:'9 Colors',
+      img:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dwdc991efe/560771/560771.jpg?sw=1310&sh=1310&sm=fit&q=65',
+      desc:'Classic suede Boston clog with a cushioned soft footbed, adjustable strap, and go-all-day comfort.'
     }];
     const reviews=[['Emily Carter','May 28, 2026','The quality feels far better than most home products I have ordered online. Everything arrived quickly and looked beautiful in my space.',1],['Michael Brooks','May 24, 2026','Clean design, sturdy materials, and the packaging felt premium. It instantly made our living room feel more organized.',12],['Sarah Mitchell','May 19, 2026','I loved how simple the checkout was. The product matched the photos and the finish feels very high-end.',23],['Daniel Parker','May 15, 2026','Fast delivery and excellent value. I ordered one item first and came back for two more upgrades.',34],['Jessica Adams','May 10, 2026','TheHomeDepot has become my go-to for stylish home upgrades. The product looks expensive without the high price.',45],['Christopher Reed','May 6, 2026','Very impressed with the details. It fits perfectly with our modern decor and feels built to last.',56]];
     function card(p){return `<a class="product-card fade" href="#product-${p.slug}" onclick="navigateTo('product-${p.slug}')"><div class="product-img"><img src="${p.img}" alt="${p.name}"></div><div class="product-info"><span class="badge sale">${p.off}</span><span class="badge" style="margin-left:6px">${p.tag}</span><div class="product-title">${p.name}</div><div class="product-desc">${p.desc}</div><div class="price"><span class="old">${p.old}</span><span class="new">${p.price}</span></div><span class="btn btn-primary card-cta">View Product</span></div></a>`}
@@ -1494,6 +1512,98 @@
       const panel=page.querySelector(`[data-impact-tab-panel="${tab}"]`);
       if(panel)panel.classList.add('active');
     }
+
+    const bostonColors=[
+      {name:'Taupe',image:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dwdc991efe/560771/560771.jpg?sw=1310&sh=1310&sm=fit&q=65'},
+      {name:'Black',image:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dwf4c9df94/660473/660473.jpg?sw=1310&sh=1310&sm=fit&q=65'},
+      {name:'Mocha',image:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dw622af308/660461/660461.jpg?sw=1310&sh=1310&sm=fit&q=65'},
+      {name:'Mink',image:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dwf65e6e79/1009543/1009543.jpg?sw=1310&sh=1310&sm=fit&q=65'},
+      {name:'Faded Lime',image:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dwcba2d1d4/1027648/1027648.jpg?sw=1310&sh=1310&sm=fit&q=65'},
+      {name:'Antique White',image:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dw04d23392/1027667/1027667.jpg?sw=1310&sh=1310&sm=fit&q=65'},
+      {name:'Oyster',image:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dwd748a676/1030789/1030789.jpg?sw=1310&sh=1310&sm=fit&q=65'},
+      {name:'Navy',image:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dwf765dca2/1030837/1030837.jpg?sw=1310&sh=1310&sm=fit&q=65'},
+      {name:'Thyme',image:'https://www.birkenstock.com/dw/image/v2/BLZD_PRD/on/demandware.static/-/Sites-master-catalog-amer/default/dw494a4a2c/1030879/1030879.jpg?sw=1310&sh=1310&sm=fit&q=65'}
+    ];
+    const bostonWomenSizes=['4-4.5','5-5.5','6-6.5','7-7.5','8-8.5','9-9.5','10-10.5','11-11.5','12-12.5'];
+    const bostonMenSizes=['6-6.5','7-7.5','8-8.5','9-9.5','10-10.5','11-11.5','12-12.5','13-13.5'];
+    let selectedBostonColorIndex=0;
+    let selectedBostonSize='Women 5-5.5';
+    function getSelectedBoston(){
+      return {
+        color:bostonColors[selectedBostonColorIndex] || bostonColors[0],
+        size:selectedBostonSize
+      };
+    }
+    function bostonSizeButtons(group,sizes){
+      return sizes.map(size=>`<button class="shoe-size-btn ${selectedBostonSize===group+' '+size?'active':''}" data-boston-size="${group} ${size}" onclick="selectBostonSize('${group} ${size}',this)"><span>${size}</span></button>`).join('');
+    }
+    function bostonPageHTML(){
+      const selected=getSelectedBoston();
+      return `<div id="product-boston-soft-footbed" class="page product-page">
+        <section>
+          <div class="container product-layout">
+            <div>
+              <div class="main-product-img">
+                <img id="bostonMainImage" src="${selected.color.image}" alt="Boston Soft Footbed - ${selected.color.name}">
+              </div>
+              <div class="walkingpad-gallery">
+                ${bostonColors.slice(0,3).map((color,index)=>`<button class="${index===0?'active':''}" data-boston-color="${index}" onclick="selectBostonColor(${index},this)"><img src="${color.image}" alt="${color.name}"></button>`).join('')}
+              </div>
+            </div>
+            <div class="product-detail">
+              <span class="eyebrow">Soft Footbed Clog</span>
+              <h1>Boston Soft Footbed</h1>
+              <a href="${trustpilotUrl}" target="_blank" class="trustpilot-badge"><span style="color:#00B67A">★★★★★</span> 4.8/5 · 2,400+ reviews on Trustpilot</a>
+              <div class="price"><span class="old">$169.00</span><span class="new" style="font-size:34px">$28.50</span><span class="badge sale">-83%</span></div>
+              <div class="blanket-variant-panel">
+                <div class="blanket-variant-title"><span>Choose your color</span><span class="selected-model-name" id="selectedBostonColor">${selected.color.name}</span></div>
+                <div class="sweatpant-color-grid">${bostonColors.map((color,index)=>`<button class="sweatpant-color-card ${index===0?'active':''}" data-boston-color="${index}" title="${color.name}" onclick="selectBostonColor(${index},this)"><img src="${color.image}" alt="${color.name}"><span>${color.name}</span></button>`).join('')}</div>
+                <div class="model-count-pill">${bostonColors.length} colors available</div>
+              </div>
+              <div class="blanket-variant-panel">
+                <div class="blanket-variant-title"><span>Choose your size</span><span class="selected-model-name" id="selectedBostonSize">${selected.size}</span></div>
+                <div class="shoe-size-group"><p class="shoe-size-group-label">Women</p><div class="shoe-size-grid">${bostonSizeButtons('Women',bostonWomenSizes)}</div></div>
+                <div class="shoe-size-group"><p class="shoe-size-group-label">Men</p><div class="shoe-size-grid">${bostonSizeButtons('Men',bostonMenSizes)}</div></div>
+                <div class="shoe-size-selected">Selected: <span id="bostonSizeLabel">${selected.size}</span></div>
+              </div>
+              <div class="urgency">LIMITED TO 1 PRODUCT PER ORDER<small>Due to high demand, we limit orders to 1 unit per customer.</small></div>
+              <a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">ADD TO CART</a>
+            </div>
+          </div>
+        </section>
+        <section><div class="container long-desc"><h2>Description</h2><p>So classic and consistently comfortable, the Boston clog has become a coveted, year-round favorite. Velvety suede lends an effortless feel to the style. Featuring an additional foam layer for cushioning, its soft footbed offers extra comfort plus go-all-day support.</p><div class="check-list"><div class="check">Cushioned soft footbed creates custom support with wear</div><div class="check">Classic suede upper</div><div class="check">Suede footbed lining helps keep you comfortable</div><div class="check">Flexible EVA sole</div><div class="check">Adjustable strap with metal pin buckle</div><div class="check">Made in Germany</div></div></div></section>
+        <section><div class="container"><div class="section-head"><h2>Material</h2><p class="section-sub">Details about product materials.</p></div><table class="spec-table"><tr><td>Special feature</td><td>Soft footbed with integrated latex foam cushion for comfort from day one.</td></tr><tr><td>Upper material</td><td>Suede split leather with a napped, velvety finish. Soft, flexible, and naturally moisture absorbent.</td></tr><tr><td>Insole</td><td>Natural leather with an untreated surface and characteristic grain details.</td></tr><tr><td>Footbed material</td><td>Cork, a sustainable material from cork oak bark that insulates and cushions.</td></tr><tr><td>Outsole</td><td>EVA, a very light, elastic material with excellent cushioning for softer steps.</td></tr></table></div></section>
+        <section class="testimonials"><div class="container"><div class="section-head"><h2>Customer Reviews</h2><p class="section-sub">Comfort-focused feedback from customers wearing them all year.</p></div><div class="review-strip">
+          <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=52" alt="Nora P."><div><b>Nora P.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"The soft footbed feels amazing right away. I wear them around the house and for errands almost every day."</p><small>June 13, 2026</small></div>
+          <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=57" alt="Rachel S."><div><b>Rachel S.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"Taupe goes with everything. The suede feels premium and the buckle makes the fit easy to adjust."</p><small>June 8, 2026</small></div>
+          <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=61" alt="Grace W."><div><b>Grace W.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"I got the black pair and they are exactly the comfortable everyday clog I wanted. True to size for me."</p><small>June 4, 2026</small></div>
+          <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=65" alt="Olivia M."><div><b>Olivia M.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"Super easy to style with jeans, leggings, or sweats. The cushion makes long days so much easier."</p><small>May 31, 2026</small></div>
+        </div></div></section>
+        <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">ADD TO CART · $28.50</a></div>
+      </div>`;
+    }
+    function selectBostonColor(index,btn){
+      selectedBostonColorIndex=index;
+      const selected=getSelectedBoston();
+      const img=document.getElementById('bostonMainImage');
+      const label=document.getElementById('selectedBostonColor');
+      if(img)img.src=selected.color.image;
+      if(label)label.textContent=selected.color.name;
+      document.querySelectorAll('#product-boston-soft-footbed .sweatpant-color-card').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('#product-boston-soft-footbed .walkingpad-gallery button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll(`#product-boston-soft-footbed [data-boston-color="${index}"]`).forEach(b=>b.classList.add('active'));
+      setTimeout(ensureCheckoutLinks,0);
+    }
+    function selectBostonSize(size,btn){
+      selectedBostonSize=size;
+      const label=document.getElementById('bostonSizeLabel');
+      const selectedLabel=document.getElementById('selectedBostonSize');
+      if(label)label.textContent=size;
+      if(selectedLabel)selectedLabel.textContent=size;
+      document.querySelectorAll('#product-boston-soft-footbed .shoe-size-btn').forEach(item=>item.classList.remove('active'));
+      if(btn)btn.classList.add('active');
+      setTimeout(ensureCheckoutLinks,0);
+    }
     const originalRenderProductPagesWithWalkingPad = renderProductPages;
     renderProductPages = function(){
       originalRenderProductPagesWithWalkingPad();
@@ -1506,6 +1616,9 @@
       }
       if(holder && !document.getElementById('product-impact-shorts-45')){
         holder.insertAdjacentHTML('beforeend', impactShortPageHTML());
+      }
+      if(holder && !document.getElementById('product-boston-soft-footbed')){
+        holder.insertAdjacentHTML('beforeend', bostonPageHTML());
       }
     };
 
@@ -1583,6 +1696,12 @@
         const selected=getSelectedImpactShort();
         const productName=`Impact Shorts 4.5 - ${selected.color.name} - ${selected.size}`;
         setProductCheckoutLinks(impactShortPage,buildCheckoutUrl("$28.50",productName,selected.color.image));
+      }
+      const bostonPage=document.getElementById('product-boston-soft-footbed');
+      if(bostonPage && typeof getSelectedBoston==='function'){
+        const selected=getSelectedBoston();
+        const productName=`Boston Soft Footbed - ${selected.color.name} - ${selected.size}`;
+        setProductCheckoutLinks(bostonPage,buildCheckoutUrl("$28.50",productName,selected.color.image));
       }
     }
     const originalNavigateToCheckout = navigateTo;
