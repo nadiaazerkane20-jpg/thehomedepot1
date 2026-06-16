@@ -844,7 +844,7 @@
       old:'£160.00',
       price:'£28.50',
       off:'-82%',
-      tag:'Black Ivory',
+      tag:'9 Colors',
       img:'https://images.ctfassets.net/hnk2vsx53n6l/7CwHyKf11fgjYWpQBSN3HB/9a0ee1f237104fb6cb336c1f8ba669f1/pbwudlg3ejelwypszxox.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80',
       desc:'Lightweight everyday sneaker in Black Ivory with a clean cushioned profile for walking, errands, and daily comfort.'
     }];
@@ -1765,6 +1765,76 @@
       const row=btn.closest('.define-acc-row');
       if(row)row.classList.toggle('active');
     }
+
+    const cloudtiltColors=[
+      {name:'Black Ivory',image:'https://images.ctfassets.net/hnk2vsx53n6l/7CwHyKf11fgjYWpQBSN3HB/9a0ee1f237104fb6cb336c1f8ba669f1/pbwudlg3ejelwypszxox.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'},
+      {name:'Olive Desert',image:'https://images.ctfassets.net/hnk2vsx53n6l/2jExYRxMGjCBTLuSv8naLF/5f248e6032e894370f98ba0f8edf3c31/8582903f6946db1841a8ab063399fd7bff74fc4f.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'},
+      {name:'Black',image:'https://images.ctfassets.net/hnk2vsx53n6l/3dUFabkzmZu7LWkQh5OqVz/71f3dfb52e6e53da444613e60623be21/c2137ab0c9c77cd6680c757c458369c42b6b5a87.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'},
+      {name:'White',image:'https://images.ctfassets.net/hnk2vsx53n6l/4JprEWzgDuVz1qtzVidbye/afb750200014c745fa6d1c83b5594cc7/6427a98e841e8cbec5f8d0ac01ccd0dbe75b73f7.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'},
+      {name:'Tide Mineral',image:'https://images.ctfassets.net/hnk2vsx53n6l/6XWH5KSuGUjrPvXwxRsqIm/74ba4bed6bf1bf19a9edf17192a8e0b2/a3db52ed36d72fddc92ff93a8f3bc3217834f4d1.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'},
+      {name:'Sand Dew',image:'https://images.ctfassets.net/hnk2vsx53n6l/5TI3gJb4n29SYjeNkc9CgT/8f2fa9c168c6b83a5c0b8b06855b6e96/4b7571e157eca32c107988e1b15816c7f0c497b4.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'},
+      {name:'Pearl Ice',image:'https://images.ctfassets.net/hnk2vsx53n6l/73TVCrxTKTaHJC45e79xOj/6412fc96392830177d0b870df4db576f/36438b1ff6bded511e9fcdc31297d9e836ede5ef.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'},
+      {name:'Midnight',image:'https://images.ctfassets.net/hnk2vsx53n6l/1n56zVsvKpJUyVwWP81OVO/fe5eff8ffc3ca9479b2b6c408bf3cdb0/c546ff81d7d95bff8be41216dda839da9801f021.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'},
+      {name:'Sand Ivory',image:'https://images.ctfassets.net/hnk2vsx53n6l/11lUwKxDKy3xF2vVIKp1E1/f1482fdc341ac480b8f092d844c33ea6/dba2f68172d7cceda1bb4ed2dfe8f6c403081bdc.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80'}
+    ];
+    let selectedCloudtiltColorIndex=0;
+    function getSelectedCloudtilt(){
+      return cloudtiltColors[selectedCloudtiltColorIndex] || cloudtiltColors[0];
+    }
+    function cloudtiltPageHTML(){
+      const selected=getSelectedCloudtilt();
+      return `<div id="product-cloudtilt" class="page product-page">
+        <section>
+          <div class="container product-layout">
+            <div>
+              <div class="main-product-img">
+                <img id="cloudtiltMainImage" src="${selected.image}" alt="Cloudtilt - ${selected.name}">
+              </div>
+              <div class="walkingpad-gallery">
+                ${cloudtiltColors.slice(0,3).map((color,index)=>`<button class="${index===0?'active':''}" data-cloudtilt-color="${index}" onclick="selectCloudtiltColor(${index},this)"><img src="${color.image}" alt="${color.name}"></button>`).join('')}
+              </div>
+            </div>
+            <div class="product-detail">
+              <span class="eyebrow">Lightweight Everyday Sneaker</span>
+              <h1>Cloudtilt</h1>
+              <a href="${trustpilotUrl}" target="_blank" class="trustpilot-badge"><span style="color:#00B67A">★★★★★</span> 4.8/5 · 2,400+ reviews on Trustpilot</a>
+              <div class="price"><span class="old">£160.00</span><span class="new" style="font-size:34px">£28.50</span><span class="badge sale">-82%</span></div>
+              <div class="blanket-variant-panel">
+                <div class="blanket-variant-title"><span>Choose your color</span><span class="selected-model-name" id="selectedCloudtiltColor">${selected.name}</span></div>
+                <div class="sweatpant-color-grid">${cloudtiltColors.map((color,index)=>`<button class="sweatpant-color-card ${index===0?'active':''}" data-cloudtilt-color="${index}" title="${color.name}" onclick="selectCloudtiltColor(${index},this)"><img src="${color.image}" alt="${color.name}"><span>${color.name}</span></button>`).join('')}</div>
+                <div class="model-count-pill">${cloudtiltColors.length} colors available</div>
+              </div>
+              <div class="inline-badges"><span>All-day comfort</span><span>Lightweight feel</span><span>Clean cushioned profile</span></div>
+              <div class="urgency">LIMITED TO 1 PRODUCT PER ORDER<small>Due to high demand, we limit orders to 1 unit per customer.</small></div>
+              <a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">ADD TO CART</a>
+            </div>
+          </div>
+        </section>
+        <section><div class="container long-desc"><h2>Description</h2><h3>Soft, clean, and easy for everyday wear.</h3><p>Cloudtilt is a lightweight everyday sneaker made for walking, travel, errands, and daily comfort. The smooth sculpted shape gives it a premium look while the cushioned feel keeps it easy to wear from morning to night.</p><p><b>Choose your favorite color above.</b> Each option updates the product image and checkout tracking so the selected variant is sent correctly.</p></div></section>
+        <section><div class="container"><div class="section-head"><h2>Technical Details</h2></div><table class="spec-table"><tr><td>Product Name</td><td>Cloudtilt</td></tr><tr><td>Selected Color</td><td id="cloudtiltSpecColor">${selected.name}</td></tr><tr><td>Colors Available</td><td>${cloudtiltColors.map(c=>c.name).join(', ')}</td></tr><tr><td>Use</td><td>Walking, travel, errands, daily wear</td></tr><tr><td>Style</td><td>Lightweight cushioned sneaker</td></tr><tr><td>Shipping</td><td>Fast free delivery</td></tr></table></div></section>
+        <section class="testimonials"><div class="container"><div class="section-head"><h2>Customer Reviews</h2><p class="section-sub">Comfort-focused feedback from customers wearing them daily.</p></div><div class="review-strip">
+          <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=72" alt="Nina P."><div><b>Nina P.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"Super light and clean. I wore them all day walking around and they still felt comfortable."</p><small>June 15, 2026</small></div>
+          <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=73" alt="Maya T."><div><b>Maya T.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"The Black Ivory color goes with everything. The shape looks premium without being too sporty."</p><small>June 11, 2026</small></div>
+          <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=74" alt="Sofia L."><div><b>Sofia L.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"Really nice for travel days. Lightweight, comfortable, and easy to style."</p><small>June 7, 2026</small></div>
+          <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=75" alt="Alyssa M."><div><b>Alyssa M.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"I love the color selection. The Pearl Ice pair looks even better in person."</p><small>June 2, 2026</small></div>
+        </div></div></section>
+        <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">ADD TO CART · £28.50</a></div>
+      </div>`;
+    }
+    function selectCloudtiltColor(index,btn){
+      selectedCloudtiltColorIndex=index;
+      const selected=getSelectedCloudtilt();
+      const img=document.getElementById('cloudtiltMainImage');
+      const label=document.getElementById('selectedCloudtiltColor');
+      const spec=document.getElementById('cloudtiltSpecColor');
+      if(img)img.src=selected.image;
+      if(label)label.textContent=selected.name;
+      if(spec)spec.textContent=selected.name;
+      document.querySelectorAll('#product-cloudtilt .sweatpant-color-card').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('#product-cloudtilt .walkingpad-gallery button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll(`#product-cloudtilt [data-cloudtilt-color="${index}"]`).forEach(b=>b.classList.add('active'));
+      setTimeout(ensureCheckoutLinks,0);
+    }
     const originalRenderProductPagesWithWalkingPad = renderProductPages;
     renderProductPages = function(){
       originalRenderProductPagesWithWalkingPad();
@@ -1783,6 +1853,12 @@
       }
       if(holder && !document.getElementById('product-define-jacket-nulu')){
         holder.insertAdjacentHTML('beforeend', definePageHTML());
+      }
+      const cloudtiltPage=document.getElementById('product-cloudtilt');
+      if(holder && cloudtiltPage){
+        cloudtiltPage.outerHTML=cloudtiltPageHTML();
+      }else if(holder){
+        holder.insertAdjacentHTML('beforeend', cloudtiltPageHTML());
       }
     };
 
@@ -1874,9 +1950,9 @@
         setProductCheckoutLinks(definePage,buildCheckoutUrl("£28.50",productName,selected.color.image));
       }
       const cloudtiltPage=document.getElementById('product-cloudtilt');
-      if(cloudtiltPage){
-        const image="https://images.ctfassets.net/hnk2vsx53n6l/7CwHyKf11fgjYWpQBSN3HB/9a0ee1f237104fb6cb336c1f8ba669f1/pbwudlg3ejelwypszxox.png?w=2000&h=2000&fm=avif&f=center&fit=fill&q=80";
-        setProductCheckoutLinks(cloudtiltPage,buildCheckoutUrl("£28.50","Cloudtilt - Black Ivory",image));
+      if(cloudtiltPage && typeof getSelectedCloudtilt==='function'){
+        const selected=getSelectedCloudtilt();
+        setProductCheckoutLinks(cloudtiltPage,buildCheckoutUrl("£28.50",`Cloudtilt - ${selected.name}`,selected.image));
       }
     }
     const originalNavigateToCheckout = navigateTo;
