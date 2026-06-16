@@ -565,7 +565,12 @@
 .sweatpant-color-card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:9px;display:block;background:#f5f7fb}
 .sweatpant-color-card span{display:block;margin-top:7px;font-size:12px;line-height:1.15;font-weight:900;color:#1f2937;white-space:normal}
 .sweatpant-color-card.active{border-color:#3396ff;background:#f2f8ff;box-shadow:0 8px 20px rgba(51,150,255,.16)}
+.inspiration-carousel{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 18px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.inspiration-card{flex:0 0 220px;scroll-snap-align:start}
+.inspiration-card img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;display:block;background:#f5f7fb}
+.inspiration-card span{display:block;margin-top:9px;font-size:14px;font-weight:900;color:#1f2937}
 @media(max-width:767px){.sweatpant-color-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.inspiration-card{flex-basis:68vw}}
 @media(max-width:767px){.desktop-links{gap:18px}.product-layout{width:100%!important;max-width:100%!important}}
 
 
@@ -1305,6 +1310,14 @@
         <section><div class="container"><div class="section-head"><h2>Fit</h2></div><div class="box-section"><p>Unisex style. Designed for an oversized look with a longer inseam. Size down once or twice if you prefer a closer fit.</p><p><b>Inseam lengths by measurement:</b> XXS - 30 1/2 in, XS & S - 31 in, M, L, XL & 2XL - 31 1/2 in.</p></div></div></section>
         <section><div class="container"><div class="section-head"><h2>Technical Details</h2></div><table class="spec-table"><tr><td>Product Name</td><td>Accolade Straight Leg Sweatpant</td></tr><tr><td>Selected Color</td><td id="sweatpantSpecColor">${selected.color.name}</td></tr><tr><td>Available Sizes</td><td>${sweatpantSizes.join(', ')}</td></tr><tr><td>Fabrication</td><td>French terry that is smooth on outside and fleecy on the inside</td></tr><tr><td>Fabric Content</td><td>65% Cotton, 35% Polyester</td></tr><tr><td>Care</td><td>Machine wash separately on cold, gentle cycle. Tumble dry low, gentle cycle.</td></tr></table></div></section>
         <section><div class="container"><div class="box-section"><h2>What is in my package?</h2><div class="check-list"><div class="check">✓ 1x Accolade Straight Leg Sweatpant in your selected color and size</div><div class="check">✓ Protective premium packaging</div><div class="check">✓ Care instructions</div><div class="check">✓ Customer support access</div></div></div></div></section>
+        <section><div class="container"><div class="section-head"><h2>Vos inspirations</h2><p class="section-sub">Style ideas from creators wearing relaxed, studio-to-street looks.</p></div><div class="inspiration-carousel">
+          <div class="inspiration-card"><img src="https://static.pxlecdn.com/photos/781825828/medium/5cbbf8842ae9823cfa8e.jpg" alt="@clara.berry inspiration"><span>@clara.berry</span></div>
+          <div class="inspiration-card"><img src="https://static.pxlecdn.com/photos/775680703/medium/4ff39125a02c9905c748.jpg" alt="@shadelima inspiration"><span>@shadelima</span></div>
+          <div class="inspiration-card"><img src="https://static.pxlecdn.com/photos/771369087/medium/57c90bbd2edbc0cf62fa.jpg" alt="@saraorrego inspiration"><span>@saraorrego</span></div>
+          <div class="inspiration-card"><img src="https://static.pxlecdn.com/photos/770861902/medium/0501b060c5f9188bb5a2.jpg" alt="@brunabiancardi inspiration"><span>@brunabiancardi</span></div>
+          <div class="inspiration-card"><img src="https://static.pxlecdn.com/photos/770335635/medium/eb7366fc169d14951683.jpg" alt="@ludiledelfino inspiration"><span>@ludiledelfino</span></div>
+          <div class="inspiration-card"><img src="https://static.pxlecdn.com/photos/770232637/medium/94cdc701d4e130f12f32.jpg" alt="@joycorrigan inspiration"><span>@joycorrigan</span></div>
+        </div></div></section>
         <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">ADD TO CART · $28.50</a></div>
       </div>`;
     }
