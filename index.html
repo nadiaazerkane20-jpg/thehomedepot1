@@ -558,6 +558,8 @@
 .walkingpad-gallery img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .walkingpad-benefits{display:grid;gap:12px;margin-top:18px}
 .walkingpad-benefit{background:#f8fbff;border:1px solid #e5efff;border-radius:14px;padding:14px;font-weight:800;color:#1269c8}
+.sweatpant-size-select{width:100%;min-height:56px;border:1px solid #d9e1ea;border-radius:14px;background:#fff;padding:0 16px;font-size:16px;font-weight:800;color:#111;outline:none}
+.sweatpant-size-select:focus{border-color:#3396ff;box-shadow:0 0 0 4px rgba(51,150,255,.14)}
 @media(max-width:767px){.desktop-links{gap:18px}.product-layout{width:100%!important;max-width:100%!important}}
 
 
@@ -1284,7 +1286,9 @@
               </div>
               <div class="blanket-variant-panel">
                 <div class="blanket-variant-title"><span>Choose your size</span><span class="selected-model-name" id="selectedSweatpantSize">${selected.size}</span></div>
-                <div class="size-selector">${sweatpantSizes.map((size,index)=>`<button class="size-btn ${index===0?'active':''}" onclick="selectSweatpantSize(${index},this)"><span>${size}</span><small>$28.50</small></button>`).join('')}</div>
+                <select class="sweatpant-size-select" id="sweatpantSizeSelect" onchange="selectSweatpantSize(this.value)">
+                  ${sweatpantSizes.map((size,index)=>`<option value="${index}" ${index===selectedSweatpantSizeIndex?'selected':''}>${size} - $28.50</option>`).join('')}
+                </select>
               </div>
               <div class="urgency">LIMITED TO 1 PRODUCT PER ORDER<small>Due to high demand, we limit orders to 1 unit per customer.</small></div>
               <a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">ADD TO CART</a>
@@ -1312,13 +1316,13 @@
       if(btn)btn.classList.add('active');
       setTimeout(ensureCheckoutLinks,0);
     }
-    function selectSweatpantSize(index,btn){
-      selectedSweatpantSizeIndex=index;
+    function selectSweatpantSize(index){
+      selectedSweatpantSizeIndex=Number(index) || 0;
       const selected=getSelectedSweatpant();
       const label=document.getElementById('selectedSweatpantSize');
+      const select=document.getElementById('sweatpantSizeSelect');
       if(label)label.textContent=selected.size;
-      document.querySelectorAll('#product-accolade-straight-leg-sweatpant .size-btn').forEach(b=>b.classList.remove('active'));
-      if(btn)btn.classList.add('active');
+      if(select)select.value=String(selectedSweatpantSizeIndex);
       setTimeout(ensureCheckoutLinks,0);
     }
     const originalRenderProductPagesWithWalkingPad = renderProductPages;
