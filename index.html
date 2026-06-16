@@ -570,10 +570,18 @@
 .inspiration-card{flex:0 0 220px;scroll-snap-align:start}
 .inspiration-card img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;display:block;background:#f5f7fb}
 .inspiration-card span{display:block;margin-top:9px;font-size:14px;font-weight:900;color:#1f2937}
-.impact-tabs{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 12px;margin-bottom:18px;-webkit-overflow-scrolling:touch}
-.impact-tab-btn{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:12px 16px;font-weight:900;color:#111;cursor:pointer}
-.impact-tab-btn.active{background:#000;color:#fff;border-color:#000}
-.impact-tab-panel{display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 24px rgba(15,23,42,.04)}
+.impact-size-pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.impact-size-pill{min-width:58px;min-height:36px;border:1.5px solid #111;background:#fff;border-radius:999px;font-weight:800;color:#111;cursor:pointer}
+.impact-size-pill.active{background:#000;color:#fff}
+.impact-size-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:#111;text-decoration:underline;text-underline-offset:3px;font-weight:700;background:transparent;border:0;padding:0;cursor:pointer;font-size:15px}
+.impact-size-chart{display:none;margin-top:14px;overflow-x:auto}
+.impact-size-chart.active{display:block}
+.impact-tabs{border:1px solid var(--line);background:#fff}
+.impact-tab-btn{width:100%;min-height:70px;border:0;border-bottom:1px solid var(--line);background:#fff;padding:0 22px;display:flex;align-items:center;justify-content:space-between;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:#111;cursor:pointer;text-align:left}
+.impact-tab-btn:last-of-type{border-bottom:0}
+.impact-tab-btn::after{content:'+';font-size:22px;letter-spacing:0;font-weight:300}
+.impact-tab-btn.active::after{content:'-'}
+.impact-tab-panel{display:none;border-bottom:1px solid var(--line);padding:20px 22px;background:#fff}
 .impact-tab-panel.active{display:block}
 .impact-tab-panel p{color:var(--muted);line-height:1.75;margin:0 0 12px}
 .impact-feature-list{display:grid;gap:10px;margin:0 0 18px;padding:0;list-style:none}
@@ -1416,9 +1424,9 @@
               </div>
               <div class="blanket-variant-panel">
                 <div class="blanket-variant-title"><span>Choose your size</span><span class="selected-model-name" id="selectedImpactShortSize">${selected.size}</span></div>
-                <select class="sweatpant-size-select" id="impactShortSizeSelect" onchange="selectImpactShortSize(this.value)">
-                  ${impactShortSizes.map((size,index)=>`<option value="${index}" ${index===selectedImpactShortSizeIndex?'selected':''}>${size} - $28.50</option>`).join('')}
-                </select>
+                <div class="impact-size-pills">${impactShortSizes.map((size,index)=>`<button class="impact-size-pill ${index===selectedImpactShortSizeIndex?'active':''}" data-impact-short-size="${index}" onclick="selectImpactShortSize(${index},this)">${size}</button>`).join('')}</div>
+                <button class="impact-size-link" type="button" onclick="toggleImpactSizeChart()">📏 What's my size?</button>
+                <div class="impact-size-chart" id="impactSizeChart"><table class="spec-table" style="min-width:680px"><tr><td>Size</td><td>Waist</td><td>Hips</td><td>Inside Leg</td><td>UK Size</td><td>US Size</td></tr><tr><td>XS</td><td>25</td><td>35</td><td>30</td><td>4-6</td><td>0-2</td></tr><tr><td>S</td><td>27.5</td><td>38</td><td>30</td><td>8-10</td><td>4-6</td></tr><tr><td>M</td><td>30</td><td>41</td><td>31</td><td>12-14</td><td>8-10</td></tr><tr><td>L</td><td>33</td><td>43.5</td><td>31</td><td>16-18</td><td>12-14</td></tr><tr><td>XL</td><td>36.5</td><td>46.5</td><td>32</td><td>20-22</td><td>16-18</td></tr></table></div>
               </div>
               <div class="urgency">LIMITED TO 1 PRODUCT PER ORDER<small>Due to high demand, we limit orders to 1 unit per customer.</small></div>
               <a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">ADD TO CART</a>
@@ -1426,9 +1434,8 @@
           </div>
         </section>
         <section><div class="container long-desc"><h2>Description</h2><p>Designed for training days, hot walks, and studio-to-street looks, the Impact Shorts | 4.5" combine a sculpting fit with a smooth performance feel. The 4.5 inch length gives confident coverage while keeping the look sleek and easy to style.</p></div></section>
-        <section><div class="container"><div class="impact-tabs"><button class="impact-tab-btn active" data-impact-tab="features" onclick="selectImpactInfoTab('features',this)">Product Features</button><button class="impact-tab-btn" data-impact-tab="model" onclick="selectImpactInfoTab('model',this)">Model Size</button><button class="impact-tab-btn" data-impact-tab="delivery" onclick="selectImpactInfoTab('delivery',this)">Delivery & Returns</button></div><div class="impact-tab-panel active" data-impact-tab-panel="features"><ul class="impact-feature-list"><li>Flexible scrunch</li><li>Glute contouring</li><li>Mid to low ribbed waistband</li><li>Supportive fabric</li><li>Contour zones</li><li>4.5" leg length</li><li>90% Nylon | 10% Elastane</li><li>Fit - True to Size</li></ul><h3>Lift heavier. Train harder.</h3><p>Built for your toughest sessions, IMPACT combines firm sculpting fabric with a flexible scrunch and contouring to lift and define your glutes. The shorts stay in place without digging into your thighs, and the mid to low waistband and contour zones support your natural shape so you can look and feel your strongest.</p></div><div class="impact-tab-panel" data-impact-tab-panel="model"><div style="overflow-x:auto"><table class="spec-table" style="min-width:520px"><tr><td></td><td>UK</td><td>USA</td></tr><tr><td>Model Wearing</td><td>Small</td><td>Small</td></tr><tr><td>Model Height</td><td>160 cm</td><td>5'3"</td></tr><tr><td>Model Hips</td><td>97 cm</td><td>38"</td></tr><tr><td>Model Waist</td><td>73 cm</td><td>28"</td></tr><tr><td>Dress Size</td><td>6 - 8</td><td>2-4</td></tr></table></div></div><div class="impact-tab-panel" data-impact-tab-panel="delivery"><p>We offer free returns for all orders. See more <a href="https://us.dfyne.com/pages/returns" target="_blank" style="text-decoration:underline;font-weight:800">here</a>.</p><h3>Express shipping is our standard</h3><p>For tracked shipments, your tracking information will be included in your shipping confirmation email. You can also log into your account and hit "view my order" to find your tracking information once the order has been dispatched.</p><p>You can also use our <a href="https://us.dfyne.com/community/track-my-order" target="_blank" style="text-decoration:underline;font-weight:800">tracking portal here to track your order</a>.</p><p>All orders made before 3pm GMT Monday - Friday will be dispatched same day.</p><h3>Mainland USA Shipping Rates</h3><div style="overflow-x:auto"><table class="spec-table" style="min-width:560px"><tr><td>Service</td><td>Delivery Time</td><td>Cost</td><td>Free From</td></tr><tr><td>DHL On Demand Tracked Express</td><td>1-3 Working Days</td><td>-</td><td>-</td></tr></table></div></div></div></section>
+        <section><div class="container"><div class="impact-tabs"><button class="impact-tab-btn active" data-impact-tab="features" onclick="selectImpactInfoTab('features',this)">Product Features</button><div class="impact-tab-panel active" data-impact-tab-panel="features"><ul class="impact-feature-list"><li>Flexible scrunch</li><li>Glute contouring</li><li>Mid to low ribbed waistband</li><li>Supportive fabric</li><li>Contour zones</li><li>4.5" leg length</li><li>90% Nylon | 10% Elastane</li><li>Fit - True to Size</li></ul><h3>Lift heavier. Train harder.</h3><p>Built for your toughest sessions, IMPACT combines firm sculpting fabric with a flexible scrunch and contouring to lift and define your glutes. The shorts stay in place without digging into your thighs, and the mid to low waistband and contour zones support your natural shape so you can look and feel your strongest.</p></div><button class="impact-tab-btn" data-impact-tab="model" onclick="selectImpactInfoTab('model',this)">Model Size</button><div class="impact-tab-panel" data-impact-tab-panel="model"><div style="overflow-x:auto"><table class="spec-table" style="min-width:520px"><tr><td></td><td>UK</td><td>USA</td></tr><tr><td>Model Wearing</td><td>Small</td><td>Small</td></tr><tr><td>Model Height</td><td>160 cm</td><td>5'3"</td></tr><tr><td>Model Hips</td><td>97 cm</td><td>38"</td></tr><tr><td>Model Waist</td><td>73 cm</td><td>28"</td></tr><tr><td>Dress Size</td><td>6 - 8</td><td>2-4</td></tr></table></div></div><button class="impact-tab-btn" data-impact-tab="delivery" onclick="selectImpactInfoTab('delivery',this)">Delivery & Returns</button><div class="impact-tab-panel" data-impact-tab-panel="delivery"><p>We offer free returns for all orders. See more <a href="https://us.dfyne.com/pages/returns" target="_blank" style="text-decoration:underline;font-weight:800">here</a>.</p><h3>Express shipping is our standard</h3><p>For tracked shipments, your tracking information will be included in your shipping confirmation email. You can also log into your account and hit "view my order" to find your tracking information once the order has been dispatched.</p><p>You can also use our <a href="https://us.dfyne.com/community/track-my-order" target="_blank" style="text-decoration:underline;font-weight:800">tracking portal here to track your order</a>.</p><p>All orders made before 3pm GMT Monday - Friday will be dispatched same day.</p><h3>Mainland USA Shipping Rates</h3><div style="overflow-x:auto"><table class="spec-table" style="min-width:560px"><tr><td>Service</td><td>Delivery Time</td><td>Cost</td><td>Free From</td></tr><tr><td>DHL On Demand Tracked Express</td><td>1-3 Working Days</td><td>-</td><td>-</td></tr></table></div></div></div></section>
         <section><div class="container"><div class="section-head"><h2>Technical Details</h2></div><table class="spec-table"><tr><td>Product Name</td><td>Impact Shorts | 4.5"</td></tr><tr><td>Selected Color</td><td id="impactShortSpecColor">${selected.color.name}</td></tr><tr><td>Available Sizes</td><td>${impactShortSizes.join(', ')}</td></tr><tr><td>Length</td><td>4.5 in</td></tr><tr><td>Fit</td><td>Sculpting training short</td></tr><tr><td>Care</td><td>Machine wash cold, gentle cycle. Tumble dry low.</td></tr></table></div></section>
-        <section><div class="container"><div class="section-head"><h2>Size Chart</h2></div><div style="overflow-x:auto"><table class="spec-table" style="min-width:680px"><tr><td>Size</td><td>Waist</td><td>Hips</td><td>Inside Leg</td><td>UK Size</td><td>US Size</td></tr><tr><td>XS</td><td>25</td><td>35</td><td>30</td><td>4-6</td><td>0-2</td></tr><tr><td>S</td><td>27.5</td><td>38</td><td>30</td><td>8-10</td><td>4-6</td></tr><tr><td>M</td><td>30</td><td>41</td><td>31</td><td>12-14</td><td>8-10</td></tr><tr><td>L</td><td>33</td><td>43.5</td><td>31</td><td>16-18</td><td>12-14</td></tr><tr><td>XL</td><td>36.5</td><td>46.5</td><td>32</td><td>20-22</td><td>16-18</td></tr></table></div></div></section>
         <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">ADD TO CART · $28.50</a></div>
       </div>`;
     }
@@ -1446,14 +1453,18 @@
       document.querySelectorAll(`#product-impact-shorts-45 [data-impact-short-color="${index}"]`).forEach(b=>b.classList.add('active'));
       setTimeout(ensureCheckoutLinks,0);
     }
-    function selectImpactShortSize(index){
+    function selectImpactShortSize(index,btn){
       selectedImpactShortSizeIndex=Number(index) || 0;
       const selected=getSelectedImpactShort();
       const label=document.getElementById('selectedImpactShortSize');
-      const select=document.getElementById('impactShortSizeSelect');
       if(label)label.textContent=selected.size;
-      if(select)select.value=String(selectedImpactShortSizeIndex);
+      document.querySelectorAll('#product-impact-shorts-45 .impact-size-pill').forEach(item=>item.classList.remove('active'));
+      if(btn)btn.classList.add('active');
       setTimeout(ensureCheckoutLinks,0);
+    }
+    function toggleImpactSizeChart(){
+      const chart=document.getElementById('impactSizeChart');
+      if(chart)chart.classList.toggle('active');
     }
     function selectImpactInfoTab(tab,btn){
       const page=document.getElementById('product-impact-shorts-45');
