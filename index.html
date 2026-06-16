@@ -560,16 +560,17 @@
 .walkingpad-benefit{background:#f8fbff;border:1px solid #e5efff;border-radius:14px;padding:14px;font-weight:800;color:#1269c8}
 .sweatpant-size-select{width:100%;min-height:56px;border:1px solid #d9e1ea;border-radius:14px;background:#fff;padding:0 16px;font-size:16px;font-weight:800;color:#111;outline:none}
 .sweatpant-size-select:focus{border-color:#3396ff;box-shadow:0 0 0 4px rgba(51,150,255,.14)}
-.sweatpant-color-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
-.sweatpant-color-card{border:1px solid #e1e7ef;background:#fff;border-radius:12px;padding:8px;cursor:pointer;text-align:left;transition:.2s ease;min-width:0}
-.sweatpant-color-card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:9px;display:block;background:#f5f7fb}
-.sweatpant-color-card span{display:block;margin-top:7px;font-size:12px;line-height:1.15;font-weight:900;color:#1f2937;white-space:normal}
-.sweatpant-color-card.active{border-color:#3396ff;background:#f2f8ff;box-shadow:0 8px 20px rgba(51,150,255,.16)}
+.sweatpant-color-grid{display:flex;gap:12px;margin-top:14px;overflow-x:auto;padding:2px 2px 10px;-webkit-overflow-scrolling:touch}
+.sweatpant-color-card{border:0;background:transparent;padding:0;cursor:pointer;text-align:center;transition:.2s ease;flex:0 0 62px}
+.sweatpant-color-card img{width:56px;height:56px;object-fit:cover;border-radius:999px;display:block;background:#f5f7fb;border:2px solid #e1e7ef;margin:0 auto}
+.sweatpant-color-card span{display:block;margin-top:6px;font-size:11px;line-height:1.1;font-weight:900;color:#1f2937;white-space:normal}
+.sweatpant-color-card.active img{border-color:#3396ff;box-shadow:0 0 0 4px rgba(51,150,255,.16)}
+.sweatpant-color-card.active span{color:#1269c8}
 .inspiration-carousel{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 18px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .inspiration-card{flex:0 0 220px;scroll-snap-align:start}
 .inspiration-card img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;display:block;background:#f5f7fb}
 .inspiration-card span{display:block;margin-top:9px;font-size:14px;font-weight:900;color:#1f2937}
-@media(max-width:767px){.sweatpant-color-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.sweatpant-color-card{flex-basis:58px}.sweatpant-color-card img{width:52px;height:52px}}
 @media(max-width:767px){.inspiration-card{flex-basis:68vw}}
 @media(max-width:767px){.desktop-links{gap:18px}.product-layout{width:100%!important;max-width:100%!important}}
 
@@ -1309,8 +1310,7 @@
         <section><div class="container long-desc"><h2>Description</h2><p>Okay, so we're pretty much obsessed with this new, straight-leg version of the Accolade Sweatpant. It is a super soft, leveled-up classic with a chrome ALO logo detail and powerful performance tech for studio and street. Wear it in cold weather with a bold jacket and transition to warmer weather with slides.</p></div></section>
         <section><div class="container"><div class="section-head"><h2>Fit</h2></div><div class="box-section"><p>Unisex style. Designed for an oversized look with a longer inseam. Size down once or twice if you prefer a closer fit.</p><p><b>Inseam lengths by measurement:</b> XXS - 30 1/2 in, XS & S - 31 in, M, L, XL & 2XL - 31 1/2 in.</p></div></div></section>
         <section><div class="container"><div class="section-head"><h2>Technical Details</h2></div><table class="spec-table"><tr><td>Product Name</td><td>Accolade Straight Leg Sweatpant</td></tr><tr><td>Selected Color</td><td id="sweatpantSpecColor">${selected.color.name}</td></tr><tr><td>Available Sizes</td><td>${sweatpantSizes.join(', ')}</td></tr><tr><td>Fabrication</td><td>French terry that is smooth on outside and fleecy on the inside</td></tr><tr><td>Fabric Content</td><td>65% Cotton, 35% Polyester</td></tr><tr><td>Care</td><td>Machine wash separately on cold, gentle cycle. Tumble dry low, gentle cycle.</td></tr></table></div></section>
-        <section><div class="container"><div class="box-section"><h2>What is in my package?</h2><div class="check-list"><div class="check">✓ 1x Accolade Straight Leg Sweatpant in your selected color and size</div><div class="check">✓ Protective premium packaging</div><div class="check">✓ Care instructions</div><div class="check">✓ Customer support access</div></div></div></div></section>
-        <section><div class="container"><div class="section-head"><h2>Vos inspirations</h2><p class="section-sub">Style ideas from creators wearing relaxed, studio-to-street looks.</p></div><div class="inspiration-carousel">
+        <section><div class="container"><div class="section-head"><h2>Your Inspirations</h2><p class="section-sub">Style ideas from creators wearing relaxed, studio-to-street looks.</p></div><div class="inspiration-carousel">
           <div class="inspiration-card"><img src="https://static.pxlecdn.com/photos/781825828/medium/5cbbf8842ae9823cfa8e.jpg" alt="@clara.berry inspiration"><span>@clara.berry</span></div>
           <div class="inspiration-card"><img src="https://static.pxlecdn.com/photos/775680703/medium/4ff39125a02c9905c748.jpg" alt="@shadelima inspiration"><span>@shadelima</span></div>
           <div class="inspiration-card"><img src="https://static.pxlecdn.com/photos/771369087/medium/57c90bbd2edbc0cf62fa.jpg" alt="@saraorrego inspiration"><span>@saraorrego</span></div>
