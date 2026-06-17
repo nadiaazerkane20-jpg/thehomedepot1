@@ -700,7 +700,45 @@
   .atc-social-avatars img{width:29px;height:29px}
 }
 
-</style>
+
+/* Compact product controls, clearer tables, and inline customer videos */
+.product-page .blanket-variant-panel{padding:14px!important;border-radius:14px!important;margin:14px 0!important}
+.product-page .blanket-variant-title{font-size:13px!important;gap:8px!important}
+.product-page .selected-model-name,.product-page .model-count-pill{font-size:12px!important}
+.product-page .sweatpant-color-grid{gap:8px!important;margin-top:10px!important;padding:1px 2px 8px!important}
+.product-page .sweatpant-color-card{flex:0 0 52px!important}
+.product-page .sweatpant-color-card img{width:46px!important;height:46px!important;border-width:1.5px!important}
+.product-page .sweatpant-color-card span{font-size:10px!important;font-weight:700!important;margin-top:5px!important;line-height:1.15!important}
+.product-page .sweatpant-color-card.active img{box-shadow:0 0 0 2px rgba(0,0,0,.12)!important}
+.product-page .define-size-head{gap:10px!important;margin:10px 0 8px!important}
+.product-page .define-size-head h3{font-size:16px!important;font-weight:800!important}
+.product-page .define-size-guide-btn{font-size:13px!important;font-weight:800!important}
+.product-page .define-size-grid{gap:8px!important}
+.product-page .define-size-btn{width:auto!important;min-width:44px!important;height:42px!important;padding:0 12px!important;font-size:14px!important;font-weight:800!important;border-radius:8px!important}
+.product-page .shoe-size-grid{gap:7px!important}
+.product-page .shoe-size-btn{min-height:44px!important;font-size:14px!important}
+.product-page .shoe-size-group-label{font-size:13px!important}
+.product-page .shoe-size-selected,.product-page .shoe-size-available{font-size:12px!important}
+.product-page .impact-size-pills{gap:7px!important}
+.product-page .impact-size-pill{min-width:46px!important;min-height:34px!important;font-size:13px!important}
+.product-page .impact-size-link{font-size:13px!important;margin-top:12px!important}
+.product-page .impact-tab-btn{min-height:56px!important;padding:0 16px!important;font-size:13px!important;letter-spacing:.18em!important}
+.product-page .impact-tab-panel{padding:16px!important}
+.product-page .spec-table{table-layout:fixed!important;border-radius:10px!important}
+.product-page .spec-table td{padding:10px 12px!important;font-size:13px!important;line-height:1.45!important;vertical-align:top!important;word-break:break-word!important}
+.product-page .spec-table td:first-child{width:34%;font-weight:800!important}
+.product-page .define-size-guide,.product-page .impact-size-chart,.product-page .impact-tab-panel div[style*="overflow-x:auto"]{max-width:100%!important}
+.product-page .define-size-guide .spec-table,.product-page .impact-size-chart .spec-table,.product-page .impact-tab-panel .spec-table{min-width:0!important;width:100%!important;max-width:100%!important}
+.product-page .inline-video-section{padding:18px 0 0!important;background:transparent!important}
+.product-page .product-detail .inline-video-section{margin-top:14px!important}
+.product-page .inline-video-section .container{padding:0!important;width:100%!important}
+.product-page .inline-video-section .section-head{text-align:left!important;margin-bottom:12px!important}
+.product-page .inline-video-section h2{font-size:16px!important;letter-spacing:.08em!important;text-transform:uppercase!important;margin:0!important}
+.product-page .inline-video-section .tiktok-carousel{gap:10px!important;padding:2px 0 10px!important}
+.product-page .inline-video-section .tiktok-card{flex:0 0 118px!important;border-radius:12px!important;box-shadow:none!important}
+@media(max-width:767px){.product-page .inline-video-section .tiktok-card{flex-basis:34vw!important}.product-page .spec-table td{font-size:12px!important;padding:9px!important}.product-page .blanket-variant-panel{padding:12px!important}.product-page .define-size-btn{min-width:42px!important;height:40px!important;font-size:13px!important}.product-page .sweatpant-color-card{flex-basis:48px!important}.product-page .sweatpant-color-card img{width:42px!important;height:42px!important}}
+
+  </style>
 
 <style id="walkingpad-story-css">
 .walkingpad-story{padding:60px 0}
@@ -2188,13 +2226,28 @@
         }
       });
     }
+
+    function relocateProductVideoCarousels(){
+      document.querySelectorAll('.product-page').forEach(page=>{
+        const features=page.querySelector('.product-detail .shared-atc-features');
+        if(!features)return;
+        const videoSection=[...page.querySelectorAll('section')].find(section=>
+          section.querySelector('.tiktok-carousel') && section.querySelector('.section-head h2')
+        );
+        if(!videoSection)return;
+        videoSection.classList.add('inline-video-section');
+        if(features.nextElementSibling!==videoSection){
+          features.insertAdjacentElement('afterend',videoSection);
+        }
+      });
+    }
     const originalNavigateToSharedAtc = navigateTo;
     navigateTo = function(page){
       originalNavigateToSharedAtc(page);
-      setTimeout(ensureSharedAtcBlocks,100);
+      setTimeout(()=>{ensureSharedAtcBlocks();relocateProductVideoCarousels();},100);
     };
-    window.addEventListener('DOMContentLoaded',()=>setTimeout(ensureSharedAtcBlocks,300));
-    window.addEventListener('hashchange',()=>setTimeout(ensureSharedAtcBlocks,300));
+    window.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{ensureSharedAtcBlocks();relocateProductVideoCarousels();},300));
+    window.addEventListener('hashchange',()=>setTimeout(()=>{ensureSharedAtcBlocks();relocateProductVideoCarousels();},300));
 
     const checkoutLinksByPrice={
       "$9.99":"https://www.molipy8trk.com/938L6R/F6G5D56/",
