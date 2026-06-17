@@ -827,9 +827,9 @@
     },{
       slug:'softlyzero',
       name:'SoftlyZero™',
-      old:'S/68.00',
-      price:'S/28.50',
-      off:'-58%',
+      old:'140 PEN',
+      price:'40 PEN',
+      off:'-71%',
       tag:'11 Colors',
       img:'https://mpir.halarastatic.com/upload/online/pu/2026/06/17/11/54/868440039372-1400x.webp',
       desc:'SoftlyZero™ 3 inch shorts with a smooth barely-there feel, clean color options, and an easy everyday active fit.'
@@ -1823,7 +1823,7 @@
               <span class="eyebrow">SoftlyZero™ Fabric</span>
               <h1>SoftlyZero™</h1>
               <a href="${trustpilotUrl}" target="_blank" class="trustpilot-badge"><span style="color:#00B67A">★★★★★</span> 4.8/5 · 2,400+ reviews on Trustpilot</a>
-              <div class="price"><span class="old">S/68.00</span><span class="new" style="font-size:34px">S/28.50</span><span class="badge sale">-58%</span></div>
+              <div class="price"><span class="old">140 PEN</span><span class="new" style="font-size:34px">40 PEN</span><span class="badge sale">-71%</span></div>
               <div class="blanket-variant-panel">
                 <div class="blanket-variant-title"><span>Choose your color</span><span class="selected-model-name" id="selectedSoftlyZeroColor">${selected.name}</span></div>
                 <div class="sweatpant-color-grid">${softlyZeroColors.map((color,index)=>`<button class="sweatpant-color-card ${index===selectedSoftlyZeroColorIndex?'active':''}" data-softlyzero-color="${index}" title="${color.name}" onclick="selectSoftlyZeroColor(${index},this)"><img src="${color.image}" alt="${color.name}"><span>${color.name}</span></button>`).join('')}</div>
@@ -1855,7 +1855,7 @@
           <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=77" alt="Carla M."><div><b>Carla M.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><img class="review-photo" src="https://i.pravatar.cc/600?img=77" alt="Carla M. customer photo"><p>"Winterberry is beautiful in person. They fit true to size and stay comfortable all day."</p><small>June 13, 2026</small></div>
           <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=78" alt="Nora T."><div><b>Nora T.</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><img class="review-photo" src="https://i.pravatar.cc/600?img=78" alt="Nora T. customer photo"><p>"I ordered black and white. Lightweight, flattering, and easy for workouts."</p><small>June 10, 2026</small></div>
         </div></div></section>
-        <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">ADD TO CART · S/28.50</a></div>
+        <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">ADD TO CART · 40 PEN</a></div>
       </div>`;
     }
     function selectSoftlyZeroColor(index,btn){
@@ -2041,7 +2041,8 @@
     const checkoutLinksByPrice={
       "S/9.99":"https://www.molipy8trk.com/938L6R/F6G5D56/",
       "S/19.97":"https://www.molipy8trk.com/938L6R/CQKM4F2/",
-      "S/28.50":"https://www.molipy8trk.com/938L6R/CQR6MCG/"
+      "S/28.50":"https://www.molipy8trk.com/938L6R/CQR6MCG/",
+      "40 PEN":"https://www.molipy8trk.com/938L6R/CQR6MCG/"
     };
     const checkoutPixelId="D8LS9L3C77U4U91BAQCG";
     function buildCheckoutUrl(price,productName,imageUrl){
@@ -2088,7 +2089,7 @@
       const softlyZeroPage=document.getElementById('product-softlyzero');
       if(softlyZeroPage && typeof getSelectedSoftlyZero==='function'){
         const selected=getSelectedSoftlyZero();
-        setProductCheckoutLinks(softlyZeroPage,buildCheckoutUrl("S/28.50",`SoftlyZero - ${selected.name} - Size ${selected.sizeLabel}`,selected.image));
+        setProductCheckoutLinks(softlyZeroPage,buildCheckoutUrl("40 PEN",`SoftlyZero - ${selected.name} - Size ${selected.sizeLabel}`,selected.image));
       }
       const bostonPage=document.getElementById('product-boston-soft-footbed');
       if(bostonPage && typeof getSelectedBoston==='function'){
