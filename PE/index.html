@@ -874,9 +874,9 @@
     },{
       slug:'airlift-set',
       name:'Airlift Set',
-      old:'S/198.00',
-      price:'S/28.50',
-      off:'-86%',
+      old:'999 PEN',
+      price:'197 PEN',
+      off:'-80%',
       tag:'8 Colors',
       img:'https://cdn.shopify.com/s/files/1/2185/2813/files/W9681R_01_b1_s1_a1_1_m215_750x.jpg?v=1767375852',
       desc:'Set Airlift ultraligero con bra de tiras ajustables, copas removibles y tela suavizante para yoga, studio y streetwear.'
@@ -2075,7 +2075,7 @@
               <span class="eyebrow">Airlift Performance Set</span>
               <h1>Airlift Set</h1>
               <a href="${trustpilotUrl}" target="_blank" class="trustpilot-badge"><span style="color:#00B67A">★★★★★</span> 4.8/5 · 2,400+ reviews on Trustpilot</a>
-              <div class="price"><span class="old">S/198.00</span><span class="new" style="font-size:34px">S/28.50</span><span class="badge sale">-86%</span></div>
+              <div class="price"><span class="old">999 PEN</span><span class="new" style="font-size:34px">197 PEN</span><span class="badge sale">-80%</span></div>
               <p style="color:#666;margin:8px 0 18px">(Impuestos y aranceles incluidos)</p>
               <div class="blanket-variant-panel">
                 <div class="blanket-variant-title"><span>Elige tu color</span><span class="selected-model-name" id="selectedAirliftColor">${selected.color.name}</span></div>
@@ -2108,7 +2108,7 @@
         <section class="testimonials"><div class="container"><div class="section-head"><h2>Opiniones de clientes</h2><p class="section-sub">A las clientas les encanta el ajuste limpio, la sensación ultraligera y el look de set completo.</p></div><div class="review-strip">
           <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=31" alt="Valentina Cruz"><div><b>Valentina Cruz</b><div class="verified">Compra verificada</div></div></div><div class="stars">★★★★★</div><p>"El set queda muy limpio y la tela se siente ligera pero con soporte. Lo uso para yoga y también para salir."</p><small>16 de junio de 2026</small></div><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=43" alt="Camila Ortega"><div><b>Camila Ortega</b><div class="verified">Compra verificada</div></div></div><div class="stars">★★★★★</div><p>"Pedí mi talla normal y me quedó perfecto. Las tiras ajustables ayudan muchísimo."</p><small>12 de junio de 2026</small></div><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=58" alt="Lucía Navarro"><div><b>Lucía Navarro</b><div class="verified">Compra verificada</div></div></div><div class="stars">★★★★★</div><p>"El color Black se ve premium y combina con todo. Me encanta que las copas sean removibles."</p><small>8 de junio de 2026</small></div>
         </div></div></section>
-        <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">AGREGAR AL CARRITO · S/28.50</a></div>
+        <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">AGREGAR AL CARRITO · 197 PEN</a></div>
       </div>`;
     }
     function selectAirliftColor(index,btn){
@@ -2254,12 +2254,13 @@
       "S/19.97":"https://www.molipy8trk.com/938L6R/CQKM4F2/",
       "S/28.50":"https://www.molipy8trk.com/938L6R/CQR6MCG/",
       "79 PEN":"https://www.molipy8trk.com/938L6R/F37TZ9P/",
-      "40 PEN":"https://www.molipy8trk.com/938L6R/9C27W24/"
+      "40 PEN":"https://www.molipy8trk.com/938L6R/9C27W24/",
+      "197 PEN":"https://www.molipy8trk.com/938L6R/F3GSCZQ/"
     };
     const checkoutPixelId="D8LS9L3C77U4U91BAQCG";
     function buildCheckoutUrl(price,productName,imageUrl){
       const base=checkoutLinksByPrice[price] || checkoutLinksByPrice["S/28.50"];
-      if(price==="40 PEN" || price==="79 PEN"){
+      if(price==="40 PEN" || price==="79 PEN" || price==="197 PEN"){
         return `${base}?sub5=${checkoutPixelId}&adv1=${encodeURIComponent(productName)}&adv2=${encodeURIComponent(imageUrl || "")}`;
       }
       const separator=base.includes("?") ? "&" : "?";
@@ -2326,7 +2327,7 @@
       const airliftPage=document.getElementById('product-airlift-set');
       if(airliftPage && typeof getSelectedAirlift==='function'){
         const selected=getSelectedAirlift();
-        setProductCheckoutLinks(airliftPage,buildCheckoutUrl("S/28.50",`Airlift Set - ${selected.color.name} - Size ${selected.size}`,selected.color.image));
+        setProductCheckoutLinks(airliftPage,buildCheckoutUrl("197 PEN",`Airlift Set - ${selected.color.name} - Size ${selected.size}`,selected.color.image));
       }
       const rosaPage=document.getElementById('product-rosa-charmosa-duo');
       if(rosaPage){
