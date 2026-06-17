@@ -2253,12 +2253,15 @@
       "S/9.99":"https://www.molipy8trk.com/938L6R/F6G5D56/",
       "S/19.97":"https://www.molipy8trk.com/938L6R/CQKM4F2/",
       "S/28.50":"https://www.molipy8trk.com/938L6R/CQR6MCG/",
-      "79 PEN":"https://www.molipy8trk.com/938L6R/CQR6MCG/",
-      "40 PEN":"https://www.molipy8trk.com/938L6R/CQR6MCG/"
+      "79 PEN":"https://www.molipy8trk.com/938L6R/F37TZ9P/",
+      "40 PEN":"https://www.molipy8trk.com/938L6R/9C27W24/"
     };
     const checkoutPixelId="D8LS9L3C77U4U91BAQCG";
     function buildCheckoutUrl(price,productName,imageUrl){
       const base=checkoutLinksByPrice[price] || checkoutLinksByPrice["S/28.50"];
+      if(price==="40 PEN" || price==="79 PEN"){
+        return `${base}?sub5=${checkoutPixelId}&adv1=${encodeURIComponent(productName)}&adv2=${encodeURIComponent(imageUrl || "")}`;
+      }
       const separator=base.includes("?") ? "&" : "?";
       const source=encodeURIComponent(productName)+"___"+encodeURIComponent(imageUrl || "");
       return `${base}${separator}aff_sub5=___${checkoutPixelId}&source=${source}`;
