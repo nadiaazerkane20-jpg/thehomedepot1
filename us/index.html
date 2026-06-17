@@ -605,8 +605,11 @@
 .define-size-grid{display:flex;gap:10px;flex-wrap:wrap}
 .define-size-btn{width:58px;height:58px;border:1.5px solid #d1d5db;background:#fff;border-radius:6px;font-size:22px;font-weight:900;cursor:pointer;color:#111}
 .define-size-btn.active{border:2px solid #111;box-shadow:0 0 0 1px #111}
-.define-size-guide{display:none;margin-top:16px;overflow-x:auto}
+.define-size-guide{display:none;margin-top:16px;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .define-size-guide.active{display:block}
+.define-size-guide div[style*="overflow-x:auto"],.impact-size-chart,.impact-tab-panel div[style*="overflow-x:auto"]{max-width:100%;overflow-x:auto!important}
+.define-size-guide .spec-table,.impact-size-chart .spec-table,.impact-tab-panel .spec-table{width:max-content;max-width:none}
+@media(max-width:767px){.define-size-guide,.impact-size-chart,.impact-tab-panel div[style*="overflow-x:auto"]{width:100%;max-width:calc(100vw - 72px)}.define-size-guide .spec-table,.impact-size-chart .spec-table,.impact-tab-panel .spec-table{min-width:0!important;width:100%!important}.define-size-guide .spec-table td,.impact-size-chart .spec-table td,.impact-tab-panel .spec-table td{white-space:normal;word-break:normal}}
 .define-why{display:grid;gap:22px;align-items:center}
 .define-why img{width:100%;border-radius:18px;object-fit:cover;background:#f7f7f7}
 .define-accordion{background:#fff}
