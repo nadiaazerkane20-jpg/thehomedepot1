@@ -932,7 +932,7 @@
       off:'Rhode',
       tag:'43 Variants',
       img:'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/lip-case-bronze-main-png-2000x2000.png?v=1780330341',
-      desc:'A silicone bubble phone case that keeps your lip treatment on hand, with iPhone model and color selections.'
+      desc:'A silicone bubble phone case that keeps your lip treatment on hand, with iPhone model, color, and free lip treatment selection.'
     }];
     const reviews=[['Emily Carter','May 28, 2026','The quality feels far better than most home products I have ordered online. Everything arrived quickly and looked beautiful in my space.',1],['Michael Brooks','May 24, 2026','Clean design, sturdy materials, and the packaging felt premium. It instantly made our living room feel more organized.',12],['Sarah Mitchell','May 19, 2026','I loved how simple the checkout was. The product matched the photos and the finish feels very high-end.',23],['Daniel Parker','May 15, 2026','Fast delivery and excellent value. I ordered one item first and came back for two more upgrades.',34],['Jessica Adams','May 10, 2026','TheHomeDepot has become my go-to for stylish home upgrades. The product looks expensive without the high price.',45],['Christopher Reed','May 6, 2026','Very impressed with the details. It fits perfectly with our modern decor and feels built to last.',56]];
     function card(p){return `<a class="product-card fade" href="#product-${p.slug}" onclick="navigateTo('product-${p.slug}')"><div class="product-img"><img src="${p.img}" alt="${p.name}"></div><div class="product-info"><span class="badge sale">${p.off}</span><span class="badge" style="margin-left:6px">${p.tag}</span><div class="product-title">${p.name}</div><div class="product-desc">${p.desc}</div><div class="price"><span class="old">${p.old}</span><span class="new">${p.price}</span></div><span class="btn btn-primary card-cta">View Product</span></div></a>`}
@@ -2184,8 +2184,14 @@
       ['iphone 14 pro max','colada',48035437609198,1,'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/lip-case-colada-nolip-main-png-2000x2000.png?v=1780189442'],['iphone 14 pro max','bronze',48035437641966,1,'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/lip-case-bronze-nolip-main-png-2000x2000.png?v=1780332677'],['iphone 14 pro max','pretzel',48061165764846,1,'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/pretzel-lip-case-main-nolip-15-png-2000x2000.png?v=1772820709'],['iphone 14 pro max','sweet pea',48061165797614,1,'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/sweetpea-lip-case-main-nolip-15-png-2000x2000.png?v=1772819451'],['iphone 14 pro max','black',47165887217902,1,'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/lip-case-main-black-no-lip-16pro.png?v=1772523725'],['iphone 14 pro max','grey',47165887185134,1,'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/Lip-case-main-no-lip.png?v=1772523725'],
       ['iphone 13','grey',47165886857454,1,'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/iphone-13_1_1d1a419d-2045-4c24-872b-3193ef5fe290.png?v=1772523725'],['iphone 13 pro','grey',47165886922990,1,'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/Lip-case-main-no-lip.png?v=1772523725'],['iphone 13 pro max','grey',47165886988526,1,'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/Lip-case-main-no-lip.png?v=1772523725']
     ].map(([model,color,id,available,img])=>({model,color,id,available:!!available,img}));
+    const rhodeGiftOptions=[
+      {name:'Peptide Lip Treatment',variant:'Vanilla',id:43700952334574,image:'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/vanilla-plt-main.png?v=1737672906'},
+      {name:'Peptide Lip Treatment',variant:'Salted Caramel',id:43098463240430,image:'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/main-png-2000x2000_saltedcaramel_5df90d2c-bf13-4be3-b218-f04a58421574.png?v=1705608073'},
+      {name:'Peptide Lip Treatment',variant:'Watermelon Slice',id:42804238057710,image:'https://cdn.shopify.com/s/files/1/0606/5451/8510/files/main-png-2000x2000_watermelon_cc3c028b-5e97-40c7-aa0e-e6b10a808fd3.png?v=1709759894'}
+    ];
     let selectedRhodeModel='iphone 17 pro';
     let selectedRhodeColor='colada';
+    let selectedRhodeGiftIndex=0;
     function rhodeLabel(text){
       return String(text).split(' ').map(word=>{
         if(word==='iphone')return 'iPhone';
@@ -2204,6 +2210,9 @@
       }
       return variant;
     }
+    function getSelectedRhodeGift(){
+      return rhodeGiftOptions[selectedRhodeGiftIndex] || rhodeGiftOptions[0];
+    }
     function rhodeColorButtonsHTML(){
       return rhodeColors.map(color=>{
         const variant=findRhodeVariant(selectedRhodeModel,color.name);
@@ -2214,13 +2223,15 @@
     }
     function rhodePageHTML(){
       const selected=getSelectedRhode();
+      const gift=getSelectedRhodeGift();
       return `<div id="product-lip-case" class="page product-page">
         <section><div class="container product-layout"><div><div class="main-product-img"><img id="rhodeMainImage" src="${selected.img}" alt="Lip Case - ${rhodeLabel(selected.color)} - ${rhodeLabel(selected.model)}"></div><div class="walkingpad-gallery"><button class="active" onclick="changeRhodeImage('${selected.img}',this)"><img src="${selected.img}" alt="Selected Lip Case"></button><button onclick="changeRhodeImage('https://cdn.shopify.com/s/files/1/0606/5451/8510/files/lip-case-hero2-mobile.jpg?v=1772523679',this)"><img src="https://cdn.shopify.com/s/files/1/0606/5451/8510/files/lip-case-hero2-mobile.jpg?v=1772523679" alt="Lip Case lifestyle"></button><button onclick="changeRhodeImage('https://cdn.shopify.com/s/files/1/0606/5451/8510/files/lip-case-pretzel-hero-mobile.jpg?v=1772523725',this)"><img src="https://cdn.shopify.com/s/files/1/0606/5451/8510/files/lip-case-pretzel-hero-mobile.jpg?v=1772523725" alt="Lip Case detail"></button></div></div><div class="product-detail"><span class="eyebrow">Rhode</span><h1>Lip Case</h1><a href="${trustpilotUrl}" target="_blank" class="trustpilot-badge"><span style="color:#00B67A">★★★★★</span> 4.8/5 · 2,400+ reviews on Trustpilot</a><div class="price"><span class="new" style="font-size:34px">£38.00</span></div><p class="section-sub" style="margin:14px 0 18px">A silicone bubble phone case that keeps your lip treatment or tint on hand, with a silky-soft touch and puffy back for easy grip.</p>
           <div class="blanket-variant-panel"><div class="blanket-variant-title"><span>iPhone model</span><span class="selected-model-name" id="selectedRhodeModel">${rhodeLabel(selected.model)}</span></div><div class="define-size-grid">${rhodeModels.map(model=>`<button class="define-size-btn ${model===selectedRhodeModel?'active':''}" style="width:132px;height:46px;font-size:13px" data-rhode-model="${model}" onclick="selectRhodeModel('${model}',this)">${rhodeLabel(model)}</button>`).join('')}</div></div>
           <div class="blanket-variant-panel"><div class="blanket-variant-title"><span>Color</span><span class="selected-model-name" id="selectedRhodeColor">${rhodeLabel(selected.color)}</span></div><div class="sweatpant-color-grid" id="rhodeColorGrid">${rhodeColorButtonsHTML()}</div></div>
-          <div class="inline-badges"><span>Silicone bubble case</span><span>Lip holder built in</span><span>43 model/color variants</span></div><div class="urgency">LIMITED TO 1 PRODUCT PER ORDER<small>Due to high demand, we limit orders to 1 unit per customer.</small></div><a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">ADD TO CART</a></div></div></section>
+          <div class="blanket-variant-panel"><div class="blanket-variant-title"><span>Free Peptide Lip Treatment</span><span class="selected-model-name" id="selectedRhodeGift">${gift.variant}</span></div><div class="sweatpant-color-grid">${rhodeGiftOptions.map((option,index)=>`<button class="sweatpant-color-card ${index===selectedRhodeGiftIndex?'active':''}" data-rhode-gift="${index}" title="${option.variant}" onclick="selectRhodeGift(${index},this)"><img src="${option.image}" alt="${option.name} ${option.variant}"><span>${option.variant}</span></button>`).join('')}</div></div>
+          <div class="inline-badges"><span>Silicone bubble case</span><span>Lip holder built in</span><span>Free lip treatment included</span></div><div class="urgency">LIMITED TO 1 PRODUCT PER ORDER<small>Choose your iPhone model, case color, and free Peptide Lip Treatment variant before checkout.</small></div><a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">ADD TO CART</a></div></div></section>
         <section><div class="container"><div class="impact-tabs"><button class="impact-tab-btn active" onclick="selectRhodeTab('details',this)">Product Details</button><div class="impact-tab-panel active" data-rhode-tab-panel="details"><p>A silicone, bubble phone case that keeps your lip on hand. With a silky-soft touch and puffy back for easy grip, it is compatible with select iPhone models and your favorite Peptide Lip Treatment or Tint.</p></div><button class="impact-tab-btn" onclick="selectRhodeTab('compatibility',this)">Compatibility</button><div class="impact-tab-panel" data-rhode-tab-panel="compatibility"><p><b>Models:</b> ${rhodeModels.map(rhodeLabel).join(', ')}.</p><p><b>Colors:</b> ${rhodeColors.map(c=>rhodeLabel(c.name)).join(', ')}.</p></div><button class="impact-tab-btn" onclick="selectRhodeTab('care',this)">Material & Care</button><div class="impact-tab-panel" data-rhode-tab-panel="care"><p>Soft-touch silicone with a puffy grip back. Wipe clean with a soft damp cloth and avoid harsh cleaners.</p></div></div></div></section>
-        <section><div class="container"><div class="section-head"><h2>Technical Details</h2></div><table class="spec-table"><tr><td>Product Name</td><td>Lip Case</td></tr><tr><td>Selected Model</td><td id="rhodeSpecModel">${rhodeLabel(selected.model)}</td></tr><tr><td>Selected Color</td><td id="rhodeSpecColor">${rhodeLabel(selected.color)}</td></tr><tr><td>Variant ID</td><td id="rhodeSpecVariant">${selected.id}</td></tr><tr><td>Total Variants</td><td>${rhodeVariants.length}</td></tr><tr><td>Compatible Product</td><td>Peptide Lip Treatment or Tint</td></tr></table></div></section>
+        <section><div class="container"><div class="section-head"><h2>Technical Details</h2></div><table class="spec-table"><tr><td>Product Name</td><td>Lip Case</td></tr><tr><td>Selected Model</td><td id="rhodeSpecModel">${rhodeLabel(selected.model)}</td></tr><tr><td>Selected Color</td><td id="rhodeSpecColor">${rhodeLabel(selected.color)}</td></tr><tr><td>Variant ID</td><td id="rhodeSpecVariant">${selected.id}</td></tr><tr><td>Free Product</td><td id="rhodeSpecGift">${gift.name} - ${gift.variant}</td></tr><tr><td>Free Product Variant ID</td><td id="rhodeSpecGiftVariant">${gift.id}</td></tr><tr><td>Total Case Variants</td><td>${rhodeVariants.length}</td></tr><tr><td>Compatible Product</td><td>Peptide Lip Treatment or Tint</td></tr></table></div></section>
         <section class="testimonials"><div class="container"><div class="section-head"><h2>Customer Reviews</h2></div><div class="review-strip"><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=49" alt="Amelia"><div><b>Amelia</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"The case feels soft and keeps my lip treatment easy to grab."</p><small>June 16, 2026</small></div><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=52" alt="Chloe"><div><b>Chloe</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"Color selection is clean and the phone model options are easy to choose."</p><small>June 12, 2026</small></div></div></div></section>
         <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">ADD TO CART · £38.00</a></div>
       </div>`;
@@ -2237,6 +2248,19 @@
       selectedRhodeColor=color;
       updateRhodePage(btn);
     }
+    function selectRhodeGift(index,btn){
+      selectedRhodeGiftIndex=Number(index) || 0;
+      const gift=getSelectedRhodeGift();
+      const label=document.getElementById('selectedRhodeGift');
+      const spec=document.getElementById('rhodeSpecGift');
+      const specVariant=document.getElementById('rhodeSpecGiftVariant');
+      if(label)label.textContent=gift.variant;
+      if(spec)spec.textContent=`${gift.name} - ${gift.variant}`;
+      if(specVariant)specVariant.textContent=gift.id;
+      document.querySelectorAll('#product-lip-case [data-rhode-gift]').forEach(item=>item.classList.remove('active'));
+      if(btn)btn.classList.add('active');
+      setTimeout(ensureCheckoutLinks,0);
+    }
     function changeRhodeImage(src,btn){
       const img=document.getElementById('rhodeMainImage');
       if(img)img.src=src;
@@ -2245,6 +2269,7 @@
     }
     function updateRhodePage(){
       const selected=getSelectedRhode();
+      const gift=getSelectedRhodeGift();
       const img=document.getElementById('rhodeMainImage');
       if(img)img.src=selected.img;
       const modelLabel=document.getElementById('selectedRhodeModel');
@@ -2252,11 +2277,17 @@
       const specModel=document.getElementById('rhodeSpecModel');
       const specColor=document.getElementById('rhodeSpecColor');
       const specVariant=document.getElementById('rhodeSpecVariant');
+      const giftLabel=document.getElementById('selectedRhodeGift');
+      const specGift=document.getElementById('rhodeSpecGift');
+      const specGiftVariant=document.getElementById('rhodeSpecGiftVariant');
       if(modelLabel)modelLabel.textContent=rhodeLabel(selected.model);
       if(colorLabel)colorLabel.textContent=rhodeLabel(selected.color);
       if(specModel)specModel.textContent=rhodeLabel(selected.model);
       if(specColor)specColor.textContent=rhodeLabel(selected.color);
       if(specVariant)specVariant.textContent=selected.id;
+      if(giftLabel)giftLabel.textContent=gift.variant;
+      if(specGift)specGift.textContent=`${gift.name} - ${gift.variant}`;
+      if(specGiftVariant)specGiftVariant.textContent=gift.id;
       document.querySelectorAll('#product-lip-case [data-rhode-model]').forEach(item=>item.classList.toggle('active',item.dataset.rhodeModel===selected.model));
       const colorGrid=document.getElementById('rhodeColorGrid');
       if(colorGrid)colorGrid.innerHTML=rhodeColorButtonsHTML();
@@ -2577,7 +2608,8 @@
       const rhodePage=document.getElementById('product-lip-case');
       if(rhodePage && typeof getSelectedRhode==='function'){
         const selected=getSelectedRhode();
-        setProductCheckoutLinks(rhodePage,buildCheckoutUrl("RHODE_£38",`Lip Case - ${rhodeLabel(selected.model)} - ${rhodeLabel(selected.color)} - Variant ${selected.id}`,selected.img));
+        const gift=typeof getSelectedRhodeGift==='function' ? getSelectedRhodeGift() : {name:'Peptide Lip Treatment',variant:'Vanilla'};
+        setProductCheckoutLinks(rhodePage,buildCheckoutUrl("RHODE_£38",`Lip Case - ${rhodeLabel(selected.color)} - ${rhodeLabel(selected.model)} and ${gift.name} - ${gift.variant}`,selected.img));
       }
       const airliftPage=document.getElementById('product-airlift-set');
       if(airliftPage && typeof getSelectedAirlift==='function'){
