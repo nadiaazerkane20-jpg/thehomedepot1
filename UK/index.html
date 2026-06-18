@@ -918,8 +918,8 @@
     },{
       slug:'empower-seamless-leggings',
       name:'Empower Seamless Leggings',
-      old:'',
-      price:'£42.00',
+      old:'£42.00',
+      price:'£17.00',
       off:'AYBL',
       tag:'8 Colors',
       img:'https://cdn.shopify.com/s/files/1/3000/0340/files/30.01_Womens_ECOM3926_a0bdd465-e0da-4a58-824d-74777e6306c6.jpg?v=1740567010',
@@ -2091,7 +2091,7 @@
               <span class="eyebrow">AYBL Empower</span>
               <h1>Empower Seamless Leggings</h1>
               <a href="${trustpilotUrl}" target="_blank" class="trustpilot-badge"><span style="color:#00B67A">★★★★★</span> 4.8/5 · 700+ reviews</a>
-              <div class="price"><span class="new" style="font-size:34px">£42.00</span></div>
+              <div class="price"><span class="old">£42.00</span><span class="new" style="font-size:34px">£17.00</span></div>
               <p class="section-sub" style="margin:14px 0 18px">Ultra-soft seamless leggings made with body-sculpting contour shading, a refined scrunch bum detail, and a flattering high-rise fit.</p>
               <div class="blanket-variant-panel">
                 <div class="blanket-variant-title"><span>Choose your color</span><span class="selected-model-name" id="selectedEmpowerColor">${selected.color.name}</span></div>
@@ -2109,6 +2109,13 @@
             </div>
           </div>
         </section>
+        <section><div class="container"><div class="section-head"><h2>OUR CUSTOMERS RECOMMEND</h2></div><div class="tiktok-carousel">
+          <div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7640459914795601155_v3.mp4" type="video/mp4"></video></div>
+          <div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7651310693274193174_v3.mp4" type="video/mp4"></video></div>
+          <div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7273168996998958379_v3.mp4" type="video/mp4"></video></div>
+          <div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7575924187517291798_v3.mp4" type="video/mp4"></video></div>
+          <div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7622758479278689544_v3.mp4" type="video/mp4"></video></div>
+        </div></div></section>
         <section><div class="container"><div class="define-accordion">
           <div class="define-acc-row active"><button class="define-acc-btn" onclick="this.parentElement.classList.toggle('active')"><span class="define-acc-label"><span class="define-acc-icon">01</span>Description</span></button><div class="define-acc-panel"><p>Build a better you in our Empower Seamless Leggings. Crafted from an ultra soft, weightless material that moulds to your figure, these contour leggings are designed to feel effortless as you train, helping you crush your goals with zero distractions.</p><div class="define-chip-grid"><div class="define-chip">Soft, high-stretch fabric</div><div class="define-chip">Body-sculpting contour shading</div><div class="define-chip">Refined scrunch bum detail</div><div class="define-chip">Flattering high-rise fit</div><div class="define-chip">Squat-proof</div><div class="define-chip">AYBL branding to front and back</div></div></div></div>
           <div class="define-acc-row"><button class="define-acc-btn" onclick="this.parentElement.classList.toggle('active')"><span class="define-acc-label"><span class="define-acc-icon">02</span>Size & Fit</span></button><div class="define-acc-panel"><p><b>Fit:</b> High waisted, scrunch bum, true to size.</p><p><b>Model:</b> Model is 5'6" and wears a size XS.</p><p><b>Recommendation:</b> Empower leggings run true to size, so stick to your usual size.</p></div></div>
@@ -2121,7 +2128,7 @@
           <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=47" alt="Shayla"><div><b>Shayla</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"Great quality material and a proper high waist. It stays in place during training."</p><small>June 10, 2026</small></div>
           <div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=32" alt="Lisa"><div><b>Lisa</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"Squat proof and flattering. I stayed with my normal size and the fit was right."</p><small>June 6, 2026</small></div>
         </div></div></section>
-        <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">ADD TO CART · £42.00</a></div>
+        <div class="sticky-atc"><a href="${affiliate}" target="_blank" class="btn btn-primary">ADD TO CART · £17.00</a></div>
       </div>`;
     }
     function changeEmpowerImage(src,btn){
@@ -2530,13 +2537,13 @@
       "SOFTLYZERO_£9.99":"https://www.molipy8trk.com/938L6R/9C27W24/",
       "£17":"https://www.molipy8trk.com/938L6R/F37TZ9P/",
       "£42":"https://www.molipy8trk.com/938L6R/F3GSCZQ/",
-      "EMPOWER_£42":"https://www.molipy8trk.com/938L6R/CQR6MCG/",
+      "EMPOWER_£17":"https://www.molipy8trk.com/938L6R/F37TZ9P/",
       "RHODE_£38":"https://www.molipy8trk.com/938L6R/CQR6MCG/"
     };
     const checkoutPixelId="D8LS9L3C77U4U91BAQCG";
     function buildCheckoutUrl(price,productName,imageUrl){
       const base=checkoutLinksByPrice[price] || checkoutLinksByPrice["£28.50"];
-      if(price==="SOFTLYZERO_£9.99" || price==="£17" || price==="£42" || price==="EMPOWER_£42" || price==="RHODE_£38"){
+      if(price==="SOFTLYZERO_£9.99" || price==="£17" || price==="£42" || price==="EMPOWER_£17" || price==="RHODE_£38"){
         return `${base}?sub5=${checkoutPixelId}&adv1=${encodeURIComponent(productName)}&adv2=${encodeURIComponent(imageUrl || "")}`;
       }
       const separator=base.includes("?") ? "&" : "?";
@@ -2603,7 +2610,7 @@
       const empowerPage=document.getElementById('product-empower-seamless-leggings');
       if(empowerPage && typeof getSelectedEmpower==='function'){
         const selected=getSelectedEmpower();
-        setProductCheckoutLinks(empowerPage,buildCheckoutUrl("EMPOWER_£42",`Empower Seamless Leggings - ${selected.color.name} - Size ${selected.size}`,selected.color.image));
+        setProductCheckoutLinks(empowerPage,buildCheckoutUrl("EMPOWER_£17",`Empower Seamless Leggings - ${selected.color.name} - Size ${selected.size}`,selected.color.image));
       }
       const rhodePage=document.getElementById('product-lip-case');
       if(rhodePage && typeof getSelectedRhode==='function'){
