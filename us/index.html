@@ -2407,11 +2407,15 @@
       "$9.99":"https://www.molipy8trk.com/938L6R/F6G5D56/",
       "$19.97":"https://www.molipy8trk.com/938L6R/CQKM4F2/",
       "$28.50":"https://www.molipy8trk.com/938L6R/CQR6MCG/",
+      "BOSTON_$28.50":"https://www.molipy8trk.com/938L6R/CQR6MCG/",
       "RHODE_$38":"https://www.molipy8trk.com/938L6R/CQR6MCG/"
     };
     const checkoutPixelId="D8LS9L3C77U4U91BAQCG";
     function buildCheckoutUrl(price,productName,imageUrl){
       const base=checkoutLinksByPrice[price] || checkoutLinksByPrice["$28.50"];
+      if(price==="BOSTON_$28.50"){
+        return `${base}?sub5=___${checkoutPixelId}&adv1=${encodeURIComponent(productName)}&adv2=${encodeURIComponent(imageUrl || "")}`;
+      }
       if(price==="RHODE_$38"){
         return `${base}?sub5=${checkoutPixelId}&adv1=${encodeURIComponent(productName)}&adv2=${encodeURIComponent(imageUrl || "")}`;
       }
@@ -2463,7 +2467,7 @@
       if(bostonPage && typeof getSelectedBoston==='function'){
         const selected=getSelectedBoston();
         const productName=`Boston Soft Footbed - ${selected.color.name} - ${selected.size}`;
-        setProductCheckoutLinks(bostonPage,buildCheckoutUrl("$28.50",productName,selected.color.image));
+        setProductCheckoutLinks(bostonPage,buildCheckoutUrl("BOSTON_$28.50",productName,selected.color.image));
       }
       const definePage=document.getElementById('product-define-jacket-nulu');
       if(definePage && typeof getSelectedDefine==='function'){
