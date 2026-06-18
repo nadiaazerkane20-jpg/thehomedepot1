@@ -2646,7 +2646,7 @@
       "₺28.50":"https://www.molipy8trk.com/938L6R/CQR6MCG/",
       "SOFTLYZERO_₺9.99":"https://www.molipy8trk.com/938L6R/9C27W24/",
       "1006 TRY":"https://www.molipy8trk.com/938L6R/F37TZ9P/",
-      "2013 TRY":"https://www.molipy8trk.com/938L6R/F37TZ9P/",
+      "2013 TRY":"https://www.molipy8trk.com/938L6R/F3FFH85/",
       "₺42":"https://www.molipy8trk.com/938L6R/F3GSCZQ/",
       "EMPOWER_₺42":"https://www.molipy8trk.com/938L6R/CQR6MCG/",
       "RHODE_₺38":"https://www.molipy8trk.com/938L6R/CQR6MCG/"
@@ -2654,6 +2654,9 @@
     const checkoutPixelId="D8LS9L3C77U4U91BAQCG";
     function buildCheckoutUrl(price,productName,imageUrl){
       const base=checkoutLinksByPrice[price] || checkoutLinksByPrice["₺28.50"];
+      if(price==="2013 TRY"){
+        return `${base}?sub5=___${checkoutPixelId}&adv1=${encodeURIComponent(productName)}&adv2=${encodeURIComponent(imageUrl || "")}`;
+      }
       if(price==="SOFTLYZERO_₺9.99" || price==="1006 TRY" || price==="2013 TRY" || price==="₺42" || price==="EMPOWER_₺42" || price==="RHODE_₺38"){
         return `${base}?sub5=${checkoutPixelId}&adv1=${encodeURIComponent(productName)}&adv2=${encodeURIComponent(imageUrl || "")}`;
       }
