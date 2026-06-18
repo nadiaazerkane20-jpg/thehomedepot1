@@ -2193,6 +2193,7 @@
     let selectedRhodeColor='colada';
     let selectedRhodeGiftIndex=0;
     function rhodeLabel(text){
+      if(String(text)==='sweet pea')return 'Pea';
       return String(text).split(' ').map(word=>{
         if(word==='iphone')return 'iPhone';
         if(word==='pro')return 'Pro';
@@ -2200,13 +2201,17 @@
         return word.charAt(0).toUpperCase()+word.slice(1);
       }).join(' ');
     }
-    function findRhodeVariant(model=selectedRhodeModel,color=selectedRhodeColor){return rhodeVariants.find(v=>v.model===model && v.color===color);}
+    function findRhodeVariant(model=selectedRhodeModel,color=selectedRhodeColor){
+      const exact=rhodeVariants.find(v=>v.model===model && v.color===color);
+      if(exact)return {...exact,available:true,model,color};
+      const colorData=rhodeColors.find(c=>c.name===color);
+      const fallback=rhodeVariants.find(v=>v.color===color) || rhodeVariants.find(v=>v.model===model) || rhodeVariants[0];
+      return {model,color,id:fallback.id,available:true,img:(colorData&&colorData.image)||fallback.img};
+    }
     function getSelectedRhode(){
       let variant=findRhodeVariant();
-      if(!variant || !variant.available){
-        variant=rhodeVariants.find(v=>v.model===selectedRhodeModel && v.available) || rhodeVariants.find(v=>v.available) || rhodeVariants[0];
-        selectedRhodeModel=variant.model;
-        selectedRhodeColor=variant.color;
+      if(!variant){
+        variant=rhodeVariants[0];
       }
       return variant;
     }
@@ -2215,10 +2220,8 @@
     }
     function rhodeColorButtonsHTML(){
       return rhodeColors.map(color=>{
-        const variant=findRhodeVariant(selectedRhodeModel,color.name);
         const active=color.name===selectedRhodeColor;
-        const disabled=!variant || !variant.available;
-        return `<button class="sweatpant-color-card ${active?'active':''}" data-rhode-color="${color.name}" ${disabled?'disabled':''} style="${disabled?'opacity:.35;cursor:not-allowed':''}" title="${rhodeLabel(color.name)}" onclick="selectRhodeColor('${color.name}',this)"><img src="${color.image}" alt="${rhodeLabel(color.name)}"><span>${rhodeLabel(color.name)}${disabled?'<br>Sold out':''}</span></button>`;
+        return `<button class="sweatpant-color-card ${active?'active':''}" data-rhode-color="${color.name}" title="${rhodeLabel(color.name)}" onclick="selectRhodeColor('${color.name}',this)"><img src="${color.image}" alt="${rhodeLabel(color.name)}"><span>${rhodeLabel(color.name)}</span></button>`;
       }).join('');
     }
     function rhodePageHTML(){
@@ -2230,6 +2233,7 @@
           <div class="blanket-variant-panel"><div class="blanket-variant-title"><span>Color</span><span class="selected-model-name" id="selectedRhodeColor">${rhodeLabel(selected.color)}</span></div><div class="sweatpant-color-grid" id="rhodeColorGrid">${rhodeColorButtonsHTML()}</div></div>
           <div class="blanket-variant-panel"><div class="blanket-variant-title"><span>Free Peptide Lip Treatment</span><span class="selected-model-name" id="selectedRhodeGift">${gift.variant}</span></div><div class="sweatpant-color-grid">${rhodeGiftOptions.map((option,index)=>`<button class="sweatpant-color-card ${index===selectedRhodeGiftIndex?'active':''}" data-rhode-gift="${index}" title="${option.variant}" onclick="selectRhodeGift(${index},this)"><img src="${option.image}" alt="${option.name} ${option.variant}"><span>${option.variant}</span></button>`).join('')}</div></div>
           <div class="inline-badges"><span>Silicone bubble case</span><span>Lip holder built in</span><span>Free lip treatment included</span></div><div class="urgency">LIMITED TO 1 PRODUCT PER ORDER<small>Choose your iPhone model, case color, and free Peptide Lip Treatment variant before checkout.</small></div><a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">ADD TO CART</a></div></div></section>
+        <section><div class="container"><div class="section-head"><h2>OUR CUSTOMERS RECOMMEND</h2></div><div class="tiktok-carousel"><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7353777597211381038_v3.mp4" type="video/mp4"></video></div><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7621209925603069206_v3.mp4" type="video/mp4"></video></div><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7652478564721347861_v3.mp4" type="video/mp4"></video></div><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7562061726624124180_v3.mp4" type="video/mp4"></video></div></div></div></section>
         <section><div class="container"><div class="impact-tabs"><button class="impact-tab-btn active" onclick="selectRhodeTab('details',this)">Product Details</button><div class="impact-tab-panel active" data-rhode-tab-panel="details"><p>A silicone, bubble phone case that keeps your lip on hand. With a silky-soft touch and puffy back for easy grip, it is compatible with select iPhone models and your favorite Peptide Lip Treatment or Tint.</p></div><button class="impact-tab-btn" onclick="selectRhodeTab('compatibility',this)">Compatibility</button><div class="impact-tab-panel" data-rhode-tab-panel="compatibility"><p><b>Models:</b> ${rhodeModels.map(rhodeLabel).join(', ')}.</p><p><b>Colors:</b> ${rhodeColors.map(c=>rhodeLabel(c.name)).join(', ')}.</p></div><button class="impact-tab-btn" onclick="selectRhodeTab('care',this)">Material & Care</button><div class="impact-tab-panel" data-rhode-tab-panel="care"><p>Soft-touch silicone with a puffy grip back. Wipe clean with a soft damp cloth and avoid harsh cleaners.</p></div></div></div></section>
         <section><div class="container"><div class="section-head"><h2>Technical Details</h2></div><table class="spec-table"><tr><td>Product Name</td><td>Lip Case</td></tr><tr><td>Selected Model</td><td id="rhodeSpecModel">${rhodeLabel(selected.model)}</td></tr><tr><td>Selected Color</td><td id="rhodeSpecColor">${rhodeLabel(selected.color)}</td></tr><tr><td>Variant ID</td><td id="rhodeSpecVariant">${selected.id}</td></tr><tr><td>Free Product</td><td id="rhodeSpecGift">${gift.name} - ${gift.variant}</td></tr><tr><td>Free Product Variant ID</td><td id="rhodeSpecGiftVariant">${gift.id}</td></tr><tr><td>Total Case Variants</td><td>${rhodeVariants.length}</td></tr><tr><td>Compatible Product</td><td>Peptide Lip Treatment or Tint</td></tr></table></div></section>
         <section class="testimonials"><div class="container"><div class="section-head"><h2>Customer Reviews</h2></div><div class="review-strip"><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=49" alt="Amelia"><div><b>Amelia</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"The case feels soft and keeps my lip treatment easy to grab."</p><small>June 16, 2026</small></div><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=52" alt="Chloe"><div><b>Chloe</b><div class="verified">Verified Purchase</div></div></div><div class="stars">★★★★★</div><p>"Color selection is clean and the phone model options are easy to choose."</p><small>June 12, 2026</small></div></div></div></section>
@@ -2238,13 +2242,9 @@
     }
     function selectRhodeModel(model,btn){
       selectedRhodeModel=model;
-      const availableForModel=rhodeVariants.find(v=>v.model===model && v.color===selectedRhodeColor && v.available) || rhodeVariants.find(v=>v.model===model && v.available);
-      if(availableForModel)selectedRhodeColor=availableForModel.color;
       updateRhodePage(btn);
     }
     function selectRhodeColor(color,btn){
-      const variant=findRhodeVariant(selectedRhodeModel,color);
-      if(!variant || !variant.available)return;
       selectedRhodeColor=color;
       updateRhodePage(btn);
     }

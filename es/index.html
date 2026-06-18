@@ -2080,6 +2080,7 @@
     let selectedRhodeColor='colada';
     let selectedRhodeGiftIndex=0;
     function rhodeLabel(text){
+      if(String(text)==='sweet pea')return 'Pea';
       return String(text).split(' ').map(word=>{
         if(word==='iphone')return 'iPhone';
         if(word==='pro')return 'Pro';
@@ -2087,13 +2088,17 @@
         return word.charAt(0).toUpperCase()+word.slice(1);
       }).join(' ');
     }
-    function findRhodeVariant(model=selectedRhodeModel,color=selectedRhodeColor){return rhodeVariants.find(v=>v.model===model && v.color===color);}
+    function findRhodeVariant(model=selectedRhodeModel,color=selectedRhodeColor){
+      const exact=rhodeVariants.find(v=>v.model===model && v.color===color);
+      if(exact)return {...exact,available:true,model,color};
+      const colorData=rhodeColors.find(c=>c.name===color);
+      const fallback=rhodeVariants.find(v=>v.color===color) || rhodeVariants.find(v=>v.model===model) || rhodeVariants[0];
+      return {model,color,id:fallback.id,available:true,img:(colorData&&colorData.image)||fallback.img};
+    }
     function getSelectedRhode(){
       let variant=findRhodeVariant();
-      if(!variant || !variant.available){
-        variant=rhodeVariants.find(v=>v.model===selectedRhodeModel && v.available) || rhodeVariants.find(v=>v.available) || rhodeVariants[0];
-        selectedRhodeModel=variant.model;
-        selectedRhodeColor=variant.color;
+      if(!variant){
+        variant=rhodeVariants[0];
       }
       return variant;
     }
@@ -2102,10 +2107,8 @@
     }
     function rhodeColorButtonsHTML(){
       return rhodeColors.map(color=>{
-        const variant=findRhodeVariant(selectedRhodeModel,color.name);
         const active=color.name===selectedRhodeColor;
-        const disabled=!variant || !variant.available;
-        return `<button class="sweatpant-color-card ${active?'active':''}" data-rhode-color="${color.name}" ${disabled?'disabled':''} style="${disabled?'opacity:.35;cursor:not-allowed':''}" title="${rhodeLabel(color.name)}" onclick="selectRhodeColor('${color.name}',this)"><img src="${color.image}" alt="${rhodeLabel(color.name)}"><span>${rhodeLabel(color.name)}${disabled?'<br>Sold out':''}</span></button>`;
+        return `<button class="sweatpant-color-card ${active?'active':''}" data-rhode-color="${color.name}" title="${rhodeLabel(color.name)}" onclick="selectRhodeColor('${color.name}',this)"><img src="${color.image}" alt="${rhodeLabel(color.name)}"><span>${rhodeLabel(color.name)}</span></button>`;
       }).join('');
     }
     function rhodePageHTML(){
@@ -2117,6 +2120,7 @@
           <div class="blanket-variant-panel"><div class="blanket-variant-title"><span>Color</span><span class="selected-model-name" id="selectedRhodeColor">${rhodeLabel(selected.color)}</span></div><div class="sweatpant-color-grid" id="rhodeColorGrid">${rhodeColorButtonsHTML()}</div></div>
           <div class="blanket-variant-panel"><div class="blanket-variant-title"><span>Tratamiento de labios Peptide gratis</span><span class="selected-model-name" id="selectedRhodeGift">${gift.variant}</span></div><div class="sweatpant-color-grid">${rhodeGiftOptions.map((option,index)=>`<button class="sweatpant-color-card ${index===selectedRhodeGiftIndex?'active':''}" data-rhode-gift="${index}" title="${option.variant}" onclick="selectRhodeGift(${index},this)"><img src="${option.image}" alt="${option.name} ${option.variant}"><span>${option.variant}</span></button>`).join('')}</div></div>
           <div class="inline-badges"><span>Funda burbuja de silicona</span><span>Soporte labial integrado</span><span>Tratamiento labial gratis incluido</span></div><div class="urgency">LIMITADO A 1 PRODUCTO POR PEDIDO<small>Elige tu modelo de iPhone, color de funda y variante gratis de Peptide Lip Treatment antes de comprar.</small></div><a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">AGREGAR AL CARRITO</a></div></div></section>
+        <section><div class="container"><div class="section-head"><h2>NUESTROS CLIENTES RECOMIENDAN</h2></div><div class="tiktok-carousel"><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7353777597211381038_v3.mp4" type="video/mp4"></video></div><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7621209925603069206_v3.mp4" type="video/mp4"></video></div><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7652478564721347861_v3.mp4" type="video/mp4"></video></div><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7562061726624124180_v3.mp4" type="video/mp4"></video></div></div></div></section>
         <section><div class="container"><div class="impact-tabs"><button class="impact-tab-btn active" onclick="selectRhodeTab('details',this)">Detalles del producto</button><div class="impact-tab-panel active" data-rhode-tab-panel="details"><p>Una funda burbuja de silicona que mantiene tu producto labial a mano. Con tacto sedoso y parte trasera acolchada para un agarre cómodo, es compatible con modelos de iPhone seleccionados y tu Peptide Lip Treatment o Tint favorito.</p></div><button class="impact-tab-btn" onclick="selectRhodeTab('compatibility',this)">Compatibilidad</button><div class="impact-tab-panel" data-rhode-tab-panel="compatibility"><p><b>Modelos:</b> ${rhodeModels.map(rhodeLabel).join(', ')}.</p><p><b>Colores:</b> ${rhodeColors.map(c=>rhodeLabel(c.name)).join(', ')}.</p></div><button class="impact-tab-btn" onclick="selectRhodeTab('care',this)">Material y cuidado</button><div class="impact-tab-panel" data-rhode-tab-panel="care"><p>Silicona de tacto suave con parte trasera acolchada para mejor agarre. Limpia con un paño suave húmedo y evita limpiadores agresivos.</p></div></div></div></section>
         <section><div class="container"><div class="section-head"><h2>Detalles técnicos</h2></div><table class="spec-table"><tr><td>Producto</td><td>Lip Case</td></tr><tr><td>Modelo seleccionado</td><td id="rhodeSpecModel">${rhodeLabel(selected.model)}</td></tr><tr><td>Color seleccionado</td><td id="rhodeSpecColor">${rhodeLabel(selected.color)}</td></tr><tr><td>ID de variante</td><td id="rhodeSpecVariant">${selected.id}</td></tr><tr><td>Producto gratis</td><td id="rhodeSpecGift">${gift.name} - ${gift.variant}</td></tr><tr><td>Producto gratis ID de variante</td><td id="rhodeSpecGiftVariant">${gift.id}</td></tr><tr><td>Variantes totales de funda</td><td>${rhodeVariants.length}</td></tr><tr><td>Producto compatible</td><td>Peptide Lip Treatment or Tint</td></tr></table></div></section>
         <section class="testimonials"><div class="container"><div class="section-head"><h2>Opiniones de clientes</h2></div><div class="review-strip"><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=49" alt="Amelia"><div><b>Amelia</b><div class="verified">Compra verificada</div></div></div><div class="stars">★★★★★</div><p>"La funda se siente suave y mantiene mi tratamiento labial fácil de agarrar."</p><small>June 16, 2026</small></div><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=52" alt="Chloe"><div><b>Chloe</b><div class="verified">Compra verificada</div></div></div><div class="stars">★★★★★</div><p>"La selección de colores es clara y las opciones de modelo de teléfono son fáciles de elegir."</p><small>June 12, 2026</small></div></div></div></section>
@@ -2125,13 +2129,9 @@
     }
     function selectRhodeModel(model,btn){
       selectedRhodeModel=model;
-      const availableForModel=rhodeVariants.find(v=>v.model===model && v.color===selectedRhodeColor && v.available) || rhodeVariants.find(v=>v.model===model && v.available);
-      if(availableForModel)selectedRhodeColor=availableForModel.color;
       updateRhodePage(btn);
     }
     function selectRhodeColor(color,btn){
-      const variant=findRhodeVariant(selectedRhodeModel,color);
-      if(!variant || !variant.available)return;
       selectedRhodeColor=color;
       updateRhodePage(btn);
     }

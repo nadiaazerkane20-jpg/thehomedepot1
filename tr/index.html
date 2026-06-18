@@ -2193,6 +2193,7 @@
     let selectedRhodeRenk='colada';
     let selectedRhodeGiftIndex=0;
     function rhodeLabel(text){
+      if(String(text)==='sweet pea')return 'Pea';
       return String(text).split(' ').map(word=>{
         if(word==='iphone')return 'iPhone';
         if(word==='pro')return 'Pro';
@@ -2200,13 +2201,17 @@
         return word.charAt(0).toUpperCase()+word.slice(1);
       }).join(' ');
     }
-    function findRhodeVariant(model=selectedRhodeModel,color=selectedRhodeRenk){return rhodeVariants.find(v=>v.model===model && v.color===color);}
+    function findRhodeVariant(model=selectedRhodeModel,color=selectedRhodeRenk){
+      const exact=rhodeVariants.find(v=>v.model===model && v.color===color);
+      if(exact)return {...exact,available:true,model,color};
+      const colorData=rhodeRenks.find(c=>c.name===color);
+      const fallback=rhodeVariants.find(v=>v.color===color) || rhodeVariants.find(v=>v.model===model) || rhodeVariants[0];
+      return {model,color,id:fallback.id,available:true,img:(colorData&&colorData.image)||fallback.img};
+    }
     function getSecilenRhode(){
       let variant=findRhodeVariant();
-      if(!variant || !variant.available){
-        variant=rhodeVariants.find(v=>v.model===selectedRhodeModel && v.available) || rhodeVariants.find(v=>v.available) || rhodeVariants[0];
-        selectedRhodeModel=variant.model;
-        selectedRhodeRenk=variant.color;
+      if(!variant){
+        variant=rhodeVariants[0];
       }
       return variant;
     }
@@ -2215,10 +2220,8 @@
     }
     function rhodeRenkButtonsHTML(){
       return rhodeRenks.map(color=>{
-        const variant=findRhodeVariant(selectedRhodeModel,color.name);
         const active=color.name===selectedRhodeRenk;
-        const disabled=!variant || !variant.available;
-        return `<button class="sweatpant-color-card ${active?'active':''}" data-rhode-color="${color.name}" ${disabled?'disabled':''} style="${disabled?'opacity:.35;cursor:not-allowed':''}" title="${rhodeLabel(color.name)}" onclick="selectRhodeRenk('${color.name}',this)"><img src="${color.image}" alt="${rhodeLabel(color.name)}"><span>${rhodeLabel(color.name)}${disabled?'<br>Sold out':''}</span></button>`;
+        return `<button class="sweatpant-color-card ${active?'active':''}" data-rhode-color="${color.name}" title="${rhodeLabel(color.name)}" onclick="selectRhodeRenk('${color.name}',this)"><img src="${color.image}" alt="${rhodeLabel(color.name)}"><span>${rhodeLabel(color.name)}</span></button>`;
       }).join('');
     }
     function rhodePageHTML(){
@@ -2230,6 +2233,7 @@
           <div class="blanket-variant-panel"><div class="blanket-variant-title"><span>Renk</span><span class="selected-model-name" id="selectedRhodeRenk">${rhodeLabel(selected.color)}</span></div><div class="sweatpant-color-grid" id="rhodeRenkGrid">${rhodeRenkButtonsHTML()}</div></div>
           <div class="blanket-variant-panel"><div class="blanket-variant-title"><span>Ucretsiz Peptide Lip Treatment</span><span class="selected-model-name" id="selectedRhodeGift">${gift.variant}</span></div><div class="sweatpant-color-grid">${rhodeGiftOptions.map((option,index)=>`<button class="sweatpant-color-card ${index===selectedRhodeGiftIndex?'active':''}" data-rhode-gift="${index}" title="${option.variant}" onclick="selectRhodeGift(${index},this)"><img src="${option.image}" alt="${option.name} ${option.variant}"><span>${option.variant}</span></button>`).join('')}</div></div>
           <div class="inline-badges"><span>Silikon bubble kilif</span><span>Lip haznesi entegre</span><span>Ucretsiz lip treatment dahil</span></div><div class="urgency">SIPARIS BASINA 1 URUNLE SINIRLI<small>Odeme oncesi iPhone modelini, kilif rengini ve ucretsiz Peptide Lip Treatment varyantini sec.</small></div><a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">SEPETE EKLE</a></div></div></section>
+        <section><div class="container"><div class="section-head"><h2>MUSTERILERIMIZ TAVSIYE EDIYOR</h2></div><div class="tiktok-carousel"><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7353777597211381038_v3.mp4" type="video/mp4"></video></div><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7621209925603069206_v3.mp4" type="video/mp4"></video></div><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7652478564721347861_v3.mp4" type="video/mp4"></video></div><div class="tiktok-card"><video autoplay muted loop playsinline controls preload="metadata"><source src="../assets/videos/snaptik_7562061726624124180_v3.mp4" type="video/mp4"></video></div></div></div></section>
         <section><div class="container"><div class="impact-tabs"><button class="impact-tab-btn active" onclick="selectRhodeTab('details',this)">Urun Detaylari</button><div class="impact-tab-panel active" data-rhode-tab-panel="details"><p>A silicone, bubble phone case that keeps your lip on hand. With a silky-soft touch and puffy back for easy grip, it is compatible with select iPhone modelis and your favorite Peptide Lip Treatment or Tint.</p></div><button class="impact-tab-btn" onclick="selectRhodeTab('compatibility',this)">Uyumluluk</button><div class="impact-tab-panel" data-rhode-tab-panel="compatibility"><p><b>Modeller:</b> ${rhodeModels.map(rhodeLabel).join(', ')}.</p><p><b>Renks:</b> ${rhodeRenks.map(c=>rhodeLabel(c.name)).join(', ')}.</p></div><button class="impact-tab-btn" onclick="selectRhodeTab('care',this)">Malzeme ve Bakim</button><div class="impact-tab-panel" data-rhode-tab-panel="care"><p>Yumusak dokulu silikon ve dolgun tutus arka yuzu. Yumusak nemli bezle temizle, sert temizleyicilerden kacin.</p></div></div></div></section>
         <section><div class="container"><div class="section-head"><h2>Teknik Detaylar</h2></div><table class="spec-table"><tr><td>Urun Adi</td><td>Lip Case</td></tr><tr><td>Secilen Model</td><td id="rhodeSpecModel">${rhodeLabel(selected.model)}</td></tr><tr><td>Secilen Renk</td><td id="rhodeSpecRenk">${rhodeLabel(selected.color)}</td></tr><tr><td>Varyant ID</td><td id="rhodeSpecVariant">${selected.id}</td></tr><tr><td>Ucretsiz Urun</td><td id="rhodeSpecGift">${gift.name} - ${gift.variant}</td></tr><tr><td>Ucretsiz Urun Varyant ID</td><td id="rhodeSpecGiftVariant">${gift.id}</td></tr><tr><td>Toplam Kilif Varyanti</td><td>${rhodeVariants.length}</td></tr><tr><td>Uyumlu Urun</td><td>Peptide Lip Treatment or Tint</td></tr></table></div></section>
         <section class="testimonials"><div class="container"><div class="section-head"><h2>Musteri Yorumlari</h2></div><div class="review-strip"><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=49" alt="Amine"><div><b>Amine</b><div class="verified">Dogrulanmis Satin Alma</div></div></div><div class="stars">★★★★★</div><p>"Kilif yumusak hissettiriyor ve lip treatment urunumu kolayca almami sagliyor."</p><small>Haziran 16, 2026</small></div><div class="review-card"><div class="review-top"><img class="avatar" src="https://i.pravatar.cc/100?img=52" alt="Ceyda"><div><b>Ceyda</b><div class="verified">Dogrulanmis Satin Alma</div></div></div><div class="stars">★★★★★</div><p>"Renk secimi temiz duruyor ve telefon modeli secenekleri kolay seciliyor."</p><small>Haziran 12, 2026</small></div></div></div></section>
@@ -2238,13 +2242,9 @@
     }
     function selectRhodeModel(model,btn){
       selectedRhodeModel=model;
-      const availableForModel=rhodeVariants.find(v=>v.model===model && v.color===selectedRhodeRenk && v.available) || rhodeVariants.find(v=>v.model===model && v.available);
-      if(availableForModel)selectedRhodeRenk=availableForModel.color;
       updateRhodePage(btn);
     }
     function selectRhodeRenk(color,btn){
-      const variant=findRhodeVariant(selectedRhodeModel,color);
-      if(!variant || !variant.available)return;
       selectedRhodeRenk=color;
       updateRhodePage(btn);
     }
