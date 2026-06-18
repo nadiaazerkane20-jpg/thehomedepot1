@@ -746,6 +746,18 @@
 .walkingpad-card h3{margin-top:18px;font-size:32px;font-weight:900;line-height:1;color:#000}
 .walkingpad-card p{margin-top:12px;color:#666;font-size:18px;line-height:1.6}
 @media(min-width:1024px){.walkingpad-grid{grid-template-columns:repeat(3,1fr)}.walkingpad-card h3{font-size:28px}}
+.pococo-variant-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.pococo-variant-card{border:1px solid var(--line);background:#fff;border-radius:14px;padding:8px;cursor:pointer;text-align:center;font-size:11px;font-weight:800;color:#111;transition:.2s ease}
+.pococo-variant-card.active{border-color:#000;box-shadow:0 0 0 2px #000 inset}
+.pococo-variant-card img{width:100%;aspect-ratio:1/1;border-radius:10px;object-fit:cover;margin-bottom:7px;background:#f7f7f7}
+.pococo-carousel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 18px 22px;margin:0 -18px;-webkit-overflow-scrolling:touch}
+.pococo-slide{position:relative;flex:0 0 84%;max-width:430px;scroll-snap-align:start;border-radius:20px;overflow:hidden;background:#050505;min-height:360px;box-shadow:0 12px 34px rgba(0,0,0,.12)}
+.pococo-slide img{width:100%;height:100%;min-height:360px;object-fit:cover;opacity:.9}
+.pococo-slide-text{position:absolute;left:0;right:0;bottom:0;padding:22px;background:linear-gradient(0deg,rgba(0,0,0,.78),rgba(0,0,0,.36),transparent);color:#fff}
+.pococo-slide-text h3{margin:0 0 8px;font-size:22px;letter-spacing:-.03em}
+.pococo-slide-text p{margin:0;color:rgba(255,255,255,.86);line-height:1.55;font-size:14px}
+@media(min-width:900px){.pococo-slide{flex-basis:31%;min-height:420px}.pococo-slide img{min-height:420px}}
+@media(max-width:767px){.pococo-variant-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pococo-slide{flex-basis:82%;min-height:320px}.pococo-slide img{min-height:320px}}
 </style>
 
 
@@ -2424,14 +2436,33 @@
       'https://cdn.shopify.com/s/files/1/0494/4317/6599/files/6_c33c568c-64b0-4196-a6aa-645b9425b34b.jpg?v=1751725863',
       'https://cdn.shopify.com/s/files/1/0494/4317/6599/files/7_c105dde0-1932-4581-a252-a417c42fdf29.jpg?v=1751725863'
     ];
+    const pococoVariants=[
+      {name:'Blue & Pink',image:pococoImages[0]},
+      {name:'Silver',image:pococoImages[1]},
+      {name:'Blue Nebula',image:pococoImages[2]},
+      {name:'Pink Galaxy',image:pococoImages[3]}
+    ];
+    let selectedPococoVariantIndex=0;
+    function getSecilenPococo(){
+      return pococoVariants[selectedPococoVariantIndex] || pococoVariants[0];
+    }
     function pococoPageHTML(){
-      const main=pococoImages[0];
+      const selected=getSecilenPococo();
+      const main=selected.image;
       const gallery=pococoImages.slice(0,6).map((img,index)=>`<button class="${index===0?'active':''}" onclick="changePococoImage('${img}',this)"><img src="${img}" alt="POCOCO Galaxy Projector ${index+1}"></button>`).join('');
+      const variants=pococoVariants.map((variant,index)=>`<button class="pococo-variant-card ${index===selectedPococoVariantIndex?'active':''}" onclick="selectPococoVariant(${index},this)" title="${variant.name}"><img src="${variant.image}" alt="${variant.name}"><span>${variant.name}</span></button>`).join('');
+      const translatedSlides=[
+        {img:'https://pococo.com/cdn/shop/files/3.3.jpg?v=1729592572&width=1820',title:'Dogal bilimle huzur',text:'Gercek yildizli gokyuzu gorselleri rahatlamaya, stresi azaltmaya ve uyku rutininin daha sakin hissettirmesine yardimci olur.'},
+        {img:pococoImages[6],title:'Meditasyon modu',text:'Loş ve sakin bir oda atmosferiyle nefes egzersizlerini, gevsemeyi ve zihinsel toparlanmayi destekler.'},
+        {img:pococoImages[7],title:'Masa ve oda estetigi',text:'Masani, yatak odani veya oyun alanini uzaya acilan gorsel bir pencereye donusturur.'},
+        {img:pococoImages[8],title:'Hazir hediye fikri',text:'Mavi-pembe tonu ve ozenli kutusuyla dogum gunu, yil donumu, Sevgililer Gunu veya yilbasi icin hazir bir hediye.'},
+        {img:pococoImages[9],title:'Hediye kutusu paketi',text:'Uyumlu bos tebrik kartlariyla birlikte gelir; hediye vermeyi hem pratik hem de daha zarif hale getirir.'},
+        {img:'https://pococo.com/cdn/shop/files/4.3_32d6e1ef-7043-4d06-974f-3e6aa1a87d1d.jpg?v=1733362828&width=1200',title:'Yumusak gorunum tasarimi',text:'Kuresel tasarim estetik gorunur ve isigin goze daha yumusak dusmesine yardimci olarak sakin bir ortam olusturur.'},
+        {img:'https://pococo.com/cdn/shop/files/Gorgeous_Nebula_Galaxy_Projector_Discs_Set.jpg?v=1776147175&width=1600',title:'Farkli disk secenekleri',text:'Farkli disk desenleriyle her kullanimda yeni ve immersive bir kozmik manzara deneyimi sunar.'}
+      ].map(slide=>`<article class="pococo-slide"><img src="${slide.img}" alt="${slide.title}"><div class="pococo-slide-text"><h3>${slide.title}</h3><p>${slide.text}</p></div></article>`).join('');
       return `<div id="product-pococo-galaxy-projector" class="page product-page">
-        <section><div class="container product-layout"><div><div class="main-product-img"><img id="pococoMainImage" src="${main}" alt="POCOCO Galaxy Projector Blue and Pink"></div><div class="walkingpad-gallery">${gallery}</div></div><div class="product-detail"><span class="eyebrow">POCOCO Star Projector</span><h1>Galaxy Projector | Blue and Pink</h1><a href="${trustpilotUrl}" target="_blank" class="trustpilot-badge"><span style="color:#00B67A">★★★★★</span> 4.8/5 · Dogrulanmis yorumlar</a><div class="price"><span class="old">3299 TRY</span><span class="new" style="font-size:34px">1006 TRY</span><span class="badge sale">-70%</span></div><p class="section-sub" style="margin:14px 0 18px">POCOCO Galaxy Projector mavi ve pembe tasarimiyla odani sakin, buyuleyici ve yildizli bir gokyuzune donusturur. Rahatlamak, uyku kalitesini desteklemek ve huzurlu bir atmosfer yaratmak icin ideal.</p><div class="inline-badges"><span>5K ultra-HD diskler</span><span>Manuel optik fokus</span><span>USB-C sarj</span><span>24 ay garanti</span></div><div class="walkingpad-benefits"><div class="walkingpad-benefit">✓ 7 katmanli yuksek gecirgenlikli optik lens</div><div class="walkingpad-benefit">✓ 130 sq ft alana kadar immersive projection</div><div class="walkingpad-benefit">✓ Gercek uzay gorsellerinden 5K ultra-HD diskler</div></div><div class="urgency">SIPARIS BASINA 1 URUNLE SINIRLI<small>Yuksek talep nedeniyle siparisleri musteri basina 1 adetle sinirliyoruz.</small></div><a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">SEPETE EKLE</a></div></div></section>
-        <section class="walkingpad-story"><div class="container"><div class="section-head"><h2>Dogal bilimle huzur</h2><p class="section-sub">Gercek yildizli gokyuzu gorselleri rahatlamaya, stresi azaltmaya ve uyku rutininin daha sakin hissettirmesine yardimci olur.</p></div><div class="walkingpad-grid"><div class="walkingpad-card"><img src="https://pococo.com/cdn/shop/files/3.3.jpg?v=1729592572&width=1820" alt="Pococo serenity projection"><h3>Mental reset</h3><p>Immersive yildizli gorseller odaklanmayi yenilemeye, zihinsel toparlanmaya ve gunun stresini azaltmaya destek olur.</p></div><div class="walkingpad-card"><img src="${pococoImages[2]}" alt="POCOCO blue pink projector"><h3>Anxiety relief</h3><p>Simule dogal ortam hissi sakinlik ve iyi olma hissini artirir; oda atmosferini aninda yumusatir.</p></div><div class="walkingpad-card"><img src="${pococoImages[3]}" alt="POCOCO star projector room"><h3>Sleep atmosphere</h3><p>Yumusak isik, gece rutini icin sakin bir ortam kurar ve odani rahatlatan bir planetarium deneyimine cevirir.</p></div></div></div></section>
-        <section class="walkingpad-story"><div class="container"><div class="section-head"><h2>Kullanim senaryolari</h2></div><div class="walkingpad-grid"><div class="walkingpad-card"><img src="${pococoImages[6]}" alt="Meditation with galaxy projector"><h3>Meditasyon</h3><p>Loş ve sakin bir oda atmosferiyle nefes egzersizlerini ve gevsemeyi destekler.</p></div><div class="walkingpad-card"><img src="${pococoImages[7]}" alt="Room decor with star projector"><h3>Oda dekoru</h3><p>Masani, yatak odani veya oyun alanini uzaya acilan gorsel bir pencereye donusturur.</p></div><div class="walkingpad-card"><img src="${pococoImages[8]}" alt="Gift ready POCOCO projector"><h3>Hediye fikri</h3><p>Mavi-pembe tonu ve ozenli kutusuyla dogum gunu, yil donumu, Sevgililer Gunu veya yilbasi icin hazir bir hediye.</p></div></div></div></section>
-        <section class="walkingpad-story"><div class="container"><div class="walkingpad-grid"><div class="walkingpad-card"><img src="${pococoImages[9]}" alt="Gift box package"><h3>Gift Box Package</h3><p>Uyumlu bos tebrik kartlariyla birlikte gelir; hediye vermeyi hem pratik hem de daha zarif hale getirir.</p></div><div class="walkingpad-card"><img src="https://pococo.com/cdn/shop/files/4.3_32d6e1ef-7043-4d06-974f-3e6aa1a87d1d.jpg?v=1733362828&width=1200" alt="Soft appearance design"><h3>Soft Appearance Design</h3><p>Kuresel tasarim estetik gorunur ve isigin goze daha yumusak dusmesine yardimci olarak sakin bir ortam olusturur.</p></div><div class="walkingpad-card"><img src="https://pococo.com/cdn/shop/files/Gorgeous_Nebula_Galaxy_Projector_Discs_Set.jpg?v=1776147175&width=1600" alt="Galaxy projector discs"><h3>Various Discs</h3><p>Farkli disk desenleriyle her kullanimda yeni ve immersive bir kozmik manzara deneyimi sunar.</p></div></div></div></section>
+        <section><div class="container product-layout"><div><div class="main-product-img"><img id="pococoMainImage" src="${main}" alt="POCOCO Galaxy Projector ${selected.name}"></div><div class="walkingpad-gallery">${gallery}</div></div><div class="product-detail"><span class="eyebrow">POCOCO Star Projector</span><h1 id="pococoTitle">Galaxy Projector | ${selected.name}</h1><a href="${trustpilotUrl}" target="_blank" class="trustpilot-badge"><span style="color:#00B67A">★★★★★</span> 4.8/5 · Dogrulanmis yorumlar</a><div class="price"><span class="old">3299 TRY</span><span class="new" style="font-size:34px">1006 TRY</span><span class="badge sale">-70%</span></div><p class="section-sub" style="margin:14px 0 18px">POCOCO Galaxy Projector odani sakin, buyuleyici ve yildizli bir gokyuzune donusturur. Rahatlamak, uyku kalitesini desteklemek ve huzurlu bir atmosfer yaratmak icin ideal.</p><div class="blanket-variant-panel"><div class="blanket-variant-title"><span>Rengini sec</span><span class="selected-model-name" id="selectedPococoVariant">${selected.name}</span></div><div class="pococo-variant-grid">${variants}</div></div><div class="inline-badges"><span>5K ultra-HD diskler</span><span>Manuel optik fokus</span><span>USB-C sarj</span><span>24 ay garanti</span></div><div class="walkingpad-benefits"><div class="walkingpad-benefit">✓ 7 katmanli yuksek gecirgenlikli optik lens</div><div class="walkingpad-benefit">✓ 130 sq ft alana kadar immersive projection</div><div class="walkingpad-benefit">✓ Gercek uzay gorsellerinden 5K ultra-HD diskler</div></div><div class="urgency">SIPARIS BASINA 1 URUNLE SINIRLI<small>Yuksek talep nedeniyle siparisleri musteri basina 1 adetle sinirliyoruz.</small></div><a href="${affiliate}" target="_blank" class="btn btn-primary" style="width:100%;max-width:100%">SEPETE EKLE</a></div></div></section>
+        <section class="walkingpad-story"><div class="container"><div class="section-head"><h2>Gorseller Turkce aciklamalarla</h2><p class="section-sub">Urun gorsellerini buyuk bloklar yerine yana kaydirilabilir, daha kompakt bir carousel icinde topladik.</p></div><div class="pococo-carousel">${translatedSlides}</div></div></section>
         <section class="walkingpad-specs-dark"><div class="container"><div class="section-head"><h2>Rahatlamak icin daha fazla ozellik</h2><p class="section-sub" style="color:#d6d6d6">Gercek ve gizemli evren atmosferi; stresi azaltmaya, ruh halini sakinlestirmeye ve daha rahat uykuya gecmeye yardimci olur.</p></div><div class="walkingpad-spec-grid"><div class="walkingpad-spec-card"><div class="walkingpad-spec-icon">✦</div><h3>5K Ultra-HD Discs</h3><p>Gercek uzay gorsellerinden olusturulan disklerle net ve etkileyici projeksiyon.</p></div><div class="walkingpad-spec-card"><div class="walkingpad-spec-icon">◉</div><h3>Manual Optical Focus</h3><p>Goruntuyu odana gore netlestirmek icin kolay manuel fokus.</p></div><div class="walkingpad-spec-card"><div class="walkingpad-spec-icon">↻</div><h3>Silent Rotation</h3><p>Yildizli sahne yumusakca hareket ederek daha dogal bir atmosfer verir.</p></div><div class="walkingpad-spec-card"><div class="walkingpad-spec-icon">⏱</div><h3>Sleep Timer</h3><p>Gece kullanimi icin zamanlayici destegiyle daha rahat bir uyku rutini.</p></div></div></div></section>
         <section><div class="container"><div class="box-section" style="text-align:center"><h2>Best BUDGET Star Planetarium Projector</h2><p class="section-sub">FUTURESPACE COLLECTIVE tarafindan onerilen budget star planetarium projector. Gercek gece gokyuzu sahnesi isteyenler icin ideal bir secenek.</p><img src="https://pococo.com/cdn/shop/files/52d42c8b441f44bd318a2f21e93ea718.jpg?v=1680070867&width=1600" alt="Best budget star planetarium projector" style="width:100%;border-radius:18px;margin-top:22px"></div></div></section>
         <section><div class="container"><div class="impact-tabs"><button class="impact-tab-btn active" onclick="selectPococoTab('specs',this)">Specification</button><div class="impact-tab-panel active" data-pococo-tab-panel="specs"><table class="spec-table"><tr><td>Item Weight</td><td>1.7 pounds</td></tr><tr><td>Product Dimensions</td><td>6.18 x 4.72 x 4.72 inches</td></tr><tr><td>Battery</td><td>1 Lithium Ion battery included</td></tr><tr><td>Material</td><td>ABS + PC</td></tr><tr><td>Voltage</td><td>5 Volts</td></tr><tr><td>Special Features</td><td>Cordless, sleep timer, manual optical focus</td></tr><tr><td>Power Source</td><td>AC & Battery</td></tr><tr><td>Bulb Type</td><td>LED</td></tr><tr><td>Total Power</td><td>1.5 watts</td></tr><tr><td>Light Source Life</td><td>20000 Hours</td></tr></table></div><button class="impact-tab-btn" onclick="selectPococoTab('included',this)">What you get</button><div class="impact-tab-panel" data-pococo-tab-panel="included"><div class="check-list"><div class="check">✓ Galaxy Projector x 1</div><div class="check">✓ Packaging Box x 1</div><div class="check">✓ Postcard x 1</div><div class="check">✓ User Manual Poster x 1</div><div class="check">✓ USB-C Charging Cable x 1</div><div class="check">✓ Diamond Stars Disc x 1</div><div class="check">✓ Westerlund2 Disc x 1</div><div class="check">✓ 24-month warranty and customer service</div></div></div><button class="impact-tab-btn" onclick="selectPococoTab('faq',this)">FAQ</button><div class="impact-tab-panel" data-pococo-tab-panel="faq"><p><b>How does it work?</b> Insert a themed disc, adjust manual focus, and project a real-space image across your room.</p><p><b>Does it come with discs?</b> Yes, this bundle includes Diamond Stars and Westerlund2 discs.</p><p><b>Can I sleep with it on?</b> Yes, the soft light and sleep timer make it suitable for bedtime ambience.</p><p><b>Is it harsh on the eyes?</b> The spherical soft appearance design helps the emitted light feel gentle in the room.</p></div><button class="impact-tab-btn" onclick="selectPococoTab('shipping',this)">Shipping & Return</button><div class="impact-tab-panel" data-pococo-tab-panel="shipping"><p>Turkiye siparisleri icin hizli kargo teklifi, takipli gonderim ve 30 gun iade destegi sunulur.</p></div></div></div></section>
@@ -2444,6 +2475,19 @@
       if(img)img.src=src;
       document.querySelectorAll('#product-pococo-galaxy-projector .walkingpad-gallery button').forEach(item=>item.classList.remove('active'));
       if(btn)btn.classList.add('active');
+    }
+    function selectPococoVariant(index,btn){
+      selectedPococoVariantIndex=Number(index) || 0;
+      const selected=getSecilenPococo();
+      const img=document.getElementById('pococoMainImage');
+      const label=document.getElementById('selectedPococoVariant');
+      const title=document.getElementById('pococoTitle');
+      if(img)img.src=selected.image;
+      if(label)label.textContent=selected.name;
+      if(title)title.textContent=`Galaxy Projector | ${selected.name}`;
+      document.querySelectorAll('#product-pococo-galaxy-projector .pococo-variant-card').forEach(item=>item.classList.remove('active'));
+      if(btn)btn.classList.add('active');
+      setTimeout(ensureCheckoutLinks,0);
     }
     function selectPococoTab(tab,btn){
       const page=document.getElementById('product-pococo-galaxy-projector');
@@ -2681,7 +2725,8 @@
       }
       const pococoPage=document.getElementById('product-pococo-galaxy-projector');
       if(pococoPage){
-        setProductCheckoutLinks(pococoPage,buildCheckoutUrl("1006 TRY","POCOCO Galaxy Projector Blue and Pink",pococoImages[0]));
+        const selected=typeof getSecilenPococo==='function' ? getSecilenPococo() : {name:'Blue & Pink',image:pococoImages[0]};
+        setProductCheckoutLinks(pococoPage,buildCheckoutUrl("1006 TRY",`POCOCO Galaxy Projector - ${selected.name}`,selected.image));
       }
 
     }
