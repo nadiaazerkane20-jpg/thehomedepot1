@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MonAvisConso.com | Comparatif des meilleurs abris de jardin</title>
+  <meta name="description" content="Comparatif editorial des meilleurs abris de jardin modernes en France. Notes, points forts, points a verifier et recommandation de notre expert jardin.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#17211d;
+      --muted:#64716b;
+      --paper:#fbfaf6;
+      --white:#ffffff;
+      --line:#dfe7e1;
+      --green:#1f7a4d;
+      --green-dark:#145c39;
+      --sage:#e9f3eb;
+      --amber:#f5b84b;
+      --red:#c94a37;
+      --shadow:0 22px 60px rgba(24,42,32,.13);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--paper);
+      letter-spacing:0;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .topbar{
+      background:#13241b;
+      color:#edf8f0;
+      font-size:13px;
+      font-weight:700;
+      text-align:center;
+      padding:10px 16px;
+    }
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(251,250,246,.92);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(223,231,225,.9);
+    }
+    .nav-inner{
+      width:min(1180px,100%);
+      margin:auto;
+      min-height:72px;
+      padding:0 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      font-weight:900;
+      letter-spacing:0;
+      line-height:1;
+    }
+    .brand strong{font-size:22px}
+    .brand span{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase}
+    .nav-links{display:flex;gap:24px;font-size:14px;font-weight:800;color:#334039}
+    .container{width:min(1180px,100%);margin:auto;padding:0 18px}
+    .hero{
+      padding:56px 0 34px;
+      background:
+        linear-gradient(180deg,rgba(233,243,235,.85),rgba(251,250,246,0) 74%),
+        radial-gradient(circle at 82% 16%,rgba(31,122,77,.14),transparent 34%);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:34px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid #cfe0d3;
+      background:#fff;
+      color:var(--green-dark);
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+    h1{
+      margin:18px 0 14px;
+      font-size:clamp(38px,5vw,68px);
+      line-height:1.02;
+      letter-spacing:0;
+    }
+    .hero p{
+      margin:0;
+      color:#526158;
+      font-size:18px;
+      line-height:1.7;
+      max-width:660px;
+    }
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+    .btn{
+      min-height:52px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      border-radius:8px;
+      padding:14px 18px;
+      border:1px solid transparent;
+      font-weight:900;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .btn-primary{background:var(--green);color:#fff;box-shadow:0 16px 34px rgba(31,122,77,.25)}
+    .btn-secondary{background:#fff;border-color:var(--line);color:#203028}
+    .btn:hover{transform:translateY(-2px)}
+    .hero-card{
+      position:relative;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:12px;
+      box-shadow:var(--shadow);
+    }
+    .hero-card img{
+      width:100%;
+      aspect-ratio:4/3;
+      object-fit:cover;
+      border-radius:8px;
+    }
+    .hero-badge{
+      position:absolute;
+      left:24px;
+      bottom:24px;
+      background:rgba(255,255,255,.94);
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:14px 16px;
+      box-shadow:0 12px 30px rgba(24,42,32,.14);
+      font-weight:900;
+    }
+    .hero-badge span{display:block;color:var(--green);font-size:28px;line-height:1}
+    .trust-row{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:30px;
+    }
+    .trust-item{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:15px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .trust-item b{display:block;color:var(--ink);font-size:18px;margin-bottom:4px}
+    section{padding:58px 0}
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:24px;
+      margin-bottom:22px;
+    }
+    h2{margin:0;font-size:clamp(29px,4vw,46px);line-height:1.08;letter-spacing:0}
+    .section-head p{margin:0;max-width:520px;color:var(--muted);line-height:1.65}
+    .ranking{display:grid;gap:16px}
+    .rank-card{
+      display:grid;
+      grid-template-columns:76px minmax(0,1.45fr) minmax(260px,.95fr) 170px;
+      gap:18px;
+      align-items:center;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 10px 28px rgba(24,42,32,.06);
+    }
+    .rank-card.featured{border:2px solid var(--green);box-shadow:var(--shadow)}
+    .rank{
+      width:62px;
+      height:62px;
+      display:grid;
+      place-items:center;
+      background:#f2f7f3;
+      border:1px solid #cfe0d3;
+      border-radius:10px;
+      font-size:28px;
+      font-weight:900;
+      color:var(--green-dark);
+    }
+    .company{
+      display:grid;
+      grid-template-columns:128px minmax(0,1fr) 132px;
+      gap:14px;
+      align-items:center;
+    }
+    .logo-box{
+      min-height:104px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#fff;
+      padding:12px;
+    }
+    .logo-box img{max-height:78px;object-fit:contain}
+    .company h3{margin:0 0 6px;font-size:20px}
+    .company p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+    .product-name{
+      display:block;
+      margin-top:7px;
+      color:#223129;
+      font-size:14px;
+      font-weight:900;
+      line-height:1.35;
+    }
+    .seller-note{
+      display:block;
+      margin-top:7px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .product-thumb{
+      background:#f5f8f5;
+      border:1px solid var(--line);
+      border-radius:8px;
+      overflow:hidden;
+    }
+    .product-thumb img{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+    }
+    .product-thumb.placeholder-thumb{
+      min-height:132px;
+      display:grid;
+      place-items:center;
+      padding:14px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+      text-align:center;
+      line-height:1.35;
+    }
+    .score{
+      display:grid;
+      gap:8px;
+      align-content:center;
+    }
+    .score-top{display:flex;align-items:center;gap:10px;font-weight:900}
+    .score-number{font-size:34px;color:var(--green)}
+    .bar{height:10px;background:#edf1ee;border-radius:999px;overflow:hidden}
+    .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--green),#76b66c);border-radius:999px}
+    .stars{color:#edaa27;font-weight:900;letter-spacing:1px}
+    .note-list{display:grid;gap:7px;margin:0;padding:0;list-style:none;color:#3e4c44;font-size:14px}
+    .note-list li::before{content:"✓";color:var(--green);font-weight:900;margin-right:8px}
+    .warning li::before{content:"!";color:var(--red)}
+    .validation{
+      margin-top:10px;
+      display:grid;
+      gap:8px;
+    }
+    .validation-title{
+      font-size:11px;
+      color:var(--muted);
+      text-transform:uppercase;
+      font-weight:900;
+    }
+    .validation-logos{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+    }
+    .validation-badge{
+      min-height:34px;
+      display:flex;
+      align-items:center;
+      gap:7px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      padding:6px 9px;
+      color:#2e3d35;
+      font-size:11px;
+      font-weight:900;
+    }
+    .validation-badge img{
+      width:auto;
+      max-width:112px;
+      height:20px;
+      object-fit:contain;
+    }
+    .validation-badge.trustpilot img{
+      max-width:82px;
+    }
+    .cta-zone{display:grid;gap:10px}
+    .small-link{font-size:12px;color:var(--muted);text-align:center;font-weight:800}
+    .expert{
+      display:grid;
+      grid-template-columns:330px 1fr;
+      gap:22px;
+      background:#16271e;
+      color:#fff;
+      border-radius:12px;
+      padding:22px;
+      overflow:hidden;
+    }
+    .expert-card{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:10px;
+      padding:20px;
+    }
+    .expert-avatar{
+      width:88px;
+      height:88px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#f8d98d,#e8f3eb);
+      display:grid;
+      place-items:center;
+      color:#163723;
+      font-size:34px;
+      font-weight:900;
+      margin-bottom:16px;
+    }
+    .expert h2,.expert h3{margin-top:0}
+    .expert p{color:#d8e6dd;line-height:1.75}
+    .quote{
+      border-left:4px solid var(--amber);
+      padding-left:16px;
+      font-size:19px;
+      color:#fff;
+      font-weight:800;
+      line-height:1.55;
+      margin:14px 0;
+    }
+    .checks{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .check{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:8px;
+      padding:14px;
+      color:#edf8f0;
+      font-weight:800;
+      line-height:1.4;
+    }
+    .compare-table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 10px 28px rgba(24,42,32,.06);
+    }
+    .compare-table th,.compare-table td{
+      padding:16px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      vertical-align:top;
+      font-size:14px;
+      line-height:1.55;
+    }
+    .compare-table th{background:#edf5ef;font-size:13px;text-transform:uppercase;color:#405148}
+    .compare-table tr:last-child td{border-bottom:0}
+    .score-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:58px;
+      padding:7px 10px;
+      border-radius:999px;
+      font-weight:900;
+      background:#e7f5ea;
+      color:var(--green-dark);
+    }
+    .score-pill.mid{background:#fff2d8;color:#805300}
+    .placeholder{
+      border:1px dashed #b8c7bd;
+      background:#fff;
+      border-radius:12px;
+      padding:22px;
+      display:grid;
+      grid-template-columns:170px 1fr;
+      gap:20px;
+      align-items:center;
+      color:var(--muted);
+    }
+    .placeholder .logo-box{height:92px}
+    .editorial{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:22px;
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:18px;
+    }
+    .editorial article{
+      padding:18px;
+      background:#f7faf7;
+      border:1px solid #e4ede6;
+      border-radius:8px;
+    }
+    .editorial h3{margin:0 0 8px}
+    .editorial p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
+    footer{
+      margin-top:38px;
+      background:#13241b;
+      color:#dce8df;
+      padding:36px 0;
+    }
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:24px;
+      font-size:13px;
+      line-height:1.7;
+    }
+    .footer-inner b{color:#fff}
+    .footer-links{
+      margin-top:22px;
+      padding-top:20px;
+      border-top:1px solid rgba(255,255,255,.14);
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px 18px;
+      font-size:13px;
+      font-weight:800;
+    }
+    .footer-links a{color:#eef8f1;text-decoration:underline;text-underline-offset:4px}
+
+    @media (max-width:940px){
+      .hero-grid,.expert,.placeholder{grid-template-columns:1fr}
+      .trust-row{grid-template-columns:1fr 1fr}
+      .rank-card{grid-template-columns:64px 1fr}
+      .company{grid-template-columns:118px minmax(0,1fr) 118px}
+      .score,.cta-zone{grid-column:2}
+      .checks,.editorial{grid-template-columns:1fr}
+      .nav-links{display:none}
+    }
+
+    @media (max-width:640px){
+      .topbar{font-size:12px}
+      .nav-inner{min-height:66px}
+      .brand strong{font-size:20px}
+      .hero{padding-top:38px}
+      .hero-actions{display:grid}
+      .btn{width:100%}
+      .trust-row{grid-template-columns:1fr}
+      .rank-card{grid-template-columns:1fr;padding:14px}
+      .rank{width:52px;height:52px;font-size:24px}
+      .company{grid-template-columns:1fr}
+      .logo-box{min-height:92px}
+      .product-thumb img{aspect-ratio:4/3}
+      .score,.cta-zone{grid-column:auto}
+      .section-head{display:block}
+      .section-head p{margin-top:10px}
+      .compare-table{display:block;overflow-x:auto}
+      .footer-inner{display:block}
+      .footer-links{display:grid}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Comparatif 2026 des abris de jardin modernes : analyse editoriale, criteres visibles et liens directs</div>
+
+  <nav class="nav" aria-label="Navigation principale">
+    <div class="nav-inner">
+      <a class="brand" href="#">
+        <strong>MonAvisConso.com</strong>
+        <span>Guides d'achat maison & jardin</span>
+      </a>
+      <div class="nav-links">
+        <a href="#classement">Classement</a>
+        <a href="#expert">Avis expert</a>
+        <a href="#comparatif">Tableau</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Selection jardin haut de gamme</span>
+            <h1>Les meilleurs abris de jardin modernes compares</h1>
+            <p>Notre redaction a passe au crible les offres disponibles en France pour identifier les abris les plus fiables, les plus lisibles et les plus rassurants avant achat.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#classement">Voir le classement</a>
+              <a class="btn btn-secondary" href="https://smartgardenfr.com/products/abri-de-jardin-moderne-7-1-m2-finition-haut-de-gamme-neuf?_pos=2&_sid=c5e8f5ec2&_ss=r">Voir notre choix n°1</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <img src="https://smartgardenfr.com/cdn/shop/files/Captured_ecran2026-06-26a21.58.44.png?v=1782482625&width=3840" alt="Abri de Jardin Moderne Smart Garden">
+            <div class="hero-badge"><span>9.7/10</span>Choix recommande</div>
+          </div>
+        </div>
+
+        <div class="trust-row" aria-label="Criteres de comparaison">
+          <div class="trust-item"><b>7.1 m2</b>Surface utile pour rangement familial</div>
+          <div class="trust-item"><b>4 criteres</b>Finitions, confiance, clarté, rapport qualite-prix</div>
+          <div class="trust-item"><b>2026</b>Comparatif mis en page pour MonAvisConso</div>
+          <div class="trust-item"><b>Expert jardin</b>Analyse editoriale orientee usage reel</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="classement">
+      <div class="container">
+        <div class="section-head">
+          <h2>Classement des sites d'abris de jardin</h2>
+          <p>Les notes ci-dessous refletent une lecture editoriale de la presentation produit, de la confiance percue et des informations disponibles avant commande.</p>
+        </div>
+
+        <div class="ranking">
+          <article class="rank-card featured">
+            <div class="rank">1</div>
+            <div class="company">
+              <div class="logo-box">
+                <img src="https://cdn.shopify.com/s/files/1/0974/2057/5053/files/1EZA.png?v=1780074000" alt="Logo Smart Garden">
+              </div>
+              <div>
+                <h3>Smart Garden</h3>
+                <p>Site vendeur specialise jardin moderne</p>
+                <span class="product-name">Abri de Jardin Moderne - 7.1 m2 - Finition Haut de Gamme - Neuf</span>
+                <span class="seller-note">Produit recommande pour un rendu propre, moderne et premium.</span>
+              </div>
+              <div class="product-thumb">
+                <img src="https://smartgardenfr.com/cdn/shop/files/Captured_ecran2026-06-26a21.58.44.png?v=1782482625&width=900" alt="Produit Smart Garden abri de jardin moderne">
+              </div>
+            </div>
+            <div class="score">
+              <div class="score-top"><span class="score-number">9.7</span><span>/10<br><span class="stars">★★★★★</span></span></div>
+              <div class="bar"><span style="width:97%"></span></div>
+              <ul class="note-list">
+                <li>Presentation produit claire et visuels detailles</li>
+                <li>Positionnement premium coherent</li>
+                <li>Meilleur choix de notre selection</li>
+              </ul>
+              <div class="validation">
+                <span class="validation-title">Signaux confiance consultes</span>
+                <div class="validation-logos">
+                  <span class="validation-badge"><img src="https://www.signal-arnaques.com/images/langs/fr/logo.png" alt="Signal-Arnaques">Controle</span>
+                  <span class="validation-badge trustpilot"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvB_-l8sVwD9-FSa6Bj0NPYdP8Wd9fGCcXhbFU5vCqcQ&s" alt="Trustpilot">Avis</span>
+                </div>
+              </div>
+            </div>
+            <div class="cta-zone">
+              <a class="btn btn-primary" href="https://smartgardenfr.com/products/abri-de-jardin-moderne-7-1-m2-finition-haut-de-gamme-neuf?_pos=2&_sid=c5e8f5ec2&_ss=r">Voir l'offre</a>
+              <span class="small-link">Lien partenaire possible</span>
+            </div>
+          </article>
+
+          <article class="rank-card">
+            <div class="rank">2</div>
+            <div class="company">
+              <div class="logo-box">
+                <img src="https://cleanjardin-fr.com/images/logo/logo.svg?dpl=dpl_ERvCgqSkkrfX19sYRv2UNiEAR163" alt="Logo Clean Jardin">
+              </div>
+              <div>
+                <h3>Clean Jardin</h3>
+                <p>Site vendeur jardin a verifier avant commande</p>
+                <span class="product-name">Abri de jardin Duty Free</span>
+                <span class="seller-note">Alternative possible, mais moins rassurante selon notre grille de confiance.</span>
+              </div>
+              <div class="product-thumb">
+                <img src="https://cleanjardin-fr.com/images/products/abri-de-jardin-duty-free-1.png" alt="Produit Clean Jardin abri de jardin Duty Free">
+              </div>
+            </div>
+            <div class="score">
+              <div class="score-top"><span class="score-number" style="color:#b67413">6.0</span><span>/10<br><span class="stars">★★★☆☆</span></span></div>
+              <div class="bar"><span style="width:60%;background:linear-gradient(90deg,#e7a33a,#f0cd7a)"></span></div>
+              <ul class="note-list warning">
+                <li>Mentions legales et informations de confiance a relire attentivement</li>
+                <li>Retours clients pouvant etre plus mitiges selon les experiences</li>
+                <li>Moins rassurant que le choix n°1</li>
+              </ul>
+              <div class="validation">
+                <span class="validation-title">Signaux a controler avant achat</span>
+                <div class="validation-logos">
+                  <span class="validation-badge"><img src="https://www.signal-arnaques.com/images/langs/fr/logo.png" alt="Signal-Arnaques">Verifier</span>
+                  <span class="validation-badge trustpilot"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvB_-l8sVwD9-FSa6Bj0NPYdP8Wd9fGCcXhbFU5vCqcQ&s" alt="Trustpilot">Avis</span>
+                </div>
+              </div>
+            </div>
+            <div class="cta-zone">
+              <a class="btn btn-secondary" href="https://cleanjardin-fr.com/">Verifier le site</a>
+              <span class="small-link">Analyse prudente conseillee</span>
+            </div>
+          </article>
+
+          <article class="rank-card">
+            <div class="rank">3</div>
+            <div class="company">
+              <div class="logo-box">
+                <img src="https://kavehomefr.com/cdn/shop/files/Capture_d_ecran_2026-06-22_a_17.03.25.png?height=36&v=1782119016" alt="Logo prochain site">
+              </div>
+              <div>
+                <h3>KaveHomeFR</h3>
+                <p>Site vendeur a analyser prochainement</p>
+                <span class="product-name">Produit abri de jardin a ajouter</span>
+                <span class="seller-note">Emplacement reserve pour la prochaine fiche comparative.</span>
+              </div>
+              <div class="product-thumb placeholder-thumb">
+                Image produit a integrer apres reception
+              </div>
+            </div>
+            <div class="score">
+              <div class="score-top"><span class="score-number" style="color:#7b8580">--</span><span>/10<br><span class="stars">☆☆☆☆☆</span></span></div>
+              <div class="bar"><span style="width:0%"></span></div>
+              <ul class="note-list">
+                <li>Logo deja integre</li>
+                <li>Note et arguments bientot disponibles</li>
+                <li>Lien prepare pour la prochaine analyse</li>
+              </ul>
+              <div class="validation">
+                <span class="validation-title">Verification en attente</span>
+                <div class="validation-logos">
+                  <span class="validation-badge"><img src="https://www.signal-arnaques.com/images/langs/fr/logo.png" alt="Signal-Arnaques">En attente</span>
+                  <span class="validation-badge trustpilot"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvB_-l8sVwD9-FSa6Bj0NPYdP8Wd9fGCcXhbFU5vCqcQ&s" alt="Trustpilot">En attente</span>
+                </div>
+              </div>
+            </div>
+            <div class="cta-zone">
+              <a class="btn btn-secondary" href="https://kavehomefr.com/">Voir le site</a>
+              <span class="small-link">Bloc en attente</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="expert">
+      <div class="container">
+        <div class="expert">
+          <aside class="expert-card">
+            <div class="expert-avatar">JD</div>
+            <h3>Julien Darras</h3>
+            <p>Expert jardin & amenagement exterieur. 12 ans d'experience dans le choix d'equipements de rangement, terrasses et structures de jardin.</p>
+          </aside>
+          <div>
+            <h2>L'avis de notre expert jardin</h2>
+            <p class="quote">"Pour un abri de jardin moderne, je regarde d'abord la surface reelle, la clarte des photos, la coherence des finitions et la confiance que le site inspire avant paiement."</p>
+            <p>Smart Garden ressort comme le choix le plus convaincant de cette selection grace a une fiche produit plus lisible et un positionnement premium assumé. Clean Jardin peut convenir a certains profils, mais merite une verification plus poussee sur les informations legales, les conditions et les signaux de satisfaction client.</p>
+            <div class="checks">
+              <div class="check">Finitions haut de gamme</div>
+              <div class="check">Surface adaptee au rangement</div>
+              <div class="check">Confiance avant achat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comparatif">
+      <div class="container">
+        <div class="section-head">
+          <h2>Tableau comparatif rapide</h2>
+          <p>Une lecture simple pour comparer les points essentiels avant de cliquer vers le site marchand.</p>
+        </div>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Site</th>
+              <th>Indice de confiance</th>
+              <th>Points forts</th>
+              <th>Points a verifier</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Smart Garden</strong></td>
+              <td><span class="score-pill">9.7</span></td>
+              <td>Produit moderne, visuel clair, presentation premium, surface 7.1 m2.</td>
+              <td>Verifier les delais, conditions de livraison et disponibilite avant commande.</td>
+              <td><strong>Notre recommandation</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Clean Jardin</strong></td>
+              <td><span class="score-pill mid">6.0</span></td>
+              <td>Site specialise jardin, navigation directe.</td>
+              <td>Mentions legales, retours clients et conditions commerciales a lire avec attention.</td>
+              <td>Choix secondaire</td>
+            </tr>
+            <tr>
+              <td><strong>KaveHomeFR</strong></td>
+              <td><span class="score-pill" style="background:#eef1ef;color:#7b8580">--</span></td>
+              <td>Logo et lien deja ajoutes.</td>
+              <td>Analyse, note et arguments bientot disponibles.</td>
+              <td>En attente</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="placeholder">
+          <div class="logo-box">
+            <img src="https://kavehomefr.com/cdn/shop/files/Capture_d_ecran_2026-06-22_a_17.03.25.png?height=36&v=1782119016" alt="Logo du prochain site">
+          </div>
+          <div>
+            <h2>Espace reserve au prochain concurrent</h2>
+            <p>Quand vous aurez les informations du prochain site, ce bloc pourra recevoir sa note, ses photos produit, ses avantages et les points faibles a signaler.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Nos criteres editoriaux</h2>
+          <p>Le classement met l'accent sur ce qui compte vraiment pour un achat d'abri de jardin en ligne.</p>
+        </div>
+        <div class="editorial">
+          <article>
+            <h3>Clarte de l'offre</h3>
+            <p>Nom du produit, surface, finitions, photos et information de livraison doivent etre faciles a comprendre rapidement.</p>
+          </article>
+          <article>
+            <h3>Confiance percue</h3>
+            <p>Nous observons la transparence des pages, la qualite des mentions, la coherence des informations et les signaux de rassurance.</p>
+          </article>
+          <article>
+            <h3>Usage jardin</h3>
+            <p>Un bon abri doit rester pratique pour stocker outils, mobilier et materiel saisonnier sans sacrifier l'aspect exterieur.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <b>MonAvisConso.com</b><br>
+        Guide comparatif independant dedie aux achats maison, jardin et equipement du quotidien.
+      </div>
+      <div>
+        Classement editorial. Les visiteurs doivent toujours verifier les prix, stocks, garanties et conditions directement sur les sites marchands.
+      </div>
+    </div>
+    <div class="container footer-links" aria-label="Liens legaux">
+      <a href="mentions-legales.html">Mentions legales</a>
+      <a href="cgv.html">CGV</a>
+      <a href="cgu.html">CGU</a>
+      <a href="politique-confidentialite.html">Politique de confidentialite</a>
+      <a href="cookies.html">Politique cookies</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+</body>
+</html>
