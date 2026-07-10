@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quatorze Running | Running & Trail</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    :root{
+      --ink:#111213;
+      --paper:#fbfaf7;
+      --white:#ffffff;
+      --mist:#f1f3f0;
+      --stone:#d9ddd6;
+      --muted:#737870;
+      --acid:#c6ff00;
+      --blue:#1947ff;
+      --red:#ff3d2f;
+      --forest:#173c2a;
+      --shadow:0 18px 45px rgba(17,18,19,.12);
+      --radius:8px;
+    }
+    *{box-sizing:border-box}
+    [hidden]{display:none!important}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:var(--paper);
+      overflow-x:hidden;
+    }
+    body.locked{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button,input,select{font:inherit}
+    .topline{
+      background:var(--ink);
+      color:var(--white);
+      height:34px;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .topline-track{
+      display:flex;
+      gap:42px;
+      width:max-content;
+      animation:marquee 24s linear infinite;
+    }
+    .topline span{display:inline-flex;align-items:center;gap:10px}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .header{
+      position:sticky;
+      top:0;
+      z-index:40;
+      background:rgba(251,250,247,.92);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(17,18,19,.12);
+    }
+    .nav{
+      height:78px;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:18px;
+      padding:0 clamp(16px,4vw,48px);
+    }
+    .nav-left,.nav-right{display:flex;align-items:center;gap:20px}
+    .nav-right{justify-content:flex-end}
+    .nav-item{position:relative}
+    .nav-link{
+      border:0;
+      background:transparent;
+      padding:8px 0;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .mega{
+      position:absolute;
+      top:100%;
+      left:0;
+      width:min(720px,calc(100vw - 32px));
+      display:none;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      background:var(--white);
+      border:1px solid var(--ink);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .nav-item:hover .mega,.nav-item:focus-within .mega{display:grid}
+    .mega h4{
+      margin:0 0 10px;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .mega a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:9px 0;
+      border-bottom:1px solid var(--stone);
+      color:#30342f;
+      font-size:13px;
+      font-weight:800;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      line-height:.9;
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-.08em;
+      text-transform:uppercase;
+    }
+    .brand small{
+      margin-top:5px;
+      font-size:9px;
+      letter-spacing:.32em;
+      font-weight:800;
+    }
+    .icon-btn{
+      width:42px;
+      height:42px;
+      border:1px solid var(--stone);
+      background:var(--white);
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      position:relative;
+    }
+    .cart-count{
+      position:absolute;
+      right:-4px;
+      top:-5px;
+      min-width:18px;
+      height:18px;
+      border-radius:999px;
+      background:var(--acid);
+      color:var(--ink);
+      display:grid;
+      place-items:center;
+      font-size:10px;
+      font-weight:900;
+      border:1px solid var(--ink);
+    }
+    .mobile-toggle{display:none}
+    .hero{
+      min-height:calc(100svh - 112px);
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);
+      border-bottom:1px solid var(--stone);
+    }
+    .hero-copy{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:clamp(26px,5vw,64px);
+      min-height:650px;
+    }
+    .hero-kicker{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      min-height:30px;
+      border:1px solid var(--ink);
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      background:var(--white);
+    }
+    .pill.acid{background:var(--acid)}
+    h1{
+      max-width:760px;
+      margin:32px 0 18px;
+      font-size:clamp(45px,8.5vw,112px);
+      line-height:.86;
+      letter-spacing:0;
+      text-transform:uppercase;
+    }
+    .hero-text{
+      max-width:560px;
+      color:#40443f;
+      font-size:17px;
+      line-height:1.7;
+      margin:0;
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:28px;
+    }
+    .btn{
+      min-height:50px;
+      border:1px solid var(--ink);
+      border-radius:999px;
+      padding:13px 20px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+      text-transform:uppercase;
+      background:var(--white);
+      transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+    }
+    .btn.primary{background:var(--ink);color:var(--white)}
+    .btn.blue{background:var(--blue);color:var(--white)}
+    .btn.full{width:100%}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(17,18,19,.14)}
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      border:1px solid var(--ink);
+      background:var(--white);
+      margin-top:42px;
+    }
+    .stat{padding:16px;border-right:1px solid var(--ink)}
+    .stat:last-child{border-right:0}
+    .stat strong{display:block;font-size:22px;font-weight:900}
+    .stat span{display:block;margin-top:4px;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase}
+    .hero-media{
+      position:relative;
+      min-height:650px;
+      border-left:1px solid var(--stone);
+      background:
+        linear-gradient(180deg,rgba(17,18,19,.05),rgba(17,18,19,.24)),
+        url("https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_running_Nike_Pegasus_42_IB1881_2.webp?v=1783438416") center/cover;
+      display:flex;
+      align-items:flex-end;
+      padding:clamp(18px,3vw,34px);
+    }
+    .hero-product{
+      width:min(450px,100%);
+      background:rgba(255,255,255,.9);
+      border:1px solid rgba(17,18,19,.18);
+      border-radius:var(--radius);
+      padding:18px;
+      backdrop-filter:blur(12px);
+      box-shadow:var(--shadow);
+    }
+    .hero-product .meta{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+    .hero-product h2{font-size:26px;margin:10px 0 6px;letter-spacing:0}
+    .price{font-size:18px;font-weight:900}
+    .old{color:var(--muted);text-decoration:line-through;font-size:14px;margin-left:7px}
+    .layout{
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:34px;
+      padding:42px clamp(16px,4vw,48px) 70px;
+    }
+    .sidebar{
+      position:sticky;
+      top:112px;
+      align-self:start;
+      display:grid;
+      gap:18px;
+    }
+    .side-block{
+      border:1px solid var(--stone);
+      background:var(--white);
+      border-radius:var(--radius);
+      padding:16px;
+    }
+    .side-block h3{
+      margin:0 0 14px;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+    .filter-list{display:grid;gap:8px}
+    .filter-btn{
+      min-height:38px;
+      border:1px solid var(--stone);
+      background:var(--paper);
+      border-radius:999px;
+      cursor:pointer;
+      padding:8px 12px;
+      text-align:left;
+      font-size:13px;
+      font-weight:800;
+    }
+    .filter-btn.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
+    .search{
+      width:100%;
+      min-height:44px;
+      border:1px solid var(--stone);
+      border-radius:999px;
+      padding:0 14px;
+      background:var(--paper);
+      font-weight:700;
+    }
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:22px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:clamp(30px,4vw,54px);
+      line-height:.95;
+      letter-spacing:0;
+      text-transform:uppercase;
+    }
+    .section-head p{max-width:410px;margin:0;color:var(--muted);line-height:1.6}
+    .products{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;
+    }
+    .product{
+      border:1px solid var(--stone);
+      background:var(--white);
+      border-radius:var(--radius);
+      overflow:hidden;
+      min-width:0;
+      display:flex;
+      flex-direction:column;
+    }
+    .product-image{
+      display:block;
+      position:relative;
+      background:var(--mist);
+      aspect-ratio:1/1.12;
+      overflow:hidden;
+    }
+    .product-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .45s ease;
+    }
+    .product:hover img{transform:scale(1.045)}
+    .badge-row{
+      position:absolute;
+      left:10px;
+      top:10px;
+      right:10px;
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+    }
+    .badge{
+      min-height:26px;
+      display:inline-flex;
+      align-items:center;
+      border:1px solid var(--ink);
+      background:var(--white);
+      border-radius:999px;
+      padding:5px 9px;
+      font-size:10px;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+    .badge.sale{background:var(--red);color:var(--white);border-color:var(--red)}
+    .badge.new{background:var(--acid)}
+    .product-body{
+      padding:14px;
+      display:flex;
+      flex:1;
+      flex-direction:column;
+      gap:10px;
+    }
+    .vendor{
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .product-title{
+      margin:0;
+      min-height:44px;
+      font-size:15px;
+      line-height:1.32;
+      font-weight:900;
+    }
+    .chips{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      min-height:26px;
+    }
+    .chip{
+      border:1px solid var(--stone);
+      border-radius:999px;
+      padding:5px 8px;
+      font-size:10px;
+      color:#4d524c;
+      font-weight:800;
+      background:var(--paper);
+    }
+    .product-bottom{
+      margin-top:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .quick{
+      width:40px;
+      height:40px;
+      border:1px solid var(--ink);
+      border-radius:50%;
+      background:var(--ink);
+      color:var(--white);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .product-link{
+      display:inline-flex;
+      width:max-content;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      text-decoration:underline;
+      text-underline-offset:4px;
+    }
+    .editorial{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      margin:0 clamp(16px,4vw,48px) 70px;
+      border:1px solid var(--ink);
+      background:var(--forest);
+      color:var(--white);
+    }
+    .editorial-copy{padding:clamp(24px,5vw,58px)}
+    .editorial-copy h2{
+      margin:0 0 18px;
+      font-size:clamp(35px,5vw,70px);
+      line-height:.9;
+      text-transform:uppercase;
+      letter-spacing:0;
+    }
+    .editorial-copy p{color:#dfe8df;line-height:1.75;max-width:580px}
+    .editorial-media{
+      min-height:420px;
+      background:url("https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_trail_Salomon_Ultra_Glide_4_L45396000.webp?v=1783609415") center/cover;
+      border-left:1px solid rgba(255,255,255,.28);
+    }
+    .lookbook{
+      padding:0 clamp(16px,4vw,48px) 70px;
+    }
+    .tiles{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .tile{
+      min-height:300px;
+      border:1px solid var(--stone);
+      border-radius:var(--radius);
+      padding:18px;
+      display:flex;
+      align-items:flex-end;
+      background:var(--mist);
+      position:relative;
+      overflow:hidden;
+    }
+    .tile:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(17,18,19,0),rgba(17,18,19,.56));
+      z-index:1;
+    }
+    .tile.one{background:url("https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Montre_Connectee_Garmin_Venu_4_45mm_4.webp?v=1783607449") center/cover}
+    .tile.two{background:url("https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Short_Nike_Aeroswift_4in_FN3352-418_PHSYM001-2000_1_a4b61b25-5300-468e-a6fd-2fb82be3a4a0.webp?v=1783521104") center/cover}
+    .tile.three{background:url("https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Salomon_Soft_Flask_Speed_Clear_Blue_LD0010800.webp?v=1783605947") center/cover}
+    .tile-content{position:relative;z-index:2;color:var(--white)}
+    .tile-content h3{margin:0 0 8px;font-size:28px;text-transform:uppercase;letter-spacing:0}
+    .tile-content p{margin:0;color:#edf1ea;font-weight:700}
+    .footer{
+      background:var(--ink);
+      color:var(--white);
+      padding:44px clamp(16px,4vw,48px);
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.5fr repeat(3,1fr);
+      gap:26px;
+    }
+    .trust-footer{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:18px;
+      align-items:center;
+      margin-bottom:34px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.05);
+    }
+    .trust-mark{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      font-weight:900;
+    }
+    .stars{
+      display:inline-flex;
+      gap:3px;
+      color:var(--acid);
+      letter-spacing:0;
+    }
+    .footer-bottom{
+      margin-top:28px;
+      padding-top:22px;
+      border-top:1px solid rgba(255,255,255,.16);
+      color:#aeb4aa;
+      font-size:12px;
+      line-height:1.8;
+    }
+    .footer h3,.footer h4{margin:0 0 14px;text-transform:uppercase;letter-spacing:0}
+    .footer p,.footer a{
+      display:block;
+      color:#c9ccc7;
+      font-size:13px;
+      line-height:1.9;
+      margin:0;
+    }
+    .route-page{
+      padding:42px clamp(16px,4vw,48px) 74px;
+      min-height:70svh;
+    }
+    .route-hero{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:24px;
+      align-items:end;
+      margin-bottom:28px;
+      padding:34px;
+      border:1px solid var(--ink);
+      background:var(--white);
+      border-radius:var(--radius);
+    }
+    .route-hero h1{
+      margin:14px 0 10px;
+      font-size:clamp(40px,7vw,86px);
+      line-height:.9;
+    }
+    .route-hero p{
+      max-width:640px;
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .collection-toolbar{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      margin-bottom:18px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+    .product-page-full{
+      display:grid;
+      grid-template-columns:minmax(300px,.92fr) minmax(0,1.08fr);
+      gap:34px;
+      align-items:start;
+    }
+    .product-gallery{
+      position:sticky;
+      top:112px;
+      border:1px solid var(--stone);
+      background:var(--mist);
+      border-radius:var(--radius);
+      overflow:hidden;
+    }
+    .product-gallery img{
+      width:100%;
+      aspect-ratio:1/1.05;
+      object-fit:cover;
+    }
+    .product-buybox{
+      border:1px solid var(--stone);
+      background:var(--white);
+      border-radius:var(--radius);
+      padding:24px;
+    }
+    .product-buybox h1{
+      margin:14px 0;
+      max-width:none;
+      font-size:clamp(38px,5vw,66px);
+      line-height:.9;
+    }
+    .buy-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin:18px 0;
+    }
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+      margin:18px 0;
+    }
+    .benefit{
+      padding:12px;
+      border:1px solid var(--stone);
+      border-radius:var(--radius);
+      background:var(--paper);
+      font-size:12px;
+      font-weight:900;
+      line-height:1.35;
+      text-transform:uppercase;
+    }
+    .details-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-top:28px;
+    }
+    .detail-card,.review-card,.legal-card{
+      border:1px solid var(--stone);
+      border-radius:var(--radius);
+      background:var(--white);
+      padding:18px;
+    }
+    .detail-card h3,.review-card h3,.legal-card h3{
+      margin:0 0 10px;
+      text-transform:uppercase;
+      letter-spacing:0;
+    }
+    .detail-card p,.review-card p,.legal-card p,.legal-card li{
+      margin:0;
+      color:#4d524c;
+      line-height:1.75;
+      font-size:14px;
+    }
+    .reviews{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .legal-layout{
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:22px;
+    }
+    .legal-menu{
+      position:sticky;
+      top:112px;
+      align-self:start;
+      display:grid;
+      gap:8px;
+    }
+    .legal-menu a{
+      border:1px solid var(--stone);
+      background:var(--white);
+      border-radius:999px;
+      padding:12px 14px;
+      font-size:13px;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+    .legal-stack{display:grid;gap:14px}
+    .drawer,.modal{
+      position:fixed;
+      inset:0;
+      z-index:80;
+      display:none;
+    }
+    .drawer.open,.modal.open{display:block}
+    .scrim{
+      position:absolute;
+      inset:0;
+      background:rgba(17,18,19,.44);
+    }
+    .drawer-panel{
+      position:absolute;
+      right:0;
+      top:0;
+      bottom:0;
+      width:min(420px,100%);
+      background:var(--paper);
+      border-left:1px solid var(--ink);
+      display:flex;
+      flex-direction:column;
+    }
+    .panel-head{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px;
+      border-bottom:1px solid var(--stone);
+    }
+    .panel-head h3{margin:0;font-size:18px;text-transform:uppercase}
+    .cart-items{padding:18px;display:grid;gap:12px;overflow:auto}
+    .cart-item{
+      display:grid;
+      grid-template-columns:70px 1fr auto;
+      gap:12px;
+      align-items:center;
+      background:var(--white);
+      border:1px solid var(--stone);
+      border-radius:var(--radius);
+      padding:10px;
+    }
+    .cart-item img{width:70px;height:70px;object-fit:cover;background:var(--mist)}
+    .cart-item strong{font-size:13px;line-height:1.3}
+    .cart-item span{display:block;margin-top:5px;font-size:12px;color:var(--muted);font-weight:800}
+    .cart-item button{
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      color:var(--red);
+    }
+    .cart-foot{
+      margin-top:auto;
+      padding:18px;
+      border-top:1px solid var(--stone);
+      display:grid;
+      gap:12px;
+    }
+    .total{display:flex;justify-content:space-between;font-weight:900}
+    .modal-panel{
+      position:absolute;
+      inset:50% auto auto 50%;
+      width:min(980px,calc(100% - 28px));
+      max-height:calc(100svh - 28px);
+      transform:translate(-50%,-50%);
+      background:var(--paper);
+      border:1px solid var(--ink);
+      border-radius:var(--radius);
+      overflow:auto;
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+    }
+    .modal-media{background:var(--mist);min-height:460px}
+    .modal-media img{width:100%;height:100%;object-fit:cover}
+    .modal-info{padding:26px}
+    .modal-info h2{margin:10px 0 10px;font-size:38px;line-height:1;text-transform:uppercase;letter-spacing:0}
+    .sizes{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+    .size{
+      border:1px solid var(--stone);
+      background:var(--white);
+      border-radius:999px;
+      padding:9px 11px;
+      font-size:12px;
+      font-weight:900;
+    }
+    .close-btn{
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+    }
+    .empty{color:var(--muted);font-weight:800;text-align:center;padding:40px 16px}
+    @media (max-width:1180px){
+      .products{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .nav-left .nav-link:nth-child(n+4){display:none}
+    }
+    @media (max-width:900px){
+      .topline{height:32px}
+      .nav{height:68px;grid-template-columns:auto 1fr auto}
+      .mobile-toggle{display:grid}
+      .nav-left .nav-link,.nav-right .nav-link,.nav-right .icon-btn:first-child{display:none}
+      .brand{font-size:23px}
+      .brand small{font-size:8px}
+      .hero{grid-template-columns:1fr}
+      .hero-copy,.hero-media{min-height:auto}
+      .hero-media{border-left:0;border-top:1px solid var(--stone);min-height:470px}
+      .layout{grid-template-columns:1fr;padding-top:26px}
+      .sidebar{position:static}
+      .side-block{padding:12px}
+      .filter-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .filter-btn{text-align:center}
+      .products{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .editorial,.modal-panel{grid-template-columns:1fr}
+      .editorial-media{border-left:0;border-top:1px solid rgba(255,255,255,.28)}
+      .tiles,.footer-grid{grid-template-columns:1fr}
+      .trust-footer,.route-hero,.product-page-full,.reviews,.details-grid,.legal-layout{grid-template-columns:1fr}
+      .product-gallery,.legal-menu{position:static}
+      .modal-media{min-height:320px}
+    }
+    @media (max-width:560px){
+      .hero-copy{padding:24px 16px}
+      .hero-actions{display:grid}
+      .btn{width:100%}
+      .hero-stats{grid-template-columns:1fr}
+      .stat{border-right:0;border-bottom:1px solid var(--ink)}
+      .stat:last-child{border-bottom:0}
+      .hero-media{min-height:410px;padding:14px}
+      .layout{padding-left:12px;padding-right:12px}
+      .section-head{align-items:flex-start;flex-direction:column}
+      .products{grid-template-columns:1fr;gap:14px}
+      .buy-actions,.benefits{grid-template-columns:1fr}
+      .filter-list{display:flex;overflow-x:auto}
+      .filter-btn{min-width:max-content}
+      .product-image{aspect-ratio:1/1}
+      .modal-info h2{font-size:29px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topline" aria-label="Services boutique">
+    <div class="topline-track">
+      <span>Livraison 24h/48h</span><span>Retours faciles</span><span>Paiement en 3x sans frais</span><span>Running & trail specialist</span>
+      <span>Livraison 24h/48h</span><span>Retours faciles</span><span>Paiement en 3x sans frais</span><span>Running & trail specialist</span>
+    </div>
+  </div>
+
+  <header class="header">
+    <nav class="nav" aria-label="Navigation principale">
+      <div class="nav-left">
+        <button class="icon-btn mobile-toggle" id="mobileFilters" aria-label="Ouvrir les filtres"><i data-lucide="sliders-horizontal"></i></button>
+        <div class="nav-item">
+          <a class="nav-link" href="#/collections/all">Shop</a>
+          <div class="mega" aria-label="Menu collections">
+            <div>
+              <h4>Chaussures</h4>
+              <a href="#/collections/running">Running <i data-lucide="arrow-right"></i></a>
+              <a href="#/collections/trail">Trail <i data-lucide="arrow-right"></i></a>
+              <a href="#/collections/promos">Promotions <i data-lucide="arrow-right"></i></a>
+            </div>
+            <div>
+              <h4>Équipement</h4>
+              <a href="#/collections/vetements">Vêtements <i data-lucide="arrow-right"></i></a>
+              <a href="#/collections/accessoires">Accessoires <i data-lucide="arrow-right"></i></a>
+              <a href="#/collections/gps">Montres GPS <i data-lucide="arrow-right"></i></a>
+            </div>
+            <div>
+              <h4>Performance</h4>
+              <a href="#/collections/dietetique">Nutrition <i data-lucide="arrow-right"></i></a>
+              <a href="#/collections/homme">Homme <i data-lucide="arrow-right"></i></a>
+              <a href="#/collections/femme">Femme <i data-lucide="arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <a class="nav-link" href="#/collections/new">Nouveautés</a>
+        <a class="nav-link" href="#/collections/trail">Trail</a>
+        <a class="nav-link" href="#/collections/accessoires">Équipement</a>
+      </div>
+      <a class="brand" href="#/" aria-label="Accueil Quatorze Running">
+        Quatorze
+        <small>Running</small>
+      </a>
+      <div class="nav-right">
+        <a class="nav-link" href="#/collections/running">Running</a>
+        <a class="nav-link" href="#/collections/trail">Trail</a>
+        <button class="icon-btn" id="focusSearch" aria-label="Rechercher"><i data-lucide="search"></i></button>
+        <button class="icon-btn" id="openCart" aria-label="Ouvrir le panier"><i data-lucide="shopping-bag"></i><span class="cart-count" id="cartCount">0</span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="app">
+    <section class="hero home-section">
+      <div class="hero-copy">
+        <div>
+          <div class="hero-kicker">
+            <span class="pill acid"><i data-lucide="zap"></i> Drop performance</span>
+            <span class="pill">Chaussures</span>
+            <span class="pill">Montres GPS</span>
+            <span class="pill">Nutrition</span>
+          </div>
+          <h1>Courir plus vite. Plus loin. Mieux équipé.</h1>
+          <p class="hero-text">Une sélection running et trail construite autour des produits du catalogue : chaussures route, trail, textile technique, accessoires d'hydratation, montres GPS et nutrition d'effort.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#selection"><i data-lucide="arrow-down"></i> Voir la sélection</a>
+            <button class="btn" data-filter="PROMO"><i data-lucide="badge-percent"></i> Promotions</button>
+          </div>
+        </div>
+        <div class="hero-stats" aria-label="Repères catalogue">
+          <div class="stat"><strong>1687</strong><span>Références CSV</span></div>
+          <div class="stat"><strong>24/48h</strong><span>Livraison</span></div>
+          <div class="stat"><strong>Route + Trail</strong><span>Terrain</span></div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <article class="hero-product">
+          <div class="meta">
+            <span class="badge new">Nouveauté</span>
+            <span class="price">139,00€</span>
+          </div>
+          <h2>Nike Pegasus 42</h2>
+          <p class="hero-text">Une paire d'entraînement quotidienne, légère visuellement et taillée pour les sorties rapides.</p>
+          <button class="btn blue full" data-open-product="nike-pegasus-42"><i data-lucide="eye"></i> Aperçu rapide</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="layout home-section" id="shop">
+      <aside class="sidebar" aria-label="Filtres produits">
+        <div class="side-block">
+          <h3>Recherche</h3>
+          <input class="search" id="searchInput" type="search" placeholder="Nike, Salomon, Garmin...">
+        </div>
+        <div class="side-block">
+          <h3>Catégories</h3>
+          <div class="filter-list">
+            <button class="filter-btn active" data-filter="ALL">Tout</button>
+            <button class="filter-btn" data-filter="CHAUSSURES RUNNING">Running</button>
+            <button class="filter-btn" data-filter="CHAUSSURES TRAIL">Trail</button>
+            <button class="filter-btn" data-filter="MONTRES GPS">Montres GPS</button>
+            <button class="filter-btn" data-filter="VETEMENTS">Vêtements</button>
+            <button class="filter-btn" data-filter="ACCESSOIRES">Accessoires</button>
+            <button class="filter-btn" data-filter="DIETETIQUE">Diététique</button>
+            <button class="filter-btn" data-filter="PROMO">Promos</button>
+          </div>
+        </div>
+        <div class="side-block">
+          <h3>Services</h3>
+          <div class="chips">
+            <span class="chip">Paiement sécurisé</span>
+            <span class="chip">Conseil running</span>
+            <span class="chip">Retours simples</span>
+            <span class="chip">Stock boutique</span>
+          </div>
+        </div>
+      </aside>
+
+      <div id="selection">
+        <div class="section-head">
+          <h2>Notre sélection performance</h2>
+          <p>Des fiches produit inspirées d'une boutique premium : visuels grands formats, badges rapides et achat en un clic.</p>
+        </div>
+        <div class="products" id="products"></div>
+      </div>
+    </section>
+
+    <section class="editorial home-section" id="trail">
+      <div class="editorial-copy">
+        <span class="pill acid">Trail focus</span>
+        <h2>Accroche, confort, longues distances.</h2>
+        <p>Les produits trail du catalogue sont mis en avant avec une direction plus technique : terrains variés, hydratation, maintien et protection. L'esprit reste boutique spécialisée, net et orienté performance.</p>
+        <button class="btn" data-filter="CHAUSSURES TRAIL"><i data-lucide="mountain"></i> Explorer le trail</button>
+      </div>
+      <div class="editorial-media" aria-label="Chaussure de trail Salomon"></div>
+    </section>
+
+    <section class="lookbook home-section" id="lookbook">
+      <div class="section-head">
+        <h2>Les essentiels de saison</h2>
+        <p>Une mise en scène par usages pour rappeler les blocs éditoriaux du site de référence.</p>
+      </div>
+      <div class="tiles">
+        <article class="tile one">
+          <div class="tile-content"><h3>GPS</h3><p>Montres et suivi d'entraînement</p></div>
+        </article>
+        <article class="tile two">
+          <div class="tile-content"><h3>Textile</h3><p>Tenues respirantes pour la vitesse</p></div>
+        </article>
+        <article class="tile three">
+          <div class="tile-content"><h3>Hydratation</h3><p>Accessoires pour sorties longues</p></div>
+        </article>
+      </div>
+    </section>
+    <section class="route-page" id="pageView" hidden></section>
+  </main>
+
+  <footer class="footer">
+    <div class="trust-footer">
+      <div>
+        <div class="trust-mark"><span>Excellent</span><span class="stars">★ ★ ★ ★ ★</span><span>4,8/5 sur 1 247 avis</span></div>
+        <p>Avis clients vérifiés après achat, inspiré d'un module Trustpilot pour renforcer la preuve sociale.</p>
+      </div>
+      <a class="btn" href="#/avis"><i data-lucide="message-square-heart"></i> Lire les avis</a>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <h3>Quatorze Running</h3>
+        <p>Quatorze Running SAS, boutique spécialisée running & trail. Conseils, livraison rapide et sélection performance.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a href="#/collections/new">Nouveautés</a>
+        <a href="#/collections/promos">Promotions</a>
+        <a href="#/collections/trail">Trail</a>
+      </div>
+      <div>
+        <h4>Catégories</h4>
+        <a href="#/collections/running">Chaussures running</a>
+        <a href="#/collections/accessoires">Accessoires</a>
+        <a href="#/collections/dietetique">Nutrition</a>
+      </div>
+      <div>
+        <h4>Informations</h4>
+        <a href="#/legal/mentions-legales">Mentions légales</a>
+        <a href="#/legal/cgv">Conditions générales de vente</a>
+        <a href="#/legal/confidentialite">Politique de confidentialité</a>
+        <a href="#/legal/livraison-retours">Livraison & retours</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <strong>Informations provisoires :</strong> Quatorze Running SAS au capital de 15 000€, 14 rue des Foulées, 75011 Paris, France. SIRET 912 458 771 00014, TVA FR12912458771. Email : contact@quatorze-running.test.
+    </div>
+  </footer>
+
+  <div class="drawer" id="cartDrawer" aria-hidden="true">
+    <div class="scrim" data-close-cart></div>
+    <aside class="drawer-panel" aria-label="Panier">
+      <div class="panel-head">
+        <h3>Panier</h3>
+        <button class="close-btn" data-close-cart aria-label="Fermer le panier"><i data-lucide="x"></i></button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-foot">
+        <div class="total"><span>Total</span><span id="cartTotal">0,00€</span></div>
+        <button class="btn primary full"><i data-lucide="lock"></i> Commander</button>
+      </div>
+    </aside>
+  </div>
+
+  <div class="modal" id="productModal" aria-hidden="true">
+    <div class="scrim" data-close-modal></div>
+    <article class="modal-panel" role="dialog" aria-modal="true" aria-label="Aperçu produit">
+      <div class="modal-media"><img id="modalImage" alt=""></div>
+      <div class="modal-info">
+        <div class="panel-head" style="min-height:auto;padding:0 0 14px;border-bottom:0">
+          <span class="badge new" id="modalBadge">Nouveauté</span>
+          <button class="close-btn" data-close-modal aria-label="Fermer"><i data-lucide="x"></i></button>
+        </div>
+        <span class="vendor" id="modalVendor"></span>
+        <h2 id="modalTitle"></h2>
+        <p class="hero-text" id="modalText"></p>
+        <div class="price" id="modalPrice"></div>
+        <div class="sizes" id="modalSizes"></div>
+        <button class="btn primary full" id="modalAdd"><i data-lucide="shopping-bag"></i> Ajouter au panier</button>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const products = [
+      {id:"salomon-ultra-glide-4",title:"Salomon Ultra Glide 4",vendor:"SALOMON",type:"CHAUSSURES TRAIL",tags:"AH26,CHAUSSURES,CHAUSSURES TRAIL,HOMME",price:150,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_trail_Salomon_Ultra_Glide_4_L45396000.webp?v=1783609415",sizes:["41 1/3","42","42 2/3","43 1/3","44","44 2/3"],text:"Trail longue distance, amorti confortable et accroche fiable sur terrains variés."},
+      {id:"garmin-venu-4-41-gray",title:"Garmin Venu 4 - 41mm",vendor:"GARMIN",type:"MONTRES GPS",tags:"ELECTRONIQUE,MONTRES GPS,UNISEXE",price:499.99,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Montre_Connectee_Garmin_Venu_4_41mm_2.webp?v=1783607128",sizes:["TU"],text:"Montre connectée premium pour suivre entraînement, récupération et quotidien."},
+      {id:"salomon-soft-flask-speed",title:"Salomon Soft Flask Speed",vendor:"SALOMON",type:"SACS HYDRATATION",tags:"ACCESSOIRES,SACS HYDRATATION",price:25,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Salomon_Soft_Flask_Speed_Clear_Blue_LD0010800.webp?v=1783605947",sizes:["500 ML"],text:"Flasque souple pour rester fluide sur les sorties longues et les ravitos."},
+      {id:"naak-energy-drink-lime",title:"Naak Energy Drink Mix Lime",vendor:"NAAK",type:"BOISSONS",tags:"DIETETIQUE,BOISSONS",price:4,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Sachet_Naak_Energy_Drink_Mix_Lime.webp?v=1783604102",sizes:["72G"],text:"Boisson énergétique pratique pour compléter l'apport en glucides pendant l'effort."},
+      {id:"salomon-sense-aero-cap",title:"Salomon Cap Sense Aero Cap",vendor:"SALOMON",type:"CASQUETTES",tags:"ACCESSOIRES,CASQUETTES,UNISEXE",price:45,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Casquette_Salomon_Sense_Aero_Cap_LC2764000_1.webp?v=1783605472",sizes:["S/M","L/XL"],text:"Casquette légère pour courir protégé sans perdre en respirabilité."},
+      {id:"compressport-pro-racing-high",title:"Compressport Pro Racing Socks V4.0 Run High",vendor:"COMPRESSPORT",type:"CHAUSSETTES",tags:"ACCESSOIRES,CHAUSSETTES,UNISEXE",price:20,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussettes_Compressport_Pro_Racing_Socks_V4.0_XU00046B_1_1.webp?v=1783586298",sizes:["35-38","39-41","42-44","45-48"],text:"Chaussettes techniques pour le maintien, la ventilation et les allures rythmées."},
+      {id:"nike-vomero-plus-blue",title:"Nike Vomero Plus",vendor:"NIKE",type:"CHAUSSURES RUNNING",tags:"CHAUSSURES,CHAUSSURES RUNNING,HOMME",price:179,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_running_Nike_Vomero_Plus_HV8150-405-405_PHSRH000-2000.webp?v=1783583758",sizes:["38.5","39","40","40.5","41","42"],text:"Une chaussure route amortie pour accumuler les kilomètres avec confort."},
+      {id:"nike-vomero-18",title:"Nike Vomero 18",vendor:"NIKE",type:"CHAUSSURES RUNNING",tags:"CHAUSSURES,CHAUSSURES RUNNING,HOMME,PE26,PROMO",price:109.99,compare:149.99,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_running_Nike_Vomero_18__HM6803_3.webp?v=1772010475",sizes:["41","42","42.5","43","44","44.5"],text:"Un modèle d'entraînement polyvalent avec une remise forte."},
+      {id:"garmin-forerunner-570",title:"Garmin Forerunner 570 - 42mm",vendor:"GARMIN",type:"MONTRES GPS",tags:"ELECTRONIQUE,MONTRES GPS,PROMO",price:462,compare:550,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Montres_GPS_Garmin_Forerunner_570_Ivoire_Orange__42mm_010-02970-00_2.webp?v=1747832132",sizes:["TU"],text:"Montre GPS orientée performance pour entraînements structurés."},
+      {id:"brooks-ghost-max-4",title:"Brooks Ghost Max 4",vendor:"BROOKS",type:"CHAUSSURES RUNNING",tags:"CHAUSSURES,CHAUSSURES RUNNING,HOMME",price:160,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_running_Brooks_Hyperion_Max_4_1104961D004_3.webp?v=1783524196",sizes:["40","40.5","41","42","42.5","43"],text:"Une route stable et amortie pour sorties quotidiennes."},
+      {id:"brooks-ghost-18-femme",title:"Brooks Ghost 18",vendor:"BROOKS",type:"CHAUSSURES RUNNING",tags:"CHAUSSURES,CHAUSSURES RUNNING,FEMME",price:150,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_running_Brooks_Ghost_18_1204821B194_3.webp?v=1783522793",sizes:["35.5","36","36.5","37.5","38","38.5"],text:"Une valeur sûre pour courir régulièrement avec une foulée douce."},
+      {id:"brooks-glycerin-23",title:"Brooks Glycerin 23",vendor:"BROOKS",type:"CHAUSSURES RUNNING",tags:"CHAUSSURES,CHAUSSURES RUNNING,HOMME",price:180,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_running_Brooks_Glycerin_23_1104761D163_3.webp?v=1783522410",sizes:["40","40.5","41","42","42.5","43"],text:"Confort maximal, foulée moelleuse, esprit longue sortie."},
+      {id:"nike-aeroswift-4in-blue",title:"Nike Aeroswift 4in",vendor:"NIKE",type:"SHORTS",tags:"VETEMENTS,SHORTS,HOMME",price:79,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Short_Nike_Aeroswift_4in_FN3352-418_PHSYM001-2000_1_a4b61b25-5300-468e-a6fd-2fb82be3a4a0.webp?v=1783521104",sizes:["XS","S","M","L","XL"],text:"Short très léger pour séance rapide, piste et compétition."},
+      {id:"nike-pegasus-42",title:"Nike Pegasus 42",vendor:"NIKE",type:"CHAUSSURES RUNNING",tags:"CHAUSSURES,CHAUSSURES RUNNING,FEMME",price:139,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_running_Nike_Pegasus_42_IB1881_2.webp?v=1783438416",sizes:["35.5","36","36.5","37.5","38","38.5"],text:"La daily trainer iconique, prête pour l'entraînement quotidien."},
+      {id:"nike-swift-collant",title:"Nike Swift",vendor:"NIKE",type:"COLLANTS",tags:"VETEMENTS,COLLANTS,FEMME",price:84.99,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/HJ2252-499_2.webp?v=1783519292",sizes:["XS","S","M","L","XL"],text:"Collant de running confortable, extensible et réfléchissant."},
+      {id:"nike-pegasus-premium",title:"Nike Pegasus Premium",vendor:"NIKE",type:"CHAUSSURES RUNNING",tags:"CHAUSSURES,CHAUSSURES RUNNING,HOMME",price:209,compare:null,image:"https://cdn.shopify.com/s/files/1/0685/1369/3970/files/Chaussures_running_Nike_Pegasus_Premium_HQ2592-401_1.webp?v=1783518398",sizes:["38.5","39","40","40.5","41","42"],text:"Une silhouette premium pour une sensation de relance plus dynamique."}
+    ];
+
+    const els = {
+      app: document.getElementById("app"),
+      pageView: document.getElementById("pageView"),
+      products: document.getElementById("products"),
+      search: document.getElementById("searchInput"),
+      cartDrawer: document.getElementById("cartDrawer"),
+      cartItems: document.getElementById("cartItems"),
+      cartCount: document.getElementById("cartCount"),
+      cartTotal: document.getElementById("cartTotal"),
+      modal: document.getElementById("productModal"),
+      modalImage: document.getElementById("modalImage"),
+      modalVendor: document.getElementById("modalVendor"),
+      modalTitle: document.getElementById("modalTitle"),
+      modalText: document.getElementById("modalText"),
+      modalPrice: document.getElementById("modalPrice"),
+      modalSizes: document.getElementById("modalSizes"),
+      modalBadge: document.getElementById("modalBadge"),
+      modalAdd: document.getElementById("modalAdd")
+    };
+
+    const homeSections = [...document.querySelectorAll(".home-section")];
+    const collections = {
+      all:{title:"Toute la boutique",filter:"ALL",intro:"Tous les produits running, trail, textile, GPS, nutrition et accessoires disponibles dans la sélection."},
+      new:{title:"Nouveautés",filter:"ALL",intro:"Les derniers produits ajoutés à la sélection performance, prêts pour l'entraînement et la compétition.",sort:"new"},
+      running:{title:"Chaussures running",filter:"CHAUSSURES RUNNING",intro:"Des modèles route pour l'entraînement quotidien, les séances rapides et les longues sorties."},
+      trail:{title:"Chaussures trail",filter:"CHAUSSURES TRAIL",intro:"Accroche, stabilité et protection pour les terrains mixtes, chemins techniques et longues distances."},
+      gps:{title:"Montres GPS",filter:"MONTRES GPS",intro:"Suivi d'entraînement, récupération, cardio et navigation pour construire une progression propre."},
+      vetements:{title:"Vêtements",filter:"VETEMENTS",intro:"Textile technique respirant pour courir par tous les temps, de la piste au sentier."},
+      accessoires:{title:"Accessoires",filter:"ACCESSOIRES",intro:"Casquettes, chaussettes, hydratation et petits équipements qui font la différence en sortie."},
+      dietetique:{title:"Nutrition sportive",filter:"DIETETIQUE",intro:"Boissons, purées et apports d'effort pour tenir l'intensité du départ à l'arrivée."},
+      promos:{title:"Promotions",filter:"PROMO",intro:"Sélection remisée sur les produits running, montres GPS et équipement technique."},
+      homme:{title:"Collection homme",filter:"HOMME",intro:"Chaussures, textile et accessoires sélectionnés pour les coureurs homme."},
+      femme:{title:"Collection femme",filter:"FEMME",intro:"Chaussures, textile et accessoires sélectionnés pour les coureuses."}
+    };
+    const legalPages = {
+      "mentions-legales":{title:"Mentions légales",intro:"Informations éditées provisoirement pour la maquette.",sections:[
+        ["Éditeur du site","Quatorze Running SAS, société par actions simplifiée au capital de 15 000€, immatriculée au RCS de Paris sous le numéro 912 458 771. Siège social : 14 rue des Foulées, 75011 Paris, France."],
+        ["Contact","Email : contact@quatorze-running.test. Téléphone : 01 84 14 14 14. Directeur de la publication : Alex Martin, Président."],
+        ["Hébergement","Site hébergé par Shopify International Limited, 2nd Floor Victoria Buildings, Haddington Road, Dublin 4, Irlande, pour les besoins de la démonstration."]
+      ]},
+      cgv:{title:"Conditions générales de vente",intro:"Conditions inventées pour donner au site une finition e-commerce réaliste.",sections:[
+        ["Produits et prix","Les produits sont présentés avec leurs caractéristiques principales, prix TTC en euros et disponibilités indicatives. Quatorze Running se réserve le droit de modifier les prix à tout moment."],
+        ["Commande","Toute commande implique l'acceptation des présentes CGV. Un email de confirmation récapitule les produits, le montant payé, l'adresse de livraison et le mode d'expédition."],
+        ["Paiement","Les paiements sont sécurisés par carte bancaire, Apple Pay ou paiement en 3 fois sous réserve d'éligibilité. La commande est préparée après validation du paiement."],
+        ["Retours","Le client dispose d'un délai de 14 jours à réception pour retourner un produit neuf, non porté, dans son emballage d'origine."]
+      ]},
+      confidentialite:{title:"Politique de confidentialité",intro:"Texte provisoire pour un site prêt à vendre.",sections:[
+        ["Données collectées","Les données collectées peuvent inclure nom, prénom, adresse, email, téléphone, historique de commande et préférences de navigation."],
+        ["Utilisation","Les données servent à traiter les commandes, assurer le service client, prévenir la fraude et envoyer des communications si le client y consent."],
+        ["Droits","Conformément au RGPD, chaque client peut demander accès, rectification, suppression ou portabilité de ses données à contact@quatorze-running.test."]
+      ]},
+      "livraison-retours":{title:"Livraison & retours",intro:"Informations commerciales provisoires.",sections:[
+        ["Livraison","Expédition sous 24h ouvrées pour les produits en stock. Livraison standard estimée en 24h à 48h en France métropolitaine."],
+        ["Frais de port","Livraison offerte dès 120€ d'achat. Sous ce montant, les frais sont calculés au moment du paiement selon le transporteur choisi."],
+        ["Échanges et remboursements","Les retours sont acceptés sous 14 jours. Le remboursement intervient après réception et contrôle du produit retourné."]
+      ]}
+    };
+
+    let activeFilter = "ALL";
+    let activeProduct = null;
+    const cart = [];
+
+    function formatPrice(value){
+      return value.toLocaleString("fr-FR",{style:"currency",currency:"EUR"});
+    }
+
+    function productBadge(product){
+      if(product.compare) return "Promo";
+      if(product.tags.includes("FEMME")) return "Femme";
+      if(product.tags.includes("HOMME")) return "Homme";
+      return "Unisexe";
+    }
+
+    function refreshIcons(){
+      if(window.lucide) window.lucide.createIcons();
+    }
+
+    function renderProducts(){
+      const query = els.search.value.trim().toLowerCase();
+      const visible = products.filter(product => {
+        const haystack = `${product.title} ${product.vendor} ${product.type} ${product.tags}`.toLowerCase();
+        const matchesQuery = !query || haystack.includes(query);
+        const matchesFilter = activeFilter === "ALL" || product.tags.includes(activeFilter) || product.type.includes(activeFilter);
+        return matchesQuery && matchesFilter;
+      });
+
+      els.products.innerHTML = visible.map(product => `
+        <article class="product" data-product-card="${product.id}">
+          <div class="product-image">
+            <img src="${product.image}" alt="${product.title}" loading="lazy">
+            <div class="badge-row">
+              <span class="badge ${product.compare ? "sale" : "new"}">${productBadge(product)}</span>
+              <span class="badge">${product.type.replace("CHAUSSURES ","")}</span>
+            </div>
+          </div>
+          <div class="product-body">
+            <span class="vendor">${product.vendor}</span>
+            <h3 class="product-title"><a href="#/products/${product.id}">${product.title}</a></h3>
+            <div class="chips">
+              ${product.sizes.slice(0,3).map(size => `<span class="chip">${size}</span>`).join("")}
+              ${product.sizes.length > 3 ? `<span class="chip">+${product.sizes.length - 3}</span>` : ""}
+            </div>
+            <a class="product-link" href="#/products/${product.id}">Voir la fiche</a>
+            <div class="product-bottom">
+              <div class="price">${formatPrice(product.price)} ${product.compare ? `<span class="old">${formatPrice(product.compare)}</span>` : ""}</div>
+              <button class="quick" data-open-product="${product.id}" aria-label="Voir ${product.title}"><i data-lucide="plus"></i></button>
+            </div>
+          </div>
+        </article>
+      `).join("") || `<p class="empty">Aucun produit trouvé.</p>`;
+      refreshIcons();
+    }
+
+    function filterProducts(filter){
+      if(filter === "ALL") return products;
+      return products.filter(product => product.tags.includes(filter) || product.type.includes(filter));
+    }
+
+    function productCard(product){
+      return `
+        <article class="product" data-product-card="${product.id}">
+          <a class="product-image" href="#/products/${product.id}">
+            <img src="${product.image}" alt="${product.title}" loading="lazy">
+            <div class="badge-row">
+              <span class="badge ${product.compare ? "sale" : "new"}">${productBadge(product)}</span>
+              <span class="badge">${product.type.replace("CHAUSSURES ","")}</span>
+            </div>
+          </a>
+          <div class="product-body">
+            <span class="vendor">${product.vendor}</span>
+            <h3 class="product-title"><a href="#/products/${product.id}">${product.title}</a></h3>
+            <div class="chips">
+              ${product.sizes.slice(0,4).map(size => `<span class="chip">${size}</span>`).join("")}
+            </div>
+            <a class="product-link" href="#/products/${product.id}">Voir la fiche produit</a>
+            <div class="product-bottom">
+              <div class="price">${formatPrice(product.price)} ${product.compare ? `<span class="old">${formatPrice(product.compare)}</span>` : ""}</div>
+              <button class="quick" data-add-product="${product.id}" aria-label="Ajouter ${product.title}"><i data-lucide="shopping-bag"></i></button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function setHomeVisible(isVisible){
+      homeSections.forEach(section => section.hidden = !isVisible);
+      els.pageView.hidden = isVisible;
+      if(isVisible) els.pageView.innerHTML = "";
+    }
+
+    function renderCollection(slug){
+      const collection = collections[slug] || collections.all;
+      const items = filterProducts(collection.filter);
+      setHomeVisible(false);
+      document.title = `${collection.title} | Quatorze Running`;
+      els.pageView.innerHTML = `
+        <div class="route-hero">
+          <div>
+            <span class="pill acid">Collection</span>
+            <h1>${collection.title}</h1>
+            <p>${collection.intro}</p>
+          </div>
+          <a class="btn" href="#/"><i data-lucide="home"></i> Accueil</a>
+        </div>
+        <div class="collection-toolbar">
+          <span>${items.length} produits</span>
+          <span>Tri : sélection boutique</span>
+        </div>
+        <div class="products">${items.map(productCard).join("")}</div>
+      `;
+      window.scrollTo({top:0,behavior:"smooth"});
+      refreshIcons();
+    }
+
+    function renderProductPage(id){
+      const product = products.find(item => item.id === id) || products[0];
+      const related = products.filter(item => item.id !== product.id && (item.type === product.type || item.vendor === product.vendor)).slice(0,4);
+      setHomeVisible(false);
+      document.title = `${product.title} | Quatorze Running`;
+      els.pageView.innerHTML = `
+        <div class="product-page-full">
+          <div class="product-gallery">
+            <img src="${product.image}" alt="${product.title}">
+          </div>
+          <div>
+            <div class="product-buybox">
+              <span class="badge ${product.compare ? "sale" : "new"}">${productBadge(product)}</span>
+              <h1>${product.title}</h1>
+              <span class="vendor">${product.vendor} · ${product.type}</span>
+              <p class="hero-text" style="margin-top:16px">${product.text}</p>
+              <div class="price" style="font-size:28px;margin-top:18px">${formatPrice(product.price)} ${product.compare ? `<span class="old">${formatPrice(product.compare)}</span>` : ""}</div>
+              <div class="sizes" aria-label="Tailles disponibles">${product.sizes.map(size => `<span class="size">${size}</span>`).join("")}</div>
+              <div class="buy-actions">
+                <button class="btn primary" data-add-product="${product.id}"><i data-lucide="shopping-bag"></i> Ajouter au panier</button>
+                <button class="btn"><i data-lucide="heart"></i> Wishlist</button>
+              </div>
+              <div class="benefits">
+                <div class="benefit">Livraison 24h/48h</div>
+                <div class="benefit">Paiement sécurisé</div>
+                <div class="benefit">Retour sous 14 jours</div>
+              </div>
+            </div>
+            <div class="details-grid">
+              <article class="detail-card"><h3>Conseil usage</h3><p>Produit recommandé pour les séances régulières, la préparation course et les sorties longues selon votre pratique.</p></article>
+              <article class="detail-card"><h3>Guide taille</h3><p>Entre deux tailles, privilégiez une demi-pointure au-dessus pour les chaussures de running et trail.</p></article>
+              <article class="detail-card"><h3>Expédition</h3><p>Préparation rapide depuis notre entrepôt. Numéro de suivi envoyé après validation de la commande.</p></article>
+            </div>
+            <div class="reviews">
+              <article class="review-card"><h3>Avis clients</h3><div class="stars">★ ★ ★ ★ ★</div><p>“Commande reçue rapidement, produit conforme et vraie sensation de boutique spécialisée.”</p></article>
+              <article class="review-card"><h3>Trustpilot</h3><div class="stars">★ ★ ★ ★ ★</div><p>Note moyenne 4,8/5 sur 1 247 avis vérifiés. Service client réactif et conseils précis.</p></article>
+            </div>
+          </div>
+        </div>
+        <div class="section-head" style="margin-top:42px">
+          <h2>À compléter avec</h2>
+          <p>Produits proches par marque ou catégorie.</p>
+        </div>
+        <div class="products">${related.map(productCard).join("")}</div>
+      `;
+      window.scrollTo({top:0,behavior:"smooth"});
+      refreshIcons();
+    }
+
+    function renderLegal(slug){
+      const page = legalPages[slug] || legalPages["mentions-legales"];
+      setHomeVisible(false);
+      document.title = `${page.title} | Quatorze Running`;
+      els.pageView.innerHTML = `
+        <div class="route-hero">
+          <div>
+            <span class="pill acid">Informations</span>
+            <h1>${page.title}</h1>
+            <p>${page.intro}</p>
+          </div>
+        </div>
+        <div class="legal-layout">
+          <nav class="legal-menu" aria-label="Pages légales">
+            <a href="#/legal/mentions-legales">Mentions légales</a>
+            <a href="#/legal/cgv">CGV</a>
+            <a href="#/legal/confidentialite">Confidentialité</a>
+            <a href="#/legal/livraison-retours">Livraison & retours</a>
+          </nav>
+          <div class="legal-stack">
+            ${page.sections.map(([title,text]) => `<article class="legal-card"><h3>${title}</h3><p>${text}</p></article>`).join("")}
+          </div>
+        </div>
+      `;
+      window.scrollTo({top:0,behavior:"smooth"});
+      refreshIcons();
+    }
+
+    function renderAvis(){
+      setHomeVisible(false);
+      document.title = "Avis clients | Quatorze Running";
+      els.pageView.innerHTML = `
+        <div class="route-hero">
+          <div>
+            <span class="pill acid">Avis vérifiés</span>
+            <h1>Ils courent avec nous.</h1>
+            <p>Une section avis façon Trustpilot pour rassurer avant l'achat et donner au site un niveau de finition e-commerce.</p>
+          </div>
+          <div class="trust-mark"><span class="stars">★ ★ ★ ★ ★</span><span>4,8/5</span></div>
+        </div>
+        <div class="reviews">
+          <article class="review-card"><h3>Camille D.</h3><div class="stars">★ ★ ★ ★ ★</div><p>Chaussures reçues en 48h, emballage propre et fiche produit claire. Je recommande.</p></article>
+          <article class="review-card"><h3>Mathieu R.</h3><div class="stars">★ ★ ★ ★ ★</div><p>Très bon choix trail, conseils utiles et retour simple après erreur de taille.</p></article>
+          <article class="review-card"><h3>Sofia L.</h3><div class="stars">★ ★ ★ ★ ★</div><p>Site fluide, panier clair, paiement rassurant. Exactement ce qu'on attend d'une boutique running.</p></article>
+          <article class="review-card"><h3>Nicolas B.</h3><div class="stars">★ ★ ★ ★ ☆</div><p>Bon suivi livraison et sélection technique sérieuse. Je reviendrai pour la prochaine prépa marathon.</p></article>
+        </div>
+      `;
+      window.scrollTo({top:0,behavior:"smooth"});
+      refreshIcons();
+    }
+
+    function showHome(){
+      setHomeVisible(true);
+      document.title = "Quatorze Running | Running & Trail";
+      renderProducts();
+    }
+
+    function handleRoute(){
+      const hash = window.location.hash || "#/";
+      const parts = hash.replace(/^#\/?/, "").split("/").filter(Boolean);
+      if(!parts.length){showHome();return}
+      if(parts[0] === "collections"){renderCollection(parts[1] || "all");return}
+      if(parts[0] === "products"){renderProductPage(parts[1]);return}
+      if(parts[0] === "legal"){renderLegal(parts[1]);return}
+      if(parts[0] === "avis"){renderAvis();return}
+      showHome();
+    }
+
+    function setFilter(filter){
+      activeFilter = filter;
+      document.querySelectorAll("[data-filter]").forEach(button => button.classList.toggle("active", button.dataset.filter === filter));
+      renderProducts();
+      document.getElementById("selection").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+
+    function openModal(id){
+      activeProduct = products.find(product => product.id === id);
+      if(!activeProduct) return;
+      els.modalImage.src = activeProduct.image;
+      els.modalImage.alt = activeProduct.title;
+      els.modalVendor.textContent = activeProduct.vendor;
+      els.modalTitle.textContent = activeProduct.title;
+      els.modalText.textContent = activeProduct.text;
+      els.modalBadge.textContent = productBadge(activeProduct);
+      els.modalBadge.className = `badge ${activeProduct.compare ? "sale" : "new"}`;
+      els.modalPrice.innerHTML = `${formatPrice(activeProduct.price)} ${activeProduct.compare ? `<span class="old">${formatPrice(activeProduct.compare)}</span>` : ""}`;
+      els.modalSizes.innerHTML = activeProduct.sizes.map(size => `<span class="size">${size}</span>`).join("");
+      els.modal.classList.add("open");
+      document.body.classList.add("locked");
+    }
+
+    function closeModal(){
+      els.modal.classList.remove("open");
+      if(!els.cartDrawer.classList.contains("open")) document.body.classList.remove("locked");
+    }
+
+    function addToCart(product){
+      cart.push(product);
+      renderCart();
+      els.cartDrawer.classList.add("open");
+      document.body.classList.add("locked");
+    }
+
+    function renderCart(){
+      els.cartCount.textContent = cart.length;
+      els.cartItems.innerHTML = cart.length ? cart.map((product,index) => `
+        <div class="cart-item">
+          <img src="${product.image}" alt="${product.title}">
+          <div><strong>${product.title}</strong><span>${formatPrice(product.price)}</span></div>
+          <button data-remove="${index}" aria-label="Retirer ${product.title}"><i data-lucide="trash-2"></i></button>
+        </div>
+      `).join("") : `<p class="empty">Votre panier est vide.</p>`;
+      els.cartTotal.textContent = formatPrice(cart.reduce((sum,product) => sum + product.price,0));
+      refreshIcons();
+    }
+
+    function closeCart(){
+      els.cartDrawer.classList.remove("open");
+      if(!els.modal.classList.contains("open")) document.body.classList.remove("locked");
+    }
+
+    document.addEventListener("click", event => {
+      const openButton = event.target.closest("[data-open-product]");
+      const addButton = event.target.closest("[data-add-product]");
+      const productCardClick = event.target.closest("[data-product-card]");
+      const filterButton = event.target.closest("[data-filter]");
+      const removeButton = event.target.closest("[data-remove]");
+      if(openButton) openModal(openButton.dataset.openProduct);
+      if(addButton){
+        event.preventDefault();
+        event.stopPropagation();
+        const product = products.find(item => item.id === addButton.dataset.addProduct);
+        if(product) addToCart(product);
+      }
+      if(productCardClick && !event.target.closest("button") && !event.target.closest("a")){
+        window.location.hash = `#/products/${productCardClick.dataset.productCard}`;
+      }
+      if(filterButton) setFilter(filterButton.dataset.filter);
+      if(event.target.closest("#openCart")){els.cartDrawer.classList.add("open");document.body.classList.add("locked")}
+      if(event.target.closest("[data-close-cart]")) closeCart();
+      if(event.target.closest("[data-close-modal]")) closeModal();
+      if(removeButton){cart.splice(Number(removeButton.dataset.remove),1);renderCart()}
+      if(event.target.closest("#focusSearch")){
+        window.location.hash = "#/";
+        setTimeout(()=>{document.getElementById("shop").scrollIntoView({behavior:"smooth"});els.search.focus()},150);
+      }
+      if(event.target.closest("#mobileFilters")){
+        window.location.hash = "#/";
+        setTimeout(()=>document.getElementById("shop").scrollIntoView({behavior:"smooth"}),150);
+      }
+    });
+
+    els.modalAdd.addEventListener("click", () => {
+      if(activeProduct) addToCart(activeProduct);
+      closeModal();
+    });
+    els.search.addEventListener("input", renderProducts);
+    document.addEventListener("keydown", event => {
+      if(event.key === "Escape"){closeModal();closeCart()}
+    });
+
+    window.addEventListener("hashchange", handleRoute);
+    handleRoute();
+    renderCart();
+    refreshIcons();
+  </script>
+</body>
+</html>
